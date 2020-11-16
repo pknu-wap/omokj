@@ -2,9 +2,12 @@ package omokJServer;
 
 
 public class OmokRoomManager {
-	OmokRoom[] room;
+	OmokRoom[] room; // 방번호를 1번 부터 시작해서 초기화
 	public OmokRoomManager(OmokRoom[] room) {
 		this.room = room;
+		for(int i = 0; i < room.length; i++) {
+			room[i].roomNumber = i+1;
+		}
 	}
 	
 	// sCP에서 방에 들어가라는 명령 받으면 거기서 이 메소드 실행
@@ -23,6 +26,14 @@ public class OmokRoomManager {
 		if(this.room[rN-1].player[0] == player) this.room[rN-1].player[0] = null;
 		else if(this.room[rN-1].player[1] == player) this.room[rN-1].player[1] = null;
 		return;
+	}
+	
+	// 정보 getter setter 등
+	public int getRoomsNum ( ) {
+		return room.length;
+	}
+	public OmokRoom[] getRoomRef ( ) {
+		return room;
 	}
 	
 	// 오목 방 정보를 가진 Room 객체

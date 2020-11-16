@@ -5,12 +5,15 @@ import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+import omokJServer.TransferObj;
+import omokJServer.OmokRoomManager.OmokRoom;
 import omokJServer.TransferObj.Opcode;
 
 public class ServerClientProcessor extends Thread {
 	private final static int MAX_USERS = 10;
 	
 	ArrayList<ServerClientProcessor> clientList = null; 
+	OmokRoom[] room;
 	
 	private Socket socket = null;
 	protected ObjectInputStream is;
@@ -18,13 +21,15 @@ public class ServerClientProcessor extends Thread {
 	private String nickname = null;
 	private int roomNumber = 0; // 아무 방에도 안들어가 있으면 0
 	
-	public ServerClientProcessor(Socket socket, ArrayList<ServerClientProcessor> clientList) {
+	// main에서 각 클라이언트 연결 될 때 마다 실행 되는 생성자 ===========
+	public ServerClientProcessor(Socket socket, ArrayList<ServerClientProcessor> clientList, OmokRoom[] room) {
 		this.socket = socket;
 		this.clientList = clientList;
+		this.room = room;
 	}
 	
 	@Override
-	public void run() {
+	public void run() { // 각 클라이언트에게 할당 되는 쓰레드 ================================================
 		try {
 			is = new ObjectInputStream(socket.getInputStream());
 			os = new ObjectOutputStream(socket.getOutputStream());
@@ -39,6 +44,8 @@ public class ServerClientProcessor extends Thread {
 						// 클라이언트 서버 연결 되자마자 클라이언트에서 joinServer 호출, 이 때 처리 과정에서
 						// 연결 인원수가 10명을 초과하면 이 부분에서, denyEntry 메소드 실행하며 접근거절 알리며 연결을 아예 끊어버림.
 					}
+					this.nickname = request.joinServer.nickname;
+					showRoomList();
 					break;
 				case joinRoom: // showRoom 2명이 방에 들어오면 startOmok
 					break;
@@ -58,11 +65,42 @@ public class ServerClientProcessor extends Thread {
 		} catch (ClassNotFoundException e) {
 			consoleLog(this.nickname + "lost connect.");
 		}
+		finally {
+			try {
+				is.close();
+				os.close();
+				socket.close();
+			}
+			catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
 }
 	
-	// ===== 오퍼레이션 처리하는 메소드
+	// ===== 오퍼레이션 처리하는 메소드 =====
 	
-	// ===== 이 클래스를 처리하는 메소드
+	// ===== 서버에서 킄라이언트로 보내는 메소드 =====
+	private void showRoomList() {
+		// 방번호 int 배열화, 각 방플레이어 String 배열화
+		int rm_len = room.length;
+		int[] rNs = new int[rm_len];
+		String[] p1 = new String[rm_len];
+		String[] p2 = new String[rm_len];
+		for(int i = 0; i < rm_len; i++) {
+			rNs[i] = room[i].roomNumber;
+			p1[i] = room[i].player[0].nickname;
+			p2[i] = room[i].player[1].nickname;
+		}
+		TransferObj tObj = new TransferObj(Opcode.showRoomList);
+		tObj.showRoomList = tObj.new ShowRoomList(rNs, p1, p2); // 방 번호, P1, P2 닉네임
+		try {
+			os.writeObject(tObj);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	// ===== 이 클래스를 처리하는 메소드 =====
 	public void setRoomNumber(int rN) {
 		this.roomNumber = rN;
 	}

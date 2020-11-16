@@ -1,6 +1,7 @@
 package omokJServer;
 
 import java.io.*;
+import java.util.ArrayList;
 
 // This class contains everything about transfer information
 
@@ -10,55 +11,22 @@ public class TransferObj implements Serializable {
 		denyEntry, showRoomList, showRoom, startOmok, deliverTurn //서버 측 통신 명령
 	}
 	private Opcode opcode; 
-	JoinServer joinServer = null;
-	JoinRoom joinRoom = null;
-	TurnOver turnOver = null;
-	GameOver gameOver = null;
+	public JoinServer joinServer = null;
+	public JoinRoom joinRoom = null;
+	public TurnOver turnOver = null;
 	
-	ShowRoomList showRoomList = null;
-	ShowRoom showRoom = null;
-	StartOmok startOmok = null;
-	DeliverTurn deliverTurn = null;
-	DenyEntry denyEntry = null;
+	public ShowRoomList showRoomList = null;
+	public ShowRoom showRoom = null;
+	public StartOmok startOmok = null;
+	public DeliverTurn deliverTurn = null;
+	public DenyEntry denyEntry = null;
 	
 	/* 각 명령에 대한 전송 객체 생성자 */
-	public TransferObj(JoinServer  jS) {
-		this.opcode = Opcode.joinServer;
-		this.joinServer = jS;
-	}
-	public TransferObj(JoinRoom jR) {
-		this.opcode = Opcode.joinRoom;
-		this.joinRoom = jR;
-	}
-	public TransferObj(TurnOver tO) {
-		this.opcode = Opcode.turnOver;
-		this.turnOver = tO;
-	}
-	public TransferObj(GameOver gO) {
-		this.opcode = Opcode.gameOver;
-		this.gameOver = gO;
-	}
-	public TransferObj(ShowRoomList sRL) {
-		this.opcode = Opcode.showRoomList;
-		this.showRoomList = sRL;
-	}
-	public TransferObj(ShowRoom sR) {
-		this.opcode = Opcode.showRoom;
-		this.showRoom = sR;
-	}
-	public TransferObj(StartOmok sO) {
-		this.opcode = Opcode.startOmok;
-		this.startOmok = sO;
-	}
-	public TransferObj(DeliverTurn dT) {
-		this.opcode = Opcode.deliverTurn;
-		this.deliverTurn = dT;
-	}
-	public TransferObj(DenyEntry dE) {
-		this.opcode = Opcode.denyEntry;
-		this.denyEntry = dE;
+	public TransferObj(Opcode opcode) {
+		this.opcode = opcode;
 	}
 	
+	// getter setter
 	public Opcode getOpcode() {
 		return opcode;
 	}
@@ -66,7 +34,13 @@ public class TransferObj implements Serializable {
 	// 각 통신 명령 마다 전달할 정보 
 	// CLIENT
 	public class JoinServer {
-		
+		String nickname = null;
+		public JoinServer(String nickname) {
+			this.nickname = nickname;
+		}
+		public String getNickname() {
+			return nickname;
+		}
 	}
 	public class JoinRoom {
 		
@@ -74,12 +48,21 @@ public class TransferObj implements Serializable {
 	public class TurnOver {
 	
 	}
-	public class GameOver {
-		
-	}
     // SERVER
-	public class ShowRoomList {
-		
+	public class ShowRoomList { // 객체 인자는 참조를 전달하기 때문에 값을 새로 복붙 해줌!!!!!!!!!
+		int[] roomNumbers; // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
+		String[] player1;
+		String[] player2;
+		public ShowRoomList(int[] rNs, String[] p1, String[] p2) {
+			roomNumbers = new int[rNs.length];
+			player1 = new String[rNs.length];
+			player2 = new String[rNs.length];
+			for(int i = 0; rNs.length < 10; i++) {
+				this.roomNumbers[i] = rNs[i];
+				this.player1[i] = p1[i];
+				this.player2[i] = p2[i];
+			}
+		}
 	}
 	public class ShowRoom {
 		

@@ -30,7 +30,7 @@ public class ServerMain {
 			while(true) {
 				// accept ( blocked until connection request is received)
 				Socket socket = serverSocket.accept();
-				ServerClientProcessor svc = new ServerClientProcessor(socket, clientList);
+				ServerClientProcessor svc = new ServerClientProcessor(socket, clientList, room);
 				svc.start(); 
 			}
 		}
