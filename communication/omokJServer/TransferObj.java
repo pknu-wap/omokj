@@ -43,16 +43,19 @@ public class TransferObj implements Serializable {
 		}
 	}
 	public class JoinRoom {
-		
+		public int roomNumber;
+		public JoinRoom(int rN) {
+			this.roomNumber = rN;
+		}
 	}
 	public class TurnOver {
 	
 	}
     // SERVER
 	public class ShowRoomList { // 객체 인자는 참조를 전달하기 때문에 값을 새로 복붙 해줌!!!!!!!!!
-		int[] roomNumbers; // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
-		String[] player1;
-		String[] player2;
+		public int[] roomNumbers; // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
+		public String[] player1;
+		public String[] player2;
 		public ShowRoomList(int[] rNs, String[] p1, String[] p2) {
 			roomNumbers = new int[rNs.length];
 			player1 = new String[rNs.length];
@@ -64,8 +67,15 @@ public class TransferObj implements Serializable {
 			}
 		}
 	}
-	public class ShowRoom {
-		
+	public class ShowRoom { // 들어간 방 번호, 들어있는 사람 닉네임이 들어있음.
+		public int roomNumber;
+		public String player1;
+		public String player2;
+		public ShowRoom(int rN, String p1, String p2) {
+			this.roomNumber = rN;
+			this.player1 = p1;
+			this.player2 = p2;
+		}
 	}
 	public class StartOmok {
 		

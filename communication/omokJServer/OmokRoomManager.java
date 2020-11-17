@@ -18,6 +18,7 @@ public class OmokRoomManager {
 		player.setRoomNumber(rN);
 		if(this.room[rN-1].player[0] == null) this.room[rN-1].player[0] = player;
 		else this.room[rN-1].player[1] = player;
+		this.room[rN-1].curPlayers++;
 		return rN; // 방에 들어갔으면 방 번호 리턴 받아서 player의 roomNumber에 저장
 	}
 	// 플레이어가 방에서 나갈 경우 
@@ -39,12 +40,11 @@ public class OmokRoomManager {
 	// 오목 방 정보를 가진 Room 객체
 	public class OmokRoom {
 		int roomNumber; // 1 ~ 5
-		
 		boolean gameStarted = false;
-		
+		boolean p1Ready = false; // 둘 다 true면 startOmok
+		boolean p2Ready = false;
 		int curPlayers = 0;
 		ServerClientProcessor[] player = {null, null};
-		
 		int nextPlayerIndex = 0; // 다음 턴인 플레이어의 인덱스 +1 하고 %2 해가며 턴 교환
  
 		boolean gameOver = false;

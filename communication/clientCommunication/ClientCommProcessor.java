@@ -11,7 +11,7 @@ import omokJServer.TransferObj.Opcode;
 
 public class ClientCommProcessor extends Thread {
 	//첫 메인 메뉴에서 서버 입장 버튼 누르면 이 클래스에 닉네임을 전달하면서 쓰레드를 실행함
-	private static final String SERVER_IP = "172.31.42.164";
+	private static final String SERVER_IP = "52.78.178.184";
 	private static final int SERVER_PORT = 50505;
 	
 	private Socket socket = null;
@@ -41,16 +41,26 @@ public class ClientCommProcessor extends Thread {
 			is = new ObjectInputStream(socket.getInputStream());
 			os = new ObjectOutputStream(socket.getOutputStream());
 			joinServer(); // 스트림 연결 직후 바로 joinServer 실행 후 연결이 완벽히 되면 ShowRoomList를 받아서 출력
+			
+			TransferObj request;
 			while (true) {
-				TransferObj request = (TransferObj)is.readObject();
+				request = (TransferObj)is.readObject();
 				// 모든 전송을 객체 하나에 묶어서 직렬화 해서 주고받음. 객체에 operation code를 enum 클래스로 가짐. 각 operation 마다 필요 정보도 내부 클래스로 가짐.
 				// operation process
 				switch(request.getOpcode()) {
 				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
 					break;
 				case showRoomList:  // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
+					// 이 명령이 날아오면
+					// 클라이언트 측에서 request.showRoomList.
+					//request.showRoomList.roomNumbers
+					//request.showRoomList.player1
+					//request.showRoomList.player2
 					break;
-				case showRoom:
+				case showRoom: // 들어가는데 실패 했으면 0 이 날아오고 아니면 들어간 방번호, 들어있는 사람 닉네임이 날아옴
+					//request.showRoom.roomNumber (int)
+					//request.showRoom.player1 (String)
+					//request.showRoom.player2 (String)
 					break;
 				default:
 					break;
@@ -82,7 +92,18 @@ public class ClientCommProcessor extends Thread {
 		try {
 			os.writeObject(tObj);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	// 방 리스트에서 원하는 방 더블클릭(?) 하면 방 번호 인자로 주며 실행. 이후 showRoom이 날아온다
+	// 방의 player1, player2가 둘 다 null이 아니면 이 메소드 실행 않고 그냥 무시.
+	public void joinRoom(int roomNum) { //showRoom을 받고 나서 그제서야 그 방 번호를 클라이언트 자기 방 번호에 저장!!!!!!!!!!
+		TransferObj tObj = new TransferObj(Opcode.joinRoom);
+		tObj.joinRoom = tObj.new JoinRoom(roomNum);
+		try {
+			os.writeObject(tObj);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
