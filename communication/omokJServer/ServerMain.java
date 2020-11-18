@@ -14,7 +14,7 @@ public class ServerMain {
 		ServerSocket serverSocket = null;
 		
 		/* 서버가 가져야할 리스트들 */
-		ArrayList<ServerClientProcessor> clientList = new ArrayList<ServerClientProcessor>();
+		ArrayList<ServerCommProcessor> clientList = new ArrayList<ServerCommProcessor>();
 		
 		OmokRoom[] room = new OmokRoom[MAX_ROOMS]; // 방 목록
 		OmokRoomManager roomManager = new OmokRoomManager(room); 
@@ -30,7 +30,7 @@ public class ServerMain {
 			while(true) {
 				// accept ( blocked until connection request is received)
 				Socket socket = serverSocket.accept();
-				ServerClientProcessor svc = new ServerClientProcessor(socket, clientList, roomManager);
+				ServerCommProcessor svc = new ServerCommProcessor(socket, clientList, roomManager);
 				svc.start(); 
 			}
 		}

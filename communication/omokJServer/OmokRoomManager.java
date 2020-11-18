@@ -11,7 +11,7 @@ public class OmokRoomManager {
 	}
 	
 	// sCP에서 방에 들어가라는 명령 받으면 거기서 이 메소드 실행
-	public int joinRoom (ServerClientProcessor player, int rN){
+	public int joinRoom (ServerCommProcessor player, int rN){
 		if(this.room[rN-1].curPlayers >= 2) { // rN번 방의 현재 인원수가 2보다 크거나 같으면 거절 
 			return 0;
 		}
@@ -22,7 +22,7 @@ public class OmokRoomManager {
 		return rN; // 방에 들어갔으면 방 번호 리턴 받아서 player의 roomNumber에 저장
 	}
 	// 플레이어가 방에서 나갈 경우 
-	public void quitRoom (ServerClientProcessor player,int rN) {
+	public void quitRoom (ServerCommProcessor player,int rN) {
 		if(player.getRoomNumber() == 0) return; // 이미 아무 방에도 안들어가 있는 경우 그냥 리턴
 		if(this.room[rN-1].player[0] == player) this.room[rN-1].player[0] = null;
 		else if(this.room[rN-1].player[1] == player) this.room[rN-1].player[1] = null;
@@ -44,11 +44,11 @@ public class OmokRoomManager {
 		boolean p1Ready = false; // 둘 다 true면 startOmok
 		boolean p2Ready = false;
 		int curPlayers = 0;
-		ServerClientProcessor[] player = {null, null};
+		ServerCommProcessor[] player = {null, null};
 		int nextPlayerIndex = 0; // 다음 턴인 플레이어의 인덱스 +1 하고 %2 해가며 턴 교환
  
 		boolean gameOver = false;
-		ServerClientProcessor winner = null;
+		ServerCommProcessor winner = null;
 		
 		private OmokRoom (int rN) {
 			this.roomNumber = rN;

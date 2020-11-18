@@ -9,10 +9,10 @@ import omokJServer.TransferObj;
 import omokJServer.OmokRoomManager.OmokRoom;
 import omokJServer.TransferObj.Opcode;
 
-public class ServerClientProcessor extends Thread {
+public class ServerCommProcessor extends Thread {
 	private final static int MAX_USERS = 10;
 	
-	ArrayList<ServerClientProcessor> clientList = null; 
+	ArrayList<ServerCommProcessor> clientList = null; 
 	OmokRoomManager roomManager;
 	
 	private Socket socket = null;
@@ -22,7 +22,7 @@ public class ServerClientProcessor extends Thread {
 	private int roomNumber = 0; // 아무 방에도 안들어가 있으면 0
 	
 	// main에서 각 클라이언트 연결 될 때 마다 실행 되는 생성자 ===========
-	public ServerClientProcessor(Socket socket, ArrayList<ServerClientProcessor> clientList, OmokRoomManager roomManager) {
+	public ServerCommProcessor(Socket socket, ArrayList<ServerCommProcessor> clientList, OmokRoomManager roomManager) {
 		this.socket = socket;
 		this.clientList = clientList;
 		this.roomManager = roomManager;
