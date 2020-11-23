@@ -7,3 +7,7 @@
 /OmokView.class
 /omok_MouseEvent.class
 /omok_drawBoard.class
+/GUI_server.class
+/getShowRoomList.class
+/omok_showRoom.class
+/omok_stateBoard.class

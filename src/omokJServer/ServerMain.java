@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import omokJServer.OmokRoomManager.OmokRoom;
 
 public class ServerMain {
-	public final static String SERVER_IP = "52.78.178.184"; // 172.31.42.164
+	public final static String SERVER_IP = "52.78.178.184"; // 172.31.42.164      52.78.178.184
 	public final static int SERVER_PORT = 50505;
 	private final static int MAX_ROOMS = 5;
 	
@@ -21,12 +21,11 @@ public class ServerMain {
 		/*===============*/
 		try {
 			// Server Socket
-			serverSocket = new ServerSocket(SERVER_PORT);
+			serverSocket = new ServerSocket();
 			// Binding
-			//String hostAddress = InetAddress.getLocalHost().getHostAddress();
-			//serverSocket.bind(new InetSocketAddress(hostAddress, SERVER_PORT));
-			//consoleLog("Binding .. " + hostAddress + " : " + SERVER_PORT);
-			consoleLog("Binding .. " + "52.78.178.184" + " : " + SERVER_PORT);
+			String hostAddress = InetAddress.getLocalHost().getHostAddress();
+			serverSocket.bind(new InetSocketAddress(hostAddress, SERVER_PORT));
+			consoleLog("Binding .. " + hostAddress + " : " + SERVER_PORT);
 			while(true) {
 				// accept ( blocked until connection request is received)
 				Socket socket = serverSocket.accept();
