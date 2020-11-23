@@ -2,11 +2,8 @@ package omokJServer;
 
 import java.io.*;
 import java.net.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-import omokJServer.TransferObj;
-import omokJServer.OmokRoomManager.OmokRoom;
 import omokJServer.TransferObj.Opcode;
 
 public class ServerClientProcessor extends Thread {
@@ -19,9 +16,9 @@ public class ServerClientProcessor extends Thread {
 	protected ObjectInputStream is;
 	protected ObjectOutputStream os;
 	private String nickname = null;
-	private int roomNumber = 0; // ¾Æ¹« ¹æ¿¡µµ ¾Èµé¾î°¡ ÀÖÀ¸¸é 0
+	private int roomNumber = 0; // ï¿½Æ¹ï¿½ ï¿½æ¿¡ï¿½ï¿½ ï¿½Èµï¿½î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0
 	
-	// main¿¡¼­ °¢ Å¬¶óÀÌ¾ğÆ® ¿¬°á µÉ ¶§ ¸¶´Ù ½ÇÇà µÇ´Â »ı¼ºÀÚ ===========
+	// mainï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ===========
 	public ServerClientProcessor(Socket socket, ArrayList<ServerClientProcessor> clientList, OmokRoomManager roomManager) {
 		this.socket = socket;
 		this.clientList = clientList;
@@ -29,7 +26,7 @@ public class ServerClientProcessor extends Thread {
 	}
 	
 	@Override
-	public void run() { // °¢ Å¬¶óÀÌ¾ğÆ®¿¡°Ô ÇÒ´ç µÇ´Â ¾²·¹µå ================================================
+	public void run() { // ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ================================================
 		try {
 			is = new ObjectInputStream(socket.getInputStream());
 			os = new ObjectOutputStream(socket.getOutputStream());
@@ -38,27 +35,27 @@ public class ServerClientProcessor extends Thread {
 			TransferObj request;
 			while (true) {
 				request = (TransferObj)is.readObject();
-				// ¸ğµç Àü¼ÛÀ» °´Ã¼ ÇÏ³ª¿¡ ¹­¾î¼­ Á÷·ÄÈ­ ÇØ¼­ ÁÖ°í¹ŞÀ½. °´Ã¼¿¡ operation code¸¦ enum Å¬·¡½º·Î °¡Áü. °¢ operation ¸¶´Ù ÇÊ¿ä Á¤º¸µµ ³»ºÎ Å¬·¡½º·Î °¡Áü.
+				// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î¼­ ï¿½ï¿½ï¿½ï¿½È­ ï¿½Ø¼ï¿½ ï¿½Ö°ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½Ã¼ï¿½ï¿½ operation codeï¿½ï¿½ enum Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ operation ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 				// operation process
 				switch(request.getOpcode()) {
 				case joinServer: // showRoomList
 					if(clientList.size()>10) {
-						// Å¬¶óÀÌ¾ğÆ® ¼­¹ö ¿¬°á µÇÀÚ¸¶ÀÚ Å¬¶óÀÌ¾ğÆ®¿¡¼­ joinServer È£Ãâ, ÀÌ ¶§ Ã³¸® °úÁ¤¿¡¼­
-						// ¿¬°á ÀÎ¿ø¼ö°¡ 10¸íÀ» ÃÊ°úÇÏ¸é ÀÌ ºÎºĞ¿¡¼­, denyEntry ¸Ş¼Òµå ½ÇÇàÇÏ¸ç Á¢±Ù°ÅÀı ¾Ë¸®¸ç ¿¬°áÀ» ¾Æ¿¹ ²÷¾î¹ö¸².
+						// Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ joinServer È£ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+						// ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½ 10ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ ï¿½ÎºĞ¿ï¿½ï¿½ï¿½, denyEntry ï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 					}
-					this.nickname = request.joinServer.nickname; // ³¯¾Æ¿Â ´Ğ³×ÀÓÀ» ÀúÀå
+					this.nickname = request.joinServer.nickname; // ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½Ğ³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					showRoomList();
 					break;
 				case joinRoom: 
 					int roomNum = roomManager.joinRoom(this, request.joinRoom.roomNumber-1);
 					this.roomNumber = roomNum;
-					if(roomNum == 0) ; // ¹æ ²ËÂ÷¼­ ¸øµé¾î°¡´Â °æ¿ì´Â Å¬¶óÀÌ¾ğÆ® Ãø¿¡¼­ ¸·¾ÆÁÙ °ÍÀÌ±â ¶§¹®¿¡ ÀÏ´Ü ³ªÁß¿¡ °³¹ß
+					if(roomNum == 0) ; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 					if(roomManager.room[roomNum-1].player[0] != null)
 					roomManager.room[roomNum-1].player[0].showRoom();
 					if(roomManager.room[roomNum-1].player[1] != null)
 					roomManager.room[roomNum-1].player[1].showRoom();
 					break;
-				case turnOver: // ¹Ş¾Æ¼­ deliverTurnÀ¸·Î »ó´ë Å¬¶óÀÌ¾ğÆ®¿¡°Ô Àü´Ş
+				case turnOver: // ï¿½Ş¾Æ¼ï¿½ deliverTurnï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					break;
 				case gameOver:
 						break;
@@ -86,11 +83,11 @@ public class ServerClientProcessor extends Thread {
 		}
 }
 	
-	// ===== ¿ÀÆÛ·¹ÀÌ¼Ç Ã³¸®ÇÏ´Â ¸Ş¼Òµå =====
+	// ===== ï¿½ï¿½ï¿½Û·ï¿½ï¿½Ì¼ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ş¼Òµï¿½ =====
 	
-	// ===== ¼­¹ö¿¡¼­ ´¶óÀÌ¾ğÆ®·Î º¸³»´Â ¸Ş¼Òµå =====
+	// ===== ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½ =====
 	private void showRoomList() {
-		// ¹æ¹øÈ£ int ¹è¿­È­, °¢ ¹æÇÃ·¹ÀÌ¾î String ¹è¿­È­
+		// ï¿½ï¿½ï¿½È£ int ï¿½è¿­È­, ï¿½ï¿½ ï¿½ï¿½ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ String ï¿½è¿­È­
 		int rm_len = roomManager.room.length;
 		int[] rNs = new int[rm_len];
 		String[] p1 = new String[rm_len];
@@ -101,7 +98,7 @@ public class ServerClientProcessor extends Thread {
 			p2[i] = roomManager.room[i].player[1].nickname;
 		}
 		TransferObj tObj = new TransferObj(Opcode.showRoomList);
-		tObj.showRoomList = tObj.new ShowRoomList(rNs, p1, p2); // ¹æ ¹øÈ£, P1, P2 ´Ğ³×ÀÓ
+		tObj.showRoomList = tObj.new ShowRoomList(rNs, p1, p2); // ï¿½ï¿½ ï¿½ï¿½È£, P1, P2 ï¿½Ğ³ï¿½ï¿½ï¿½
 		try {
 			os.writeObject(tObj);
 		} catch (IOException e) {
@@ -109,7 +106,7 @@ public class ServerClientProcessor extends Thread {
 			e.printStackTrace();
 		}
 	}
-	private void showRoom() { // µé¾î°£ ¹æ ¹øÈ£, µé¾îÀÖ´Â »ç¶÷ ´Ğ³×ÀÓ ³¯¸²
+	private void showRoom() { // ï¿½ï¿½î°£ ï¿½ï¿½ ï¿½ï¿½È£, ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½Ğ³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		TransferObj tObj = new TransferObj(Opcode.showRoom);
 		tObj.showRoom = tObj.new ShowRoom(this.roomNumber, this.roomManager.room[this.roomNumber-1].player[0].nickname,
 				this.roomManager.room[this.roomNumber-1].player[1].nickname);
@@ -120,7 +117,7 @@ public class ServerClientProcessor extends Thread {
 			e.printStackTrace();
 		}
 	}
-	// ===== ÀÌ Å¬·¡½º¸¦ Ã³¸®ÇÏ´Â ¸Ş¼Òµå =====
+	// ===== ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ş¼Òµï¿½ =====
 	public void setRoomNumber(int rN) {
 		this.roomNumber = rN;
 	}

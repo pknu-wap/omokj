@@ -1,11 +1,8 @@
 package clientCommunication;
 
-import java.io.*;
-import java.net.*;
-
 public class ClientCommMain {
 	public static void main(String[] args) {
-		ClientCommProcessor ccp = new ClientCommProcessor("´Ð³×ÀÓ");
+		ClientCommProcessor ccp = new ClientCommProcessor("ï¿½Ð³ï¿½ï¿½ï¿½");
 		ccp.start();
 	}
 }

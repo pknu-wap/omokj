@@ -134,11 +134,11 @@ public class OmokImpl implements OmokInterface {
 		_x = chX;
 		_y = chY;
 		count = 0;
-		while(omok[_y][_x] == turn && _y > 0 && _x > 0) {
+		while(_y > 0 && _y < 18 && _x > 0 && omok[_y][_x] == turn) {	// x, y 범위 체크
 			_y++;
 			_x--;
 		}
-		while(omok[_y-- < 0 ? 0 : _y][_x++] == turn && _y <= 17 && _x <= 17) {
+		while(_y <= 17 && _x <= 17 && omok[_y-- <= 0 ? 0 : _y][_x++] == turn) {
 			// omok[][] 에서 y 값에 조건문을 넣은 이유는 a, 1 을 입력시 
 			// y 값이 -1 로 음수값으로 넘어가면 오류를 출력해서 조정
 			count++;
