@@ -34,15 +34,17 @@ public class ClientCommProcessor extends Thread {
 			//socket=new Socket(address.getHostAddress(),SERVER_PORT);
 			socket = new Socket();
 			socket.connect(new InetSocketAddress(SERVER_IP, SERVER_PORT));
-			System.out.println("CONNECT===============");
 		}
 		catch(IOException e) {
 			e.printStackTrace();
 		}
 		// input, output 스트림 세팅 밑 데이타 객체 수신 대기 시작
 		try {
-			is = new ObjectInputStream(socket.getInputStream());
+			System.out.println("JOIN===============");
 			os = new ObjectOutputStream(socket.getOutputStream());
+			System.out.println("JOIN===============");
+			is = new ObjectInputStream(socket.getInputStream());
+			System.out.println("JOIN===============");
 			joinServer(nickname); // 스트림 연결 직후 바로 joinServer 실행 후 연결이 완벽히 되면 ShowRoomList를 받아서 출력
 			System.out.println("JOIN===============");
 			

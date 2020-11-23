@@ -18,9 +18,9 @@ public class ServerCommProcessor extends Thread {
 	protected ObjectInputStream is;
 	protected ObjectOutputStream os;
 	private String nickname = null;
-	private int roomNumber = 0; // 아무 방에도 안들어가 있으면 0
+	private int roomNumber = 0; // 0 if never entered any room
 	
-	// main에서 각 클라이언트 연결 될 때 마다 실행 되는 생성자 ===========
+	// Constructor for each connection
 	public ServerCommProcessor(Socket socket, ArrayList<ServerCommProcessor> clientList, OmokRoomManager roomManager) {
 		this.socket = socket;
 		this.clientList = clientList;
@@ -28,7 +28,7 @@ public class ServerCommProcessor extends Thread {
 	}
 	
 	@Override
-	public void run() { // 각 클라이언트에게 할당 되는 쓰레드 ================================================
+	public void run() { // Thread for each client ================================================
 		try {
 			is = new ObjectInputStream(socket.getInputStream());
 			os = new ObjectOutputStream(socket.getOutputStream());
@@ -36,7 +36,6 @@ public class ServerCommProcessor extends Thread {
 			
 			while (true) {
 				Opcode opcode = (Opcode)is.readObject();
-				// 모든 전송을 객체 하나에 묶어서 직렬화 해서 주고받음. 객체에 operation code를 enum 클래스로 가짐. 각 operation 마다 필요 정보도 내부 클래스로 가짐.
 				// operation process
 				switch(opcode) {
 				case joinServer: // showRoomList
@@ -92,7 +91,7 @@ public class ServerCommProcessor extends Thread {
 	private void showRoomList() {
 		Opcode opcode = Opcode.showRoomList;
 		ShowRoomList sRL = new ShowRoomList();
-		
+		consoleLog(this.nickname + "님이 접속하셨습니다.");
 		// 방번호 int 배열화, 각 방플레이어 String 배열화
 		int rm_len = roomManager.room.length;
 		int[] rNs = new int[rm_len];
@@ -109,7 +108,6 @@ public class ServerCommProcessor extends Thread {
 			ShowRoomList.player1[i] = p1[i];
 			ShowRoomList.player2[i] = p2[i];
 		}
-		consoleLog(this.nickname + "님이 접속하셨습니다.");
 		try {
 			os.writeObject(opcode);
 			os.writeObject(sRL);

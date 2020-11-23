@@ -25,7 +25,7 @@ public class ServerMain {
 			// Binding
 			String hostAddress = InetAddress.getLocalHost().getHostAddress();
 			serverSocket.bind(new InetSocketAddress(hostAddress, SERVER_PORT));
-			consoleLog("Binding .. " + hostAddress + " : " + SERVER_PORT);
+			consoleLog("Binding .. " + SERVER_IP + " : " + SERVER_PORT);
 			while(true) {
 				// accept ( blocked until connection request is received)
 				Socket socket = serverSocket.accept();
