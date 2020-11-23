@@ -1,12 +1,13 @@
 package omokJServer;
 
+import omokJServer.OmokRoomManager.OmokRoom;
 
 public class OmokRoomManager {
-	OmokRoom[] room; // 방번호를 1번 부터 시작해서 초기화
-	public OmokRoomManager(OmokRoom[] room) {
-		this.room = room;
+	private final static int MAX_ROOMS = 5;
+	OmokRoom[] room = new OmokRoom[MAX_ROOMS]; // 방번호를 1번 부터 시작해서 초기화
+	public OmokRoomManager() {
 		for(int i = 0; i < room.length; i++) {
-			room[i].roomNumber = i+1;
+			this.room[i] = new OmokRoom(i+1);
 		}
 	}
 	

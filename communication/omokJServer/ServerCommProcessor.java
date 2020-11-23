@@ -88,7 +88,7 @@ public class ServerCommProcessor extends Thread {
 	
 	// ===== 오퍼레이션 처리하는 메소드 =====
 	
-	// ===== 서버에서 킄라이언트로 보내는 메소드 =====
+	// ===== Server to Client =====
 	private void showRoomList() {
 		Opcode opcode = Opcode.showRoomList;
 		ShowRoomList sRL = new ShowRoomList();
@@ -109,7 +109,7 @@ public class ServerCommProcessor extends Thread {
 			ShowRoomList.player1[i] = p1[i];
 			ShowRoomList.player2[i] = p2[i];
 		}
-		
+		consoleLog(this.nickname + "님이 접속하셨습니다.");
 		try {
 			os.writeObject(opcode);
 			os.writeObject(sRL);
@@ -143,6 +143,6 @@ public class ServerCommProcessor extends Thread {
 	}
 	//
 	private void consoleLog(String log) {
-		System.out.println(log);
+		System.out.println("[SERVER " + Thread.currentThread().getId() + " ] " + log);
 	}
 }

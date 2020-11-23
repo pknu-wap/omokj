@@ -3,6 +3,7 @@ package clientCommunication;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
@@ -10,7 +11,7 @@ import omokJServer.TransferObj.*;
 
 public class ClientCommProcessor extends Thread {
 	//첫 메인 메뉴에서 서버 입장 버튼 누르면 이 클래스에 닉네임을 전달하면서 쓰레드를 실행함
-	private static final String SERVER_IP = "52.78.178.184";
+	private static final String SERVER_IP = "52.78.178.184"; // 172.31.42.164
 	private static final int SERVER_PORT = 50505;
 	
 	private Socket socket = null;
@@ -29,6 +30,8 @@ public class ClientCommProcessor extends Thread {
 	public void run() {
 		//서버와 연결
 		try {
+			//InetAddress address= InetAddress.getByName(SERVER_IP);
+			//socket=new Socket(address.getHostAddress(),SERVER_PORT);
 			socket = new Socket();
 			socket.connect(new InetSocketAddress(SERVER_IP, SERVER_PORT));
 		}
@@ -40,6 +43,7 @@ public class ClientCommProcessor extends Thread {
 			is = new ObjectInputStream(socket.getInputStream());
 			os = new ObjectOutputStream(socket.getOutputStream());
 			joinServer(nickname); // 스트림 연결 직후 바로 joinServer 실행 후 연결이 완벽히 되면 ShowRoomList를 받아서 출력
+			System.out.println("JOIN===============");
 			
 			while (true) {
 				Opcode opcode = (Opcode)is.readObject();
