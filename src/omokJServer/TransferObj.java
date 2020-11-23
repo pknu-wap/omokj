@@ -5,85 +5,49 @@ import java.util.ArrayList;
 
 // This class contains everything about transfer information
 
-public class TransferObj implements Serializable {
-	public enum Opcode { 
+public class TransferObj {
+	public static enum Opcode implements Serializable { 
 		joinServer, joinRoom, turnOver, gameOver, // 클라이언트 측 통신 명령
 		denyEntry, showRoomList, showRoom, startOmok, deliverTurn //서버 측 통신 명령
-	}
-	private Opcode opcode; 
-	public JoinServer joinServer = null;
-	public JoinRoom joinRoom = null;
-	public TurnOver turnOver = null;
-	
-	public ShowRoomList showRoomList = null;
-	public ShowRoom showRoom = null;
-	public StartOmok startOmok = null;
-	public DeliverTurn deliverTurn = null;
-	public DenyEntry denyEntry = null;
-	
-	/* 각 명령에 대한 전송 객체 생성자 */
-	public TransferObj(Opcode opcode) {
-		this.opcode = opcode;
-	}
-	
-	// getter setter
-	public Opcode getOpcode() {
-		return opcode;
 	}
 	
 	// 각 통신 명령 마다 전달할 정보 
 	// CLIENT
-	public class JoinServer {
-		String nickname = null;
-		public JoinServer(String nickname) {
-			this.nickname = nickname;
-		}
-		public String getNickname() {
-			return nickname;
-		}
+	public static class JoinServer implements Serializable {
+		private static final long serialVersionUID = 10000L;
+		public static String nickname = null;
 	}
-	public class JoinRoom {
-		public int roomNumber;
-		public JoinRoom(int rN) {
-			this.roomNumber = rN;
-		}
+	public static class JoinRoom implements Serializable {
+		private static final long serialVersionUID = 10000L;
+		public static int roomNumber;
 	}
-	public class TurnOver {
+	public static class TurnOver implements Serializable {
+		private static final long serialVersionUID = 10000L;
 	
 	}
     // SERVER
-	public class ShowRoomList { // 객체 인자는 참조를 전달하기 때문에 값을 새로 복붙 해줌!!!!!!!!!
-		public int[] roomNumbers; // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
-		public String[] player1;
-		public String[] player2;
-		public ShowRoomList(int[] rNs, String[] p1, String[] p2) {
-			roomNumbers = new int[rNs.length];
-			player1 = new String[rNs.length];
-			player2 = new String[rNs.length];
-			for(int i = 0; rNs.length < 10; i++) {
-				this.roomNumbers[i] = rNs[i];
-				this.player1[i] = p1[i];
-				this.player2[i] = p2[i];
-			}
-		}
+	public static class ShowRoomList implements Serializable { // 객체 인자는 참조를 전달하기 때문에 값을 새로 복붙 해줌!!!!!!!!!
+		private static final long serialVersionUID = 10000L;
+		public static int[] roomNumbers = new int[5]; // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
+		public static String[] player1 = new String[5];
+		public static String[] player2 = new String[5];
 	}
-	public class ShowRoom { // 들어간 방 번호, 들어있는 사람 닉네임이 들어있음.
-		public int roomNumber;
-		public String player1;
-		public String player2;
-		public ShowRoom(int rN, String p1, String p2) {
-			this.roomNumber = rN;
-			this.player1 = p1;
-			this.player2 = p2;
-		}
+	public static class ShowRoom implements Serializable { // 들어간 방 번호, 들어있는 사람 닉네임이 들어있음.
+		private static final long serialVersionUID = 10000L;
+		public static int roomNumber;
+		public static String player1;
+		public static String player2;
 	}
-	public class StartOmok {
+	public static class StartOmok implements Serializable {
+		private static final long serialVersionUID = 10000L;
 		
 	}
-	public class DeliverTurn {
+	public static class DeliverTurn implements Serializable {
+		private static final long serialVersionUID = 10000L;
 		
 	}
-	public class DenyEntry {
-		
+	
+	public static class DenyEntry implements Serializable {
+		private static final long serialVersionUID = 10000L;
 	}
 }

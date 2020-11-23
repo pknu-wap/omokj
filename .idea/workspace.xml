@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3b5cf48-de40-4977-a1e1-dac48a1d3006" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/clientGUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientGUI/GUI_main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/GUI_main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientGUI/GUI_play.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/GUI_play.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientGUI/omok_MouseEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/omok_MouseEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientGUI/omok_drawBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/omok_drawBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communication/clientCommunication/ClientCommMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communication/clientCommunication/ClientCommProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientCommunication/ClientCommProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communication/omokJServer/OmokRoomManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/OmokRoomManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communication/omokJServer/ServerClientProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/ServerClientProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communication/omokJServer/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/ServerMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communication/omokJServer/TransferObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/TransferObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omok/OmokImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/OmokImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omok/OmokInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/OmokInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/omok/OmokView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/OmokView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientCommunication/ClientCommProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientCommunication/ClientCommProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omokJServer/OmokRoomManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/OmokRoomManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omokJServer/ServerClientProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/ServerClientProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omokJServer/ServerCommProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/ServerCommProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omokJServer/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/ServerMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omokJServer/TransferObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/TransferObj.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/modules/" />
@@ -30,11 +23,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+            <state relative-caret-position="38">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/omok/OmokImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="143" column="20" lean-forward="true" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="20" />
+            <state relative-caret-position="237">
+              <caret line="121" column="17" lean-forward="true" selection-start-line="121" selection-start-column="17" selection-end-line="121" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -60,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/omokJServer/ServerMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+            <state relative-caret-position="133">
+              <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -80,7 +76,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/omok/GUI_main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="266">
@@ -120,9 +116,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/clientGUI/omok/GUI.java" />
-        <option value="$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java" />
         <option value="$PROJECT_DIR$/src/omok/OmokImpl.java" />
         <option value="$PROJECT_DIR$/src/omok/GUI_main.java" />
+        <option value="$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java" />
       </list>
     </option>
   </component>
@@ -187,6 +183,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/omok" />
@@ -269,12 +266,12 @@
       <updated>1605517363503</updated>
       <workItem from="1605517366411" duration="1427000" />
       <workItem from="1605687358327" duration="1481000" />
-      <workItem from="1606128959603" duration="6391000" />
+      <workItem from="1606128959603" duration="6697000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9299000" />
+    <option name="totallyTimeSpent" value="9605000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -315,17 +312,10 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/omokJServer/ServerMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+        <state relative-caret-position="133">
+          <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -340,13 +330,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="665">
           <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/omok/OmokImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="143" column="20" lean-forward="true" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -376,6 +359,23 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#82#109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/omok/OmokImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="121" column="17" lean-forward="true" selection-start-line="121" selection-start-column="17" selection-end-line="121" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
