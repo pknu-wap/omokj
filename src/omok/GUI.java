@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import omokJServer.TransferObj.*;
+import clientCommunication.*;
+
 
 public class GUI extends JFrame  {
 	public GUI() {
@@ -12,7 +15,6 @@ public class GUI extends JFrame  {
 		setTitle("오목 7조"); //윈도우 창 이름 지정, 의논
 		
 		GUI_main gui_main = new GUI_main();
-		GUI_play gui_play = new GUI_play();
 		
 		add(gui_main);
 		setVisible(true); 

@@ -3,16 +3,21 @@ package omok;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
+
+import omokJServer.TransferObj.*;
+import clientCommunication.*;
 
 @SuppressWarnings("serial")
 public class GUI_main extends JPanel implements ActionListener {
+	static String nickname;
 	
 	public GUI_main() {
 		setSize(700,700); //크기 지정. 수정 가능
 		setLayout(null);
 		
 		JPanel picture = new JPanel() {
-			ImageIcon icon = new ImageIcon("C:\\Users\\김서현\\Downloads\\balletbear.png");
+			ImageIcon icon = new ImageIcon("./omok.png");
 			Image img = icon.getImage();
 			public void paint(Graphics g) {
 				g.drawImage(img, 0,0,500,500,null);
@@ -24,15 +29,17 @@ public class GUI_main extends JPanel implements ActionListener {
 		
 		JPanel text = new JPanel();//닉네임 넣을 패널
 		JTextField name = new JTextField(10); //닉네임 창
+		text.add(name);//패널에 닉네임 텍스트 필드 추가
 		text.setLocation(275,530);  //닉네임 텍스트 창 사이즈 및 위치 지정, 수정가능
 		text.setSize(150,50);
 		
 		JButton entrance = new JButton("서버 입장"); //서버 입장 버튼
 		entrance.addActionListener(e->{
-			removeAll();
-			repaint();
+			nickname = name.getText();
+			removeAll(); //프레임에 있는 패널 및 각종 항목 모두 제거
+			repaint(); //다시 그림
 			add(new GUI_play());
-			});//서버입장 버튼 ->게임중 창으로 이동, 차후에 서버 GUI창으로 이동
+			});//서버입장 버튼 ->서버창으로 이동
 		entrance.setLocation(200, 600);
 		entrance.setSize(100,30);
 		
@@ -42,7 +49,6 @@ public class GUI_main extends JPanel implements ActionListener {
 		exit.setSize(100,30);
 		
 		add(picture);
-		text.add(name);//패널에 닉네임 텍스트 필드 추가
 		add(text);
 		add(entrance); // 패널에 입장 버튼 추가
 		add(exit); // 패널에 종료 버튼 추가

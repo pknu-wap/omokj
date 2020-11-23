@@ -3,8 +3,12 @@ package omok;
 import java.awt.*;
 import javax.swing.*;
 
+import omok_logic.*;
+
 @SuppressWarnings("serial")
 public class GUI_play extends JPanel {
+	
+	private OmokImpl oi = new OmokImpl();
 	
 	public GUI_play() {
 		setSize(700,700);
@@ -14,7 +18,7 @@ public class GUI_play extends JPanel {
 		info.setLocation(300,15);
 		info.setSize(100,20);
 		
-		omok_drawBoard board = new omok_drawBoard(); //오목판 그리는 패널
+		omok_drawBoard board = new omok_drawBoard(oi); //오목판 그리는 패널
 		board.setLocation(100,50);
 		board.setSize(500,500);
 		
@@ -27,7 +31,7 @@ public class GUI_play extends JPanel {
 		player2.setSize(100,30);
 		
 		
-		JButton exit = new JButton("종료");// 서버 종료 버튼 
+		JButton exit = new JButton("종료");// 종료 버튼 
 		exit.addActionListener(e->{System.exit(0);}); //종료 누르면 그냥 창 종료
 		exit.setLocation(300,600);
 		exit.setSize(100,30);
