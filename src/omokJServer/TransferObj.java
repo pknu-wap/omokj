@@ -7,11 +7,10 @@ import java.util.ArrayList;
 
 public class TransferObj {
 	public static enum Opcode implements Serializable { 
-		joinServer, joinRoom, turnOver, gameOver, // 클라이언트 측 통신 명령
-		denyEntry, showRoomList, showRoom, startOmok, deliverTurn //서버 측 통신 명령
+		joinServer, joinRoom, turnOver, gameOver, // for Client
+		denyEntry, showRoomList, showRoom, startOmok, deliverTurn // for Server
 	}
 	
-	// 각 통신 명령 마다 전달할 정보 
 	// CLIENT
 	public static class JoinServer implements Serializable {
 		private static final long serialVersionUID = 10000L;
@@ -26,13 +25,13 @@ public class TransferObj {
 	
 	}
     // SERVER
-	public static class ShowRoomList implements Serializable { // 객체 인자는 참조를 전달하기 때문에 값을 새로 복붙 해줌!!!!!!!!!
+	public static class ShowRoomList implements Serializable { 
 		private static final long serialVersionUID = 10000L;
-		public static int[] roomNumbers = new int[5]; // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
+		public static int[] roomNumbers = new int[5]; // empty slot = null
 		public static String[] player1 = new String[5];
 		public static String[] player2 = new String[5];
 	}
-	public static class ShowRoom implements Serializable { // 들어간 방 번호, 들어있는 사람 닉네임이 들어있음.
+	public static class ShowRoom implements Serializable { 
 		private static final long serialVersionUID = 10000L;
 		public static int roomNumber;
 		public static String player1;

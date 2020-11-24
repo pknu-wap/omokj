@@ -40,24 +40,23 @@ public class ServerCommProcessor extends Thread {
 				switch(opcode) {
 				case joinServer: // showRoomList
 					if(clientList.size()>10) {
-						// 클라이언트 서버 연결 되자마자 클라이언트에서 joinServer 호출, 이 때 처리 과정에서
-						// 연결 인원수가 10명을 초과하면 이 부분에서, denyEntry 메소드 실행하며 접근거절 알리며 연결을 아예 끊어버림.
+						// n of cl num > 10 -> deny
 					}
 					JoinServer jS = (JoinServer)is.readObject();
-					this.nickname = JoinServer.nickname; // 날아온 닉네임을 저장
+					this.nickname = JoinServer.nickname; // save nickname
 					showRoomList();
 					break;
 				case joinRoom: 
 					JoinRoom jR = (JoinRoom)is.readObject();
 					int roomNum = JoinRoom.roomNumber - 1;
 					this.roomNumber = roomNum;
-					if(roomNum == 0) ; // 방 꽉차서 못들어가는 경우는 클라이언트 측에서 막아줄 것이기 때문에 일단 나중에 개발
+					if(roomNum == 0) ; // full ??
 					if(roomManager.room[roomNum-1].player[0] != null)
 					roomManager.room[roomNum-1].player[0].showRoom();
 					if(roomManager.room[roomNum-1].player[1] != null)
 					roomManager.room[roomNum-1].player[1].showRoom();
 					break;
-				case turnOver: // 받아서 deliverTurn으로 상대 클라이언트에게 전달
+				case turnOver:
 					break;
 				case gameOver:
 						break;
@@ -85,14 +84,14 @@ public class ServerCommProcessor extends Thread {
 		}
 }
 	
-	// ===== 오퍼레이션 처리하는 메소드 =====
+	// ===== Comm Operations =====
 	
 	// ===== Server to Client =====
 	private void showRoomList() {
 		Opcode opcode = Opcode.showRoomList;
 		ShowRoomList sRL = new ShowRoomList();
-		consoleLog(this.nickname + "님이 접속하셨습니다.");
-		// 방번호 int 배열화, 각 방플레이어 String 배열화
+		consoleLog(this.nickname + " Connected.");
+		// rn => int[], players => String[]
 		int rm_len = roomManager.room.length;
 		int[] rNs = new int[rm_len];
 		String[] p1 = new String[rm_len];
@@ -117,7 +116,7 @@ public class ServerCommProcessor extends Thread {
 		}
 	}
 	
-	private void showRoom() { // 들어간 방 번호, 들어있는 사람 닉네임 날림
+	private void showRoom() { //
 		Opcode opcode = Opcode.showRoom;
 		ShowRoom sRL = new ShowRoom();
 		
@@ -132,7 +131,7 @@ public class ServerCommProcessor extends Thread {
 			e.printStackTrace();
 		}
 	}
-	// ===== 이 클래스를 처리하는 메소드 =====
+	// ===== Methods about this Class =====
 	public void setRoomNumber(int rN) {
 		this.roomNumber = rN;
 	}
