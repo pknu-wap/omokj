@@ -23,7 +23,7 @@ public class OmokRoomManager {
 	}
 	
 	public void quitRoom (ServerCommProcessor player,int rN) {
-		if(player.getRoomNumber() == 0) return; // 이미 아무 방에도 안들어가 있는 경우 그냥 리턴
+		if(player.getRoomNumber() == 0) return; // already no room
 		if(this.room[rN-1].player[0] == player) this.room[rN-1].player[0] = null;
 		else if(this.room[rN-1].player[1] == player) this.room[rN-1].player[1] = null;
 		return;
@@ -41,11 +41,11 @@ public class OmokRoomManager {
 	public class OmokRoom {
 		int roomNumber; // 1 ~ 5
 		boolean gameStarted = false;
-		boolean p1Ready = false; // 둘 다 true면 startOmok
+		boolean p1Ready = false; // both are true, then startOmok
 		boolean p2Ready = false;
 		int curPlayers = 0;
 		ServerCommProcessor[] player = {null, null};
-		int nextPlayerIndex = 0; // 다음 턴인 플레이어의 인덱스 +1 하고 %2 해가며 턴 교환
+		int nextPlayerIndex = 0; // Next Player + 1 % 2
  
 		boolean gameOver = false;
 		ServerCommProcessor winner = null;
