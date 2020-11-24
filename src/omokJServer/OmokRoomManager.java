@@ -4,25 +4,24 @@ import omokJServer.OmokRoomManager.OmokRoom;
 
 public class OmokRoomManager {
 	private final static int MAX_ROOMS = 5;
-	OmokRoom[] room = new OmokRoom[MAX_ROOMS]; // 방번호를 1번 부터 시작해서 초기화
+	OmokRoom[] room = new OmokRoom[MAX_ROOMS]; // roomNumber : 1 ~
 	public OmokRoomManager() {
 		for(int i = 0; i < room.length; i++) {
 			this.room[i] = new OmokRoom(i+1);
 		}
 	}
 	
-	// sCP에서 방에 들어가라는 명령 받으면 거기서 이 메소드 실행
 	public int joinRoom (ServerCommProcessor player, int rN){
-		if(this.room[rN-1].curPlayers >= 2) { // rN번 방의 현재 인원수가 2보다 크거나 같으면 거절 
+		if(this.room[rN-1].curPlayers >= 2) { // deny if the nuber of players >= 2 
 			return 0;
 		}
 		player.setRoomNumber(rN);
 		if(this.room[rN-1].player[0] == null) this.room[rN-1].player[0] = player;
 		else this.room[rN-1].player[1] = player;
 		this.room[rN-1].curPlayers++;
-		return rN; // 방에 들어갔으면 방 번호 리턴 받아서 player의 roomNumber에 저장
+		return rN; // if got in room then, save roomNum return value to player's roomNum 
 	}
-	// 플레이어가 방에서 나갈 경우 
+	
 	public void quitRoom (ServerCommProcessor player,int rN) {
 		if(player.getRoomNumber() == 0) return; // 이미 아무 방에도 안들어가 있는 경우 그냥 리턴
 		if(this.room[rN-1].player[0] == player) this.room[rN-1].player[0] = null;
@@ -30,7 +29,7 @@ public class OmokRoomManager {
 		return;
 	}
 	
-	// 정보 getter setter 등
+	// getter setter 
 	public int getRoomsNum ( ) {
 		return room.length;
 	}
@@ -38,7 +37,7 @@ public class OmokRoomManager {
 		return room;
 	}
 	
-	// 오목 방 정보를 가진 Room 객체
+	// Omok Room
 	public class OmokRoom {
 		int roomNumber; // 1 ~ 5
 		boolean gameStarted = false;
