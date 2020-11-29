@@ -9,7 +9,7 @@ public class omok_logicSet {
 	private boolean turn;	//true = 흑, false = 백
 	private int state; // 0 = 못놓음, 1=가능, 2=승리
 	
-	private omok_baseCheck bch;
+	private omok_baseCheck bch = new omok_baseCheck();
 	
 	public omok_logicSet() {
 		omok = new int[18][18];
@@ -36,8 +36,17 @@ public class omok_logicSet {
 		int chx = x;
 		int chy = y;
 		
-		state = bch.omok_baseCheck(this, chx, chy);
+		state = bch.omok_bCheck(this, chx, chy);
 		
+		if(state ==1) {
+			if(turn==true)
+				omok[y][x]=BLACK;
+			else
+				omok[y][x]=WHITE;
+			
+			turn = !turn;
+		}
+
 		return state;
 	}
 	
