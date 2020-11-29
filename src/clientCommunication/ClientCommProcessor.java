@@ -41,13 +41,9 @@ public class ClientCommProcessor extends Thread {
 		}
 		// input, output 스트림 세팅 밑 데이타 객체 수신 대기 시작
 		try {
-			System.out.println("JOIN===============");
 			os = new ObjectOutputStream(socket.getOutputStream());
-			System.out.println("JOIN===============");
 			is = new ObjectInputStream(socket.getInputStream());
-			System.out.println("JOIN===============");
 			joinServer(nickname); // 스트림 연결 직후 바로 joinServer 실행 후 연결이 완벽히 되면 ShowRoomList를 받아서 출력
-			System.out.println("JOIN===============");
 			
 			while (true) {
 				Opcode opcode = (Opcode)is.readObject();
@@ -57,13 +53,9 @@ public class ClientCommProcessor extends Thread {
 				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
 					break;
 				case showRoomList:  // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
-					ShowRoomList sRL = new ShowRoomList();
-					sRL = (ShowRoomList)is.readObject();
-					
-					ShowRoomList.roomNumbers = null;
-					ShowRoomList.player1= null;
-					ShowRoomList.player2= null;
-					
+					int[] roomNumbers = (int[])is.readObject();
+					String[] player1 = (String[])is.readObject();
+					String[] player2 = (String[])is.readObject();
 					break;
 				case showRoom: // 들어가는데 실패 했으면 0 이 날아오고 아니면 들어간 방번호, 들어있는 사람 닉네임이 날아옴
 					ShowRoom sR = new ShowRoom();
@@ -103,7 +95,7 @@ public class ClientCommProcessor extends Thread {
 		JoinServer.nickname = nickname;
 		try {
 			os.writeObject(opcode);
-			os.writeObject(new JoinServer());
+			os.writeObject(nickname);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

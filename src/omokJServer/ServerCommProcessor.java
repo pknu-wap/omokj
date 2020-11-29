@@ -42,8 +42,7 @@ public class ServerCommProcessor extends Thread {
 					if(clientList.size()>10) {
 						// n of cl num > 10 -> deny
 					}
-					JoinServer jS = (JoinServer)is.readObject();
-					this.nickname = jS.nickname; // save nickname
+					this.nickname = (String)is.readObject();
 					showRoomList();
 					break;
 				case joinRoom: 
@@ -68,9 +67,9 @@ public class ServerCommProcessor extends Thread {
 			}
 		}
 		catch(IOException e) {
-			consoleLog(this.nickname + "lost connect.");
+			consoleLog(this.nickname + " lost connect.");
 		} catch (ClassNotFoundException e) {
-			consoleLog(this.nickname + "lost connect.");
+			consoleLog(this.nickname + " lost connect.");
 		}
 		finally {
 			try {
@@ -98,18 +97,17 @@ public class ServerCommProcessor extends Thread {
 		String[] p2 = new String[rm_len];
 		for(int i = 0; i < rm_len; i++) {
 			rNs[i] = roomManager.room[i].roomNumber;
-			p1[i] = roomManager.room[i].player[0].nickname;
-			p2[i] = roomManager.room[i].player[1].nickname;
+			if(roomManager.room[i].player[0] == null) p1[i] = " ";
+			else p1[i] = roomManager.room[i].player[0].nickname;
+			if(roomManager.room[i].player[1] == null) p2[i] = " ";
+			else p2[i] = roomManager.room[i].player[1].nickname;
 		}
-		
-		for(int i = 0; i < rm_len ; i++) {
-			ShowRoomList.roomNumbers[i] = rNs[i];
-			ShowRoomList.player1[i] = p1[i];
-			ShowRoomList.player2[i] = p2[i];
-		}
+		// Room Numbers, Players in each rooms
 		try {
 			os.writeObject(opcode);
-			os.writeObject(sRL);
+			os.writeObject(rNs);
+			os.writeObject(p1);
+			os.writeObject(p2);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
