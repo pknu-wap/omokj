@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 // This class contains everything about transfer information
 
-public class TransferObj {
+public class TransferObj implements Serializable {
 	public static enum Opcode implements Serializable { 
 		joinServer, joinRoom, turnOver, gameOver, // for Client
 		denyEntry, showRoomList, showRoom, startOmok, deliverTurn // for Server
@@ -13,8 +13,8 @@ public class TransferObj {
 	
 	// CLIENT
 	public static class JoinServer implements Serializable {
-		private static final long serialVersionUID = 10000L;
-		public static String nickname = null;
+		private final long serialVersionUID = 10000L;
+		public static String nickname;
 	}
 	public static class JoinRoom implements Serializable {
 		private static final long serialVersionUID = 10000L;

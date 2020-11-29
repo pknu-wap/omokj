@@ -8,6 +8,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import omokJServer.TransferObj.*;
+import omokJServer.TransferObj;
 
 public class ClientCommProcessor extends Thread {
 	//첫 메인 메뉴에서 서버 입장 버튼 누르면 이 클래스에 닉네임을 전달하면서 쓰레드를 실행함
@@ -99,11 +100,10 @@ public class ClientCommProcessor extends Thread {
 	//JoinServer 소켓, 스트림 연결된 직후에 바로 실행
 	private void joinServer(String nickname) {
 		Opcode opcode = Opcode.joinServer;
-		JoinServer jS = new JoinServer();
 		JoinServer.nickname = nickname;
 		try {
 			os.writeObject(opcode);
-			os.writeObject(jS);
+			os.writeObject(new JoinServer());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -9,7 +9,6 @@ import omokJServer.OmokRoomManager.OmokRoom;
 public class ServerMain {
 	public final static String SERVER_IP = "52.78.178.184"; // 172.31.42.164      52.78.178.184
 	public final static int SERVER_PORT = 50505;
-	private final static int MAX_ROOMS = 5;
 	
 	public static void main(String[] args) {
 		ServerSocket serverSocket = null;

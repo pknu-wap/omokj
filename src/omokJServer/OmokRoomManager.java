@@ -52,6 +52,8 @@ public class OmokRoomManager {
 		
 		private OmokRoom (int rN) {
 			this.roomNumber = rN;
+			this.player[0] = null;
+			this.player[1] = null;
 		}
 	}
 }

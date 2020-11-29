@@ -43,7 +43,7 @@ public class ServerCommProcessor extends Thread {
 						// n of cl num > 10 -> deny
 					}
 					JoinServer jS = (JoinServer)is.readObject();
-					this.nickname = JoinServer.nickname; // save nickname
+					this.nickname = jS.nickname; // save nickname
 					showRoomList();
 					break;
 				case joinRoom: 
