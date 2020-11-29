@@ -8,7 +8,7 @@ import omok_logic.*;
 @SuppressWarnings("serial")
 public class GUI_play extends JPanel {
 	
-	private OmokImpl oi = new OmokImpl();
+	private omok_logicSet ls = new omok_logicSet();
 	
 	public GUI_play() {
 		setSize(700,700);
@@ -18,7 +18,7 @@ public class GUI_play extends JPanel {
 		info.setLocation(300,15);
 		info.setSize(100,20);
 		
-		omok_drawBoard board = new omok_drawBoard(oi); //오목판 그리는 패널
+		omok_drawBoard board = new omok_drawBoard(ls); //오목판 그리는 패널
 		board.setLocation(100,50);
 		board.setSize(500,500);
 		
