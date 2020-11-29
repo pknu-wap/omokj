@@ -59,6 +59,8 @@ public class ClientCommProcessor extends Thread {
 					for(int i = 0; i < roomNumbers.length;i++) {
 						System.out.println("[" + roomNumbers[i] + "] P1:" + player1s[i] + " | P2:" + player2s[i]);
 					}
+					System.out.println("Join Room 3");
+					joinRoom(3);
 					break;
 				case showRoom: // 들어가는데 실패 했으면 0 이 날아오고 아니면 들어간 방번호, 들어있는 사람 닉네임이 날아옴
 					this.roomNumber = (int)is.readObject();

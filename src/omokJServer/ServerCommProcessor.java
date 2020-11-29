@@ -50,16 +50,16 @@ public class ServerCommProcessor extends Thread {
 					this.roomNumber = roomNum;
 					// MAX ROOM NUM 5 ( allow 1 ~ 5 )
 					if(roomNum<1 || roomNum> 5|| roomManager.room[roomNum-1].curPlayers >= 2) this.showRoom(0); // if full return 0 to client
-					else if(roomManager.room[roomNum-1].player[0] == null) { // p1이 비었으면,
-						roomManager.room[roomNum-1].player[0] = this;		 // p1으로 등록
+					else if(roomManager.room[roomNum-1].player[0] == null) { // p1 empty
+						roomManager.room[roomNum-1].player[0] = this;		 // p1 regist
 						roomManager.room[roomNum-1].player[0].showRoom(roomNum);
-						if(roomManager.room[roomNum-1].player[1] != null) //  p2가 있으면 갱신된 방 정보 전달
+						if(roomManager.room[roomNum-1].player[1] != null) //  p2 exists, then showRoom
 							roomManager.room[roomNum-1].player[1].showRoom(roomNum);
 					}
-					else if(roomManager.room[roomNum-1].player[1] == null) { // p2가 비었으면,
-						roomManager.room[roomNum-1].player[1] = this;		 // p2로 등록
+					else if(roomManager.room[roomNum-1].player[1] == null) { // p2 empty
+						roomManager.room[roomNum-1].player[1] = this;		 // p2 regist
 						roomManager.room[roomNum-1].player[1].showRoom(roomNum);
-						if(roomManager.room[roomNum-1].player[0] != null) // p1이 있으면 갱신된 방 정보 전달
+						if(roomManager.room[roomNum-1].player[0] != null) // p2 exists, then showRoom
 							roomManager.room[roomNum-1].player[0].showRoom(roomNum);
 					}
 					else this.showRoom(0);
