@@ -49,18 +49,18 @@ public class ServerCommProcessor extends Thread {
 					int roomNum = (int)is.readObject() -1;
 					this.roomNumber = roomNum;
 					// MAX ROOM NUM 5 ( allow 1 ~ 5 )
-					if(roomNum<1 || roomNum> 5|| roomManager.room[roomNum-1].curPlayers >= 2) this.showRoom(0); // if full return 0 to client
-					else if(roomManager.room[roomNum-1].player[0] == null) { // p1 empty
-						roomManager.room[roomNum-1].player[0] = this;		 // p1 regist
-						roomManager.room[roomNum-1].player[0].showRoom(roomNum);
-						if(roomManager.room[roomNum-1].player[1] != null) //  p2 exists, then showRoom
-							roomManager.room[roomNum-1].player[1].showRoom(roomNum);
+					if(roomNum<1 || roomNum> 5|| roomManager.room[roomNum].curPlayers >= 2) this.showRoom(0); // if full return 0 to client
+					else if(roomManager.room[roomNum].player[0] == null) { // p1 empty
+						roomManager.room[roomNum].player[0] = this;		 // p1 regist
+						roomManager.room[roomNum].player[0].showRoom(roomNum);
+						if(roomManager.room[roomNum].player[1] != null) //  p2 exists, then showRoom
+							roomManager.room[roomNum].player[1].showRoom(roomNum);
 					}
-					else if(roomManager.room[roomNum-1].player[1] == null) { // p2 empty
-						roomManager.room[roomNum-1].player[1] = this;		 // p2 regist
-						roomManager.room[roomNum-1].player[1].showRoom(roomNum);
-						if(roomManager.room[roomNum-1].player[0] != null) // p2 exists, then showRoom
-							roomManager.room[roomNum-1].player[0].showRoom(roomNum);
+					else if(roomManager.room[roomNum].player[1] == null) { // p2 empty
+						roomManager.room[roomNum].player[1] = this;		 // p2 regist
+						roomManager.room[roomNum].player[1].showRoom(roomNum);
+						if(roomManager.room[roomNum].player[0] != null) // p2 exists, then showRoom
+							roomManager.room[roomNum].player[0].showRoom(roomNum);
 					}
 					else this.showRoom(0);
 					this.roomNumber = roomNum;
@@ -77,9 +77,11 @@ public class ServerCommProcessor extends Thread {
 			}
 		}
 		catch(IOException e) {
-			consoleLog(this.nickname + " lost connect.");
+			clientList.remove(this);
+			consoleLog(this.nickname + " lost connect. [Connected : " + clientList.size() + " ]");
 		} catch (ClassNotFoundException e) {
-			consoleLog(this.nickname + " lost connect.");
+			clientList.remove(this);
+			consoleLog(this.nickname + " lost connect. [Connected : " + clientList.size() + " ]");
 		}
 		finally {
 			try {
@@ -98,7 +100,7 @@ public class ServerCommProcessor extends Thread {
 	// ===== Server to Client =====
 	private void showRoomList() {
 		Opcode opcode = Opcode.showRoomList;
-		consoleLog(this.nickname + " Connected.");
+		consoleLog(this.nickname + " Connected. [Connected : " + clientList.size() + " ]");
 		// rn => int[], players => String[]
 		int rm_len = roomManager.room.length;
 		int[] rNs = new int[rm_len];
