@@ -54,17 +54,17 @@ public class ClientCommProcessor extends Thread {
 					break;
 				case showRoomList:  // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
 					int[] roomNumbers = (int[])is.readObject();
-					String[] player1 = (String[])is.readObject();
-					String[] player2 = (String[])is.readObject();
+					String[] player1s = (String[])is.readObject();
+					String[] player2s = (String[])is.readObject();
+					for(int i = 0; i < roomNumbers.length;i++) {
+						System.out.println("[" + roomNumbers[i] + "] P1:" + player1s[i] + " | P2:" + player2s[i]);
+					}
 					break;
 				case showRoom: // 들어가는데 실패 했으면 0 이 날아오고 아니면 들어간 방번호, 들어있는 사람 닉네임이 날아옴
-					ShowRoom sR = new ShowRoom();
-					sR = (ShowRoom)is.readObject();
-		
-					ShowRoom.roomNumber = 0;
-					ShowRoom.player1 = null;
-					ShowRoom.player2 = null;
-					
+					this.roomNumber = (int)is.readObject();
+					String player1 = (String)is.readObject();
+					String player2 = (String)is.readObject();
+					System.out.println(" >" + roomNumber + "< P1:" + player1 + " | P2:" + player2);
 					break;
 				default:
 					break;
@@ -92,7 +92,7 @@ public class ClientCommProcessor extends Thread {
 	//JoinServer 소켓, 스트림 연결된 직후에 바로 실행
 	private void joinServer(String nickname) {
 		Opcode opcode = Opcode.joinServer;
-		JoinServer.nickname = nickname;
+		this.nickname = nickname;
 		try {
 			os.writeObject(opcode);
 			os.writeObject(nickname);
@@ -106,11 +106,9 @@ public class ClientCommProcessor extends Thread {
 	public void joinRoom(int roomNum) { //showRoom을 받고 나서 그제서야 그 방 번호를 클라이언트 자기 방 번호에 저장!!!!!!!!!!
 		this.roomNumber = roomNum;
 		Opcode opcode = Opcode.joinRoom;
-		JoinRoom jR = new JoinRoom();
-		JoinRoom.roomNumber = roomNum;
 		try {
 			os.writeObject(opcode);
-			os.writeObject(jR);
+			os.writeObject(this.roomNumber);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -11,26 +11,11 @@ public class TransferObj implements Serializable {
 		denyEntry, showRoomList, showRoom, startOmok, deliverTurn // for Server
 	}
 	
-	// CLIENT
-	public static class JoinServer implements Serializable {
-		private final long serialVersionUID = 10000L;
-		public static String nickname;
-	}
-	public static class JoinRoom implements Serializable {
-		private static final long serialVersionUID = 10000L;
-		public static int roomNumber;
-	}
 	public static class TurnOver implements Serializable {
 		private static final long serialVersionUID = 10000L;
 	
 	}
     // SERVER
-	public static class ShowRoomList implements Serializable { 
-		private static final long serialVersionUID = 10000L;
-		public static int[] roomNumbers = new int[5]; // empty slot = null
-		public static String[] player1 = new String[5];
-		public static String[] player2 = new String[5];
-	}
 	public static class ShowRoom implements Serializable { 
 		private static final long serialVersionUID = 10000L;
 		public static int roomNumber;

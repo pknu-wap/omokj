@@ -32,7 +32,6 @@ public class ServerCommProcessor extends Thread {
 		try {
 			is = new ObjectInputStream(socket.getInputStream());
 			os = new ObjectOutputStream(socket.getOutputStream());
-			clientList.add(this); 
 			
 			while (true) {
 				Opcode opcode = (Opcode)is.readObject();
@@ -43,17 +42,28 @@ public class ServerCommProcessor extends Thread {
 						// n of cl num > 10 -> deny
 					}
 					this.nickname = (String)is.readObject();
+					clientList.add(this);
 					showRoomList();
 					break;
 				case joinRoom: 
-					JoinRoom jR = (JoinRoom)is.readObject();
-					int roomNum = JoinRoom.roomNumber - 1;
+					int roomNum = (int)is.readObject() -1;
 					this.roomNumber = roomNum;
-					if(roomNum == 0) ; // full ??
-					if(roomManager.room[roomNum-1].player[0] != null)
-					roomManager.room[roomNum-1].player[0].showRoom();
-					if(roomManager.room[roomNum-1].player[1] != null)
-					roomManager.room[roomNum-1].player[1].showRoom();
+					// MAX ROOM NUM 5 ( allow 1 ~ 5 )
+					if(roomNum<1 || roomNum> 5|| roomManager.room[roomNum-1].curPlayers >= 2) this.showRoom(0); // if full return 0 to client
+					else if(roomManager.room[roomNum-1].player[0] == null) { // p1이 비었으면,
+						roomManager.room[roomNum-1].player[0] = this;		 // p1으로 등록
+						roomManager.room[roomNum-1].player[0].showRoom(roomNum);
+						if(roomManager.room[roomNum-1].player[1] != null) //  p2가 있으면 갱신된 방 정보 전달
+							roomManager.room[roomNum-1].player[1].showRoom(roomNum);
+					}
+					else if(roomManager.room[roomNum-1].player[1] == null) { // p2가 비었으면,
+						roomManager.room[roomNum-1].player[1] = this;		 // p2로 등록
+						roomManager.room[roomNum-1].player[1].showRoom(roomNum);
+						if(roomManager.room[roomNum-1].player[0] != null) // p1이 있으면 갱신된 방 정보 전달
+							roomManager.room[roomNum-1].player[0].showRoom(roomNum);
+					}
+					else this.showRoom(0);
+					this.roomNumber = roomNum;
 					break;
 				case turnOver:
 					break;
@@ -88,7 +98,6 @@ public class ServerCommProcessor extends Thread {
 	// ===== Server to Client =====
 	private void showRoomList() {
 		Opcode opcode = Opcode.showRoomList;
-		ShowRoomList sRL = new ShowRoomList();
 		consoleLog(this.nickname + " Connected.");
 		// rn => int[], players => String[]
 		int rm_len = roomManager.room.length;
@@ -114,16 +123,15 @@ public class ServerCommProcessor extends Thread {
 		}
 	}
 	
-	private void showRoom() { //
+	private void showRoom(int rN) { //
 		Opcode opcode = Opcode.showRoom;
-		ShowRoom sRL = new ShowRoom();
-		
-		ShowRoom.roomNumber = this.roomNumber;
-		ShowRoom.player1 = roomManager.room[this.roomNumber-1].player[0].nickname;
-		ShowRoom.player2 = roomManager.room[this.roomNumber-1].player[1].nickname;
 		try {
 			os.writeObject(opcode);
-			os.writeObject(sRL);
+			os.writeObject(rN + 1);
+			if(roomManager.room[rN].player[0] == null) os.writeObject(" ");
+			else os.writeObject(roomManager.room[rN].player[0].nickname);
+			if(roomManager.room[rN].player[1] == null) os.writeObject(" ");
+			else os.writeObject(roomManager.room[rN].player[1].nickname);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
