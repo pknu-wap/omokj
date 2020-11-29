@@ -23,9 +23,7 @@ public class GUI_server extends JPanel {
 		name.setLocation(300,15);
 		name.setSize(100,30);
 		
-		omok_showRoom showRoom = new omok_showRoom(ccp);
-		showRoom.setLocation(100,50);
-		showRoom.setSize(500,500);
+		
 		
 		JButton exit = new JButton("종료");// 서버 종료 버튼 
 		exit.addActionListener(e->{System.exit(0);}); //종료 누르면 그냥 창 종료
@@ -33,7 +31,7 @@ public class GUI_server extends JPanel {
 		exit.setSize(100,30);
 		
 		add(name);
-		add(showRoom);
+
 		add(exit);
 	}
 }

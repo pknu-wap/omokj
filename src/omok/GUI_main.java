@@ -17,7 +17,7 @@ public class GUI_main extends JPanel implements ActionListener {
 		setLayout(null);
 		
 		JPanel picture = new JPanel() {
-			ImageIcon icon = new ImageIcon(getClass().getResource(".\\omok.png"));
+			ImageIcon icon = new ImageIcon(".//omok.png");
 			Image img = icon.getImage();
 			public void paint(Graphics g) {
 				g.drawImage(img, 0,0,500,500,null);

@@ -8,14 +8,14 @@ import omok_logic.*;
 @SuppressWarnings("serial")
 public class omok_drawBoard extends JPanel {
 	
-	private OmokImpl oi;
+	private omok_logicSet ls;
 	
-	public omok_drawBoard(OmokImpl oi) {
+	public omok_drawBoard(omok_logicSet ls) {
 		setBackground(new Color(206,167,61));
 		setSize(500,500);
 		setLayout(null);
-		this.oi = oi;
-		addMouseListener(new omok_MouseEvent(this, this.oi));
+		this.ls = ls;
+		addMouseListener(new omok_MouseEvent(this, this.ls));
 	}
 	
 	public void paintComponent(Graphics arg0) {
@@ -36,9 +36,9 @@ public class omok_drawBoard extends JPanel {
 	public void drawStone(Graphics arg0) {
 		for(int y=0; y<18; y++) {
 			for(int x=0; x<18; x++) {
-				if(oi.omok[y][x]==1)
+				if(ls.getXY(y, x)==1)
 					drawBlack(arg0,x,y);
-				if(oi.omok[y][x]==2){
+				if(ls.getXY(y, x)==2){
 					drawWhite(arg0,x,y);
 				}
 			}
