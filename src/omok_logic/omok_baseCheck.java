@@ -9,13 +9,18 @@ public class omok_baseCheck {
 	private boolean chturn;
 	private int count;
 	
-	public int omok_baseCheck(omok_logicSet LS, int x, int y) {
+	public omok_baseCheck() {
+		chx = 0;
+		chy = 0;
+		chturn = true;
+		count =0;
+	}
+	
+	public int omok_bCheck(omok_logicSet LS, int x, int y) {
 			ls = LS;
 			chx = x;
 			chy = y;
 			chturn = ls.getTurn();
-			
-			count = 0;
 			
 			if(chturn == false) {
 				while(ls.getXY(chx,chy) == ls.WHITE && chx > 0) {
