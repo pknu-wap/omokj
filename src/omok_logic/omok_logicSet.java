@@ -3,22 +3,24 @@ package omok_logic;
 public class omok_logicSet {
 	private int[][] omok;
 	
-	static private int BLACK; //흑,백을 나타내는 인수 설정 -->민준님께 여쭤보기
-	static private int WHITE;
+	static int BLACK; // 흑은 1
+	static int WHITE; // 백은 2
 	
 	private boolean turn;	//true = 흑, false = 백
-	private boolean state; //true = 놓을 수 있음, false = 못놓음
+	private int state; // 0 = 못놓음, 1=가능, 2=승리
+	
+	private omok_baseCheck bch;
 	
 	public omok_logicSet() {
 		omok = new int[18][18];
 		BLACK = 1;
-		WHITE = -1;
+		WHITE = 2;
 		turn = true;
-		state = true;
+		state = 1;
 		
 	}
 	
-	public int getXY(int y, int x) {
+	public int getXY(int y, int x) { 
 		return omok[y][x];
 	}
 	
@@ -26,15 +28,17 @@ public class omok_logicSet {
 		return turn;
 	}
 	
-	public boolean getstate() {
+	public int getstate() {
 		return state;
 	}
 	
-	public void omokCheck(int x, int y, boolean turn) {
+	public int omokCheck(int x, int y) {
 		int chx = x;
 		int chy = y;
-		boolean chturn = turn;
 		
+		state = bch.omok_baseCheck(this, chx, chy);
+		
+		return state;
 	}
 	
 }
