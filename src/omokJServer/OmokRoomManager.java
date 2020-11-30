@@ -3,30 +3,35 @@ package omokJServer;
 import omokJServer.OmokRoomManager.OmokRoom;
 
 public class OmokRoomManager {
-	private final static int MAX_ROOMS = 5;
-	OmokRoom[] room = new OmokRoom[MAX_ROOMS]; // roomNumber : 1 ~
+	private final static int MAX_ROOMS = 5+1;
+	public OmokRoom[] room = new OmokRoom[MAX_ROOMS]; // roomNumber : 1 ~
 	public OmokRoomManager() {
 		for(int i = 0; i < room.length; i++) {
-			this.room[i] = new OmokRoom(i+1);
+			this.room[i] = new OmokRoom(i);
 		}
 	}
 	
 	public int joinRoom (ServerCommProcessor player, int rN){
-		if(this.room[rN-1].curPlayers >= 2) { // deny if the nuber of players >= 2 
-			return 0;
+		if(rN<1 || rN> 5|| room[rN].curPlayers >= 2) { // Strange room or exceed
+			rN = 0;
+			return rN;
 		}
-		player.setRoomNumber(rN);
-		if(this.room[rN-1].player[0] == null) this.room[rN-1].player[0] = player;
-		else this.room[rN-1].player[1] = player;
-		this.room[rN-1].curPlayers++;
-		return rN; // if got in room then, save roomNum return value to player's roomNum 
+		else if(room[rN].player[0] == null) { // p1 empty
+			room[rN].player[0] = player;		 // p1 regist
+		}
+		else if(room[rN].player[1] == null) { // p2 empty
+			room[rN].player[1] = player;		 // p2 regist
+		}
+		else {
+			rN = 0;
+			return rN;
+		}
+		room[rN].curPlayers++;
+		return rN;
 	}
 	
 	public void quitRoom (ServerCommProcessor player,int rN) {
-		if(player.getRoomNumber() == 0) return; // already no room
-		if(this.room[rN-1].player[0] == player) this.room[rN-1].player[0] = null;
-		else if(this.room[rN-1].player[1] == player) this.room[rN-1].player[1] = null;
-		return;
+		
 	}
 	
 	// getter setter 

@@ -53,12 +53,13 @@ public class ClientCommProcessor extends Thread {
 				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
 					break;
 				case showRoomList:  // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
-					int[] roomNumbers = (int[])is.readObject();
+					int[] roomNumbers = (int[])is.readObject(); // 0번방은 사용 안하고 현재 1~5번방 까지 있음
 					String[] player1s = (String[])is.readObject();
 					String[] player2s = (String[])is.readObject();
-					for(int i = 0; i < roomNumbers.length;i++) {
+					for(int i = 1; i < roomNumbers.length;i++) {
 						System.out.println("[" + roomNumbers[i] + "] P1:" + player1s[i] + " | P2:" + player2s[i]);
 					}
+					joinRoom(3);
 					break;
 				case showRoom: // 들어가는데 실패 했으면 0 이 날아오고 아니면 들어간 방번호, 들어있는 사람 닉네임이 날아옴
 					this.roomNumber = (int)is.readObject();

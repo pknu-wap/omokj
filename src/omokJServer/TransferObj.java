@@ -15,13 +15,6 @@ public class TransferObj implements Serializable {
 		private static final long serialVersionUID = 10000L;
 	
 	}
-    // SERVER
-	public static class ShowRoom implements Serializable { 
-		private static final long serialVersionUID = 10000L;
-		public static int roomNumber;
-		public static String player1;
-		public static String player2;
-	}
 	public static class StartOmok implements Serializable {
 		private static final long serialVersionUID = 10000L;
 		
@@ -29,9 +22,5 @@ public class TransferObj implements Serializable {
 	public static class DeliverTurn implements Serializable {
 		private static final long serialVersionUID = 10000L;
 		
-	}
-	
-	public static class DenyEntry implements Serializable {
-		private static final long serialVersionUID = 10000L;
 	}
 }

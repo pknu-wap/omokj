@@ -46,23 +46,15 @@ public class ServerCommProcessor extends Thread {
 					showRoomList();
 					break;
 				case joinRoom: 
-					int roomNum = (int)is.readObject() -1;
-					this.roomNumber = roomNum;
-					// MAX ROOM NUM 5 ( allow 1 ~ 5 )
-					if(roomNum<1 || roomNum> 5|| roomManager.room[roomNum].curPlayers >= 2) this.showRoom(0); // if full return 0 to client
-					else if(roomManager.room[roomNum].player[0] == null) { // p1 empty
-						roomManager.room[roomNum].player[0] = this;		 // p1 regist
+					int roomNum = (int)is.readObject();
+					roomNum = roomManager.joinRoom(this, roomNum);
+					if (roomNum == 0) {
+						this.showRoom(roomNum);
+					}
+					if(roomManager.room[roomNum].player[0] != null) //  p1 exists, then showRoom
 						roomManager.room[roomNum].player[0].showRoom(roomNum);
-						if(roomManager.room[roomNum].player[1] != null) //  p2 exists, then showRoom
-							roomManager.room[roomNum].player[1].showRoom(roomNum);
-					}
-					else if(roomManager.room[roomNum].player[1] == null) { // p2 empty
-						roomManager.room[roomNum].player[1] = this;		 // p2 regist
+					if(roomManager.room[roomNum].player[1] != null) // p2 exists, then showRoom
 						roomManager.room[roomNum].player[1].showRoom(roomNum);
-						if(roomManager.room[roomNum].player[0] != null) // p2 exists, then showRoom
-							roomManager.room[roomNum].player[0].showRoom(roomNum);
-					}
-					else this.showRoom(0);
 					this.roomNumber = roomNum;
 					break;
 				case turnOver:
@@ -129,7 +121,7 @@ public class ServerCommProcessor extends Thread {
 		Opcode opcode = Opcode.showRoom;
 		try {
 			os.writeObject(opcode);
-			os.writeObject(rN + 1);
+			os.writeObject(rN);
 			if(roomManager.room[rN].player[0] == null) os.writeObject(" ");
 			else os.writeObject(roomManager.room[rN].player[0].nickname);
 			if(roomManager.room[rN].player[1] == null) os.writeObject(" ");
