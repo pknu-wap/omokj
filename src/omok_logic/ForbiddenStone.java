@@ -57,17 +57,17 @@ public class ForbiddenStone {
 				break left;
 			
 			//check를 false로 바꿈으로 두번연속으로 만나는지 확인할수있게.
-			if(ls.getXY(chx,chy) == ls.BLACK) 
+			if(ls.getXY(chy,chx) == ls.BLACK) 
 			{
 				check = false;
 				stone1++;
 			}
 			
 			//상대돌을 만나면 탐색중지
-			if(ls.getXY(chx,chy) == ls.WHITE) 
+			if(ls.getXY(chy,chx) == ls.WHITE) 
 				break left;
 			
-			if(ls.getXY(chx,chy) == 0) {
+			if(ls.getXY(chy,chx) == 0) {
 				//처음 빈공간을만나 check가 true가 됬는데
 				//연달아 빈공간을만나면 탐색중지
 				//두번연속으로 빈공간만날시 blink카운트를 되돌림.
@@ -101,17 +101,17 @@ public class ForbiddenStone {
 			if(chx == 18)
 				break right;
 			
-			if(ls.getXY(chx,chy) == ls.BLACK) 
+			if(ls.getXY(chy,chx) == ls.BLACK) 
 			{
 				check = false;
 				stone2++;
 			}
 			
 			//상대돌을 만나면 탐색중지
-			if(ls.getXY(chx,chy) == ls.WHITE) 
+			if(ls.getXY(chy,chx) == ls.WHITE) 
 				break right;
 			
-			if(ls.getXY(chx,chy) == 0) {
+			if(ls.getXY(chy,chx) == 0) {
 				//두번연속으로 빈공간만날시 blink카운트를 되돌림.
 				if(check == false) {
 					check = true;
@@ -278,16 +278,16 @@ public class ForbiddenStone {
 			if(chy == -1)
 				break up;
 
-			if(ls.getXY[chy][x] == ls.BLACK)
+			if(ls.getXY(chy,x) == ls.BLACK)
 			{
 				check = false;
 				stone1++;
 			}
 
-			if(ls.getXY[chy][x] == ls.WHITE)
+			if(ls.getXY(chy,x) == ls.WHITE)
 				break up;
 			
-			if(ls.getXY[chy][x] == 0) {
+			if(ls.getXY(chy,x) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -315,16 +315,16 @@ public class ForbiddenStone {
 			if(chy == 18)
 				break down;
 			
-			if(ls.getXY[chy][x] == ls.BLACK)
+			if(ls.getXY(chy,x) == ls.BLACK)
 			{
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY[chy][x] == ls.WHITE)
+			if(ls.getXY(chy,x) == ls.WHITE)
 				break down;
 			
-			if(ls.getXY[chy][x] == 0) {
+			if(ls.getXY(chy,x) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -353,7 +353,7 @@ public class ForbiddenStone {
 		if(y - up == 0 || y + down == 17) {
 			return 0;
 		}else 
-			if(ls.getXY[y - up - 1][x] == ls.WHITE || ls.getXY[y + down + 1][x] == ls.WHITE) {
+			if(ls.getXY(y - up - 1,x) == ls.WHITE || ls.getXY(y + down + 1,x) == ls.WHITE) {
 				return 0;
 			}else {
 				return 1;
@@ -515,10 +515,10 @@ public class ForbiddenStone {
 				stone1++;
 			}
 			
-			if(ls.getXY[chy][chx] == ls.WHITE)
+			if(ls.getXY(chy,chx) == ls.WHITE)
 				break left;
 			
-			if(ls.getXY[chy][chx] == 0) {
+			if(ls.getXY(chy,chx) == 0) {
 				//두번연속으로 빈공간만날시 blink카운트를 되돌림.
 				if(check == false) {
 					check = true;
@@ -549,15 +549,15 @@ public class ForbiddenStone {
 			if(chx == 18)
 				break right;
 			
-			if(ls.getXY[chy][chx] == ls.BLACK) {
+			if(ls.getXY(chy,chx) == ls.BLACK) {
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY[chy][chx] == ls.WHITE)
+			if(ls.getXY(chy,chx) == ls.WHITE)
 				break right;
 			
-			if(ls.getXY[chy][chx] == 0) {
+			if(ls.getXY(chy,chx) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -628,15 +628,15 @@ public class ForbiddenStone {
 			if(chx == -1 || chy == -1)
 				break leftUp;
 			
-			if(ls.getXY[chy][chx] == ls.BLACK) {
+			if(ls.getXY(chy,chx) == ls.BLACK) {
 				check = false;
 				stone1++;
 			}
 			
-			if(ls.getXY[chy][chx] == ls.WHITE)
+			if(ls.getXY(chy,chx) == ls.WHITE)
 				break leftUp;
 			
-			if(ls.getXY[chy][chx] == 0) {
+			if(ls.getXY(chy,chx) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -667,15 +667,15 @@ public class ForbiddenStone {
 			if(chx == 18 || chy == 18)
 				break leftDown;
 			
-			if(ls.getXY[chy][chx] == ls.BLACK) {
+			if(ls.getXY(chy,chx) == ls.BLACK) {
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY[chy][chx] == ls.WHITE)
+			if(ls.getXY(chy,chx) == ls.WHITE)
 				break leftDown;
 			
-			if(ls.getXY[chy][chx] == 0) {
+			if(ls.getXY(chy,chx) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -742,15 +742,15 @@ public class ForbiddenStone {
 			if(chy == -1)
 				break up;
 			
-			if(ls.getXY[chy][chx] == ls.BLACK) {
+			if(ls.getXY(chy,chx) == ls.BLACK) {
 				check = false;
 				stone1++;
 			}
 			
-			if(ls.getXY[chy][chx] == ls.WHITE)
+			if(ls.getXY(chy,chx) == ls.WHITE)
 				break up;
 			
-			if(ls.getXY[chy][chx] == 0) {
+			if(ls.getXY(chy,chx) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -780,15 +780,15 @@ public class ForbiddenStone {
 			if(chy == 18)
 				break down;
 			
-			if(ls.getXY[chy][chx] == ls.BLACK) {
+			if(ls.getXY(chy,chx) == ls.BLACK) {
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY[chy][chx] == ls.WHITE)
+			if(ls.getXY(chy,chx) == ls.WHITE)
 				break down;
 			
-			if(ls.getXY[chy][chx] == 0) {
+			if(ls.getXY(chy,chx) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -855,15 +855,15 @@ public class ForbiddenStone {
 			if(chx == 18 || chy == -1)
 				break rightup;
 			
-			if(ls.getXY[chy][chx] == ls.BLACK) {
+			if(ls.getXY(chy,chx) == ls.BLACK) {
 				check = false;
 				stone1++;
 			}
 			
-			if(ls.getXY[chy][chx] == ls.WHITE)
+			if(ls.getXY(chy,chx) == ls.WHITE)
 				break rightup;
 			
-			if(ls.getXY[chy][chx] == 0) {
+			if(ls.getXY(chy,chx) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -894,15 +894,15 @@ public class ForbiddenStone {
 			if(chx == -1 || chy == 18)
 				break leftdown;
 			
-			if(ls.getXY[chy][chx] == ls.BLACK) {
+			if(ls.getXY(chy,chx) == ls.BLACK) {
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY[chy][chx] == ls.WHITE)
+			if(ls.getXY(chy,chx) == ls.WHITE)
 				break leftdown;
 			
-			if(ls.getXY[chy][chx] == 0) {
+			if(ls.getXY(chy,chx) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
