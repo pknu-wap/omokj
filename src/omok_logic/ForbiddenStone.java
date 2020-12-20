@@ -7,30 +7,32 @@ public class ForbiddenStone {
 	private int chx;
 	private int chy;
 	
-	
-	
-	public omok_logicSet() {
-		this.ls = ls;
+	public ForbiddenStone() {
 		chx = 0;
 		chy = 0;
 	}
 
 
-	public boolean samsam() {
+	public int samsam(omok_logicSet LS, int x, int y) {
+		ls = LS;
+		chx = x;
+		chy = y;
+		
 		int open_sam_count = 0;
-		open_sam_count += find1(); 
-		open_sam_count += find2();
-		open_sam_count += find3();
-		open_sam_count += find4();
+		open_sam_count += find1(ls, chx, chy); 
+		open_sam_count += find2(ls, chx, chy);
+		open_sam_count += find3(ls, chx, chy);
+		open_sam_count += find4(ls, chx, chy);
 
 		if(open_sam_count >= 2)
-			return true;
+			return 0;
 		else
-			return false;
+			return 1;
 	}
+	
 
-	// ¡ç ¡æ Å½»ö
-	// ¦¡ Å½»ö : ¿­¸°3ÀÌ µÇ¸é 1À» ¸®ÅÏ ¾Æ´Ï¸é 0 ¸®ÅÏ
+	// ï¿½ï¿½ ï¿½ï¿½ Å½ï¿½ï¿½
+	// ï¿½ï¿½ Å½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½ ï¿½Ç¸ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ 0 ï¿½ï¿½ï¿½ï¿½
 	public int find1(omok_logicSet LS, int x, int y) {
 		ls = LS;
 		chx = x;
@@ -39,38 +41,38 @@ public class ForbiddenStone {
 		int stone1 = 0;
 		int stone2 = 0;
 		int allStone = 0;
-		//¿­¸° 3ÀÎÁö Ã¼Å©ÇÏ±âÀ§ÇÑ°Í..
+		//ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï±ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½..
 		int blink1 = 1;
 		
-		//blink2 ´Â blink1 °ú °°À½ Áß°£¿¡¼­³Ö¾îÁÙ°ÅÀÓ.
+		//blink2 ï¿½ï¿½ blink1 ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½Ù°ï¿½ï¿½ï¿½.
 		//int blink2 = blink1;
 		
 		
-		// ¡ç
-		chx = x-1; //´Þ¶óÁö´Â ÁÂÇ¥
+		// ï¿½ï¿½
+		chx = x-1; //ï¿½Þ¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥
 		boolean check = false;
 		left :
 		while(true) {
 			
-			//ÁÂÇ¥³¡µµ´Þ
+			//ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(chx == -1)
 				break left;
 			
-			//check¸¦ false·Î ¹Ù²ÞÀ¸·Î µÎ¹ø¿¬¼ÓÀ¸·Î ¸¸³ª´ÂÁö È®ÀÎÇÒ¼öÀÖ°Ô.
-			if(ls.getXY(chy,chx) == ls.BLACK) 
+			//checkï¿½ï¿½ falseï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ö°ï¿½.
+			if(ls.getXY(chx,chy) == ls.BLACK) 
 			{
 				check = false;
 				stone1++;
 			}
 			
-			//»ó´ëµ¹À» ¸¸³ª¸é Å½»öÁßÁö
-			if(ls.getXY(chy,chx) == ls.WHITE) 
+			//ï¿½ï¿½ëµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			if(ls.getXY(chx,chy) == ls.WHITE) 
 				break left;
 			
-			if(ls.getXY(chy,chx) == 0) {
-				//Ã³À½ ºó°ø°£À»¸¸³ª check°¡ true°¡ ‰ç´Âµ¥
-				//¿¬´Þ¾Æ ºó°ø°£À»¸¸³ª¸é Å½»öÁßÁö
-				//µÎ¹ø¿¬¼ÓÀ¸·Î ºó°ø°£¸¸³¯½Ã blinkÄ«¿îÆ®¸¦ µÇµ¹¸².
+			if(ls.getXY(chx,chy) == 0) {
+				//Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ checkï¿½ï¿½ trueï¿½ï¿½ ï¿½ï¿½Âµï¿½
+				//ï¿½ï¿½ï¿½Þ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				//ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ blinkÄ«ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½.
 				if(check == false) {
 					check = true;
 				}else {
@@ -81,38 +83,38 @@ public class ForbiddenStone {
 				if(blink1 == 1) {
 					blink1--;
 				}else {
-					break left; //ºó°ø°£À»¸¸³µÀ¸³ª ºó°ø°£À» µÎ¹ø¸¸³ª¸é ³¡ÀÓ
+					break left; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				}
 			}
-			//°è¼ÓÅ½»ö
+			//ï¿½ï¿½ï¿½Å½ï¿½ï¿½
 			chx--;
 		}
 		
 		
-		// ¡æ
-		chx = x+1; //´Þ¶óÁö´Â ÁÂÇ¥
-		int blink2 = blink1; //blink1³²Àº°Å¸¸Å­ blink2,
-		if(blink1 == 1) //ºó°ø°£À» ¸¸³ªÁö¾ÊÀº°æ¿ì ¾ø¾úÀ½À»±â·Ï
+		// ï¿½ï¿½
+		chx = x+1; //ï¿½Þ¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥
+		int blink2 = blink1; //blink1ï¿½ï¿½ï¿½ï¿½ï¿½Å¸ï¿½Å­ blink2,
+		if(blink1 == 1) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			blink1 = 0;
 		check = false;
 		right :
 		while(true) {
-			//ÁÂÇ¥³¡µµ´Þ
+			//ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(chx == 18)
 				break right;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK) 
+			if(ls.getXY(chx,chy) == ls.BLACK) 
 			{
 				check = false;
 				stone2++;
 			}
 			
-			//»ó´ëµ¹À» ¸¸³ª¸é Å½»öÁßÁö
-			if(ls.getXY(chy,chx) == ls.WHITE) 
+			//ï¿½ï¿½ëµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			if(ls.getXY(chx,chy) == ls.WHITE) 
 				break right;
 			
-			if(ls.getXY(chy,chx) == 0) {
-				//µÎ¹ø¿¬¼ÓÀ¸·Î ºó°ø°£¸¸³¯½Ã blinkÄ«¿îÆ®¸¦ µÇµ¹¸².
+			if(ls.getXY(chx,chy) == 0) {
+				//ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ blinkÄ«ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½.
 				if(check == false) {
 					check = true;
 				}else {
@@ -123,35 +125,35 @@ public class ForbiddenStone {
 				if(blink2 == 1) {
 					blink2--;
 				}else {
-					break right; //ºó°ø°£À»¸¸³µÀ¸³ª ºó°ø°£À» µÎ¹ø¸¸³ª¸é ³¡ÀÓ
+					break right; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				}
 			}
 			chx++;
 		}
 		
 		allStone = stone1 + stone2;
-		//»ï»ïÀÌ¹Ç·Î µ¹°¹¼ö°¡ 2 + 1(ÇöÀçµ¹)ÀÌ¾Æ´Ï¸é 0¸®ÅÏ
-		//ÀÌºÎºÐÀÌ 43À» Çã¿ëÇÏ°ÔÇØÁÜ. 33¸¸ Ã£°ÔµÊ
+		//ï¿½ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2 + 1(ï¿½ï¿½ï¿½çµ¹)ï¿½Ì¾Æ´Ï¸ï¿½ 0ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ÌºÎºï¿½ï¿½ï¿½ 43ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½. 33ï¿½ï¿½ Ã£ï¿½Ôµï¿½
 		if(allStone != 2) {
 			return 0;
 			}
-		//µ¹°¹¼ö°¡ 3ÀÌ¸é ¿­¸° 3ÀÎÁö ÆÄ¾Ç.
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¾ï¿½.
 		
 		int left = (stone1 + blink1);
 		int right = (stone2 + blink2);
 		
-		//º®À¸·Î ¸·Èù°æ¿ì - ¿­¸°3ÀÌ ¾Æ´Ô
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½ ï¿½Æ´ï¿½
 		if(x - left == 0 || x + right == 17) {
 			return 0;
-		}else //»ó´ëµ¹·Î ¸·Èù°æ¿ì - ¿­¸°3ÀÌ ¾Æ´Ô
-			if(ls.getXY(y,x-left-1) == ls.WHITE || ls.getXY(y,x+right+1) == ls.WHITE) {
+		}else //ï¿½ï¿½ëµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½ ï¿½Æ´ï¿½
+			if(ls.getXY(x-left-1,y) == ls.WHITE || ls.getXY(x+right+1,y) == ls.WHITE) {
 				return 0;
 			}else {
-				return 1; //¿­¸°3 ÀÏ¶§ 1 ¸®ÅÏ
+				return 1; //ï¿½ï¿½ï¿½ï¿½3 ï¿½Ï¶ï¿½ 1 ï¿½ï¿½ï¿½ï¿½
 			}
 
 	}
-	// ¢Ø ¢Ù Å½»ö
+	// ï¿½ï¿½ ï¿½ï¿½ Å½ï¿½ï¿½
 	public int find2(omok_logicSet LS, int x, int y) {
 		ls = LS;
 		chx = x;
@@ -163,7 +165,7 @@ public class ForbiddenStone {
 		int blink1 = 1;
 		
 		
-		// ¢Ø
+		// ï¿½ï¿½
 		chx = x-1; 
 		chy = y-1;
 		boolean check = false;
@@ -172,16 +174,16 @@ public class ForbiddenStone {
 			if(chx == -1 || chy == -1)
 				break leftUp;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK)
+			if(ls.getXY(chx,chy) == ls.BLACK)
 			{
 				check = false;
 				stone1++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break leftUp;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -200,7 +202,7 @@ public class ForbiddenStone {
 		}
 		
 		
-		// ¢Ù
+		// ï¿½ï¿½
 		int blink2 = blink1;
 		if(blink1 == 1) 
 			blink1 = 0;
@@ -212,16 +214,16 @@ public class ForbiddenStone {
 			if(chx == 18 || chy == 18)
 				break rightDown;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK)
+			if(ls.getXY(chx,chy) == ls.BLACK)
 			{
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break rightDown;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -251,7 +253,7 @@ public class ForbiddenStone {
 		if(y - leftUp == 0 || x - leftUp == 0 || y + rightDown == 17 || x + rightDown == 17) {
 			return 0;
 		}else 
-			if(ls.getXY(y - leftUp -1,x - leftUp - 1) == ls.WHITE || ls.getXY(y + rightDown + 1,x + rightDown + 1) == ls.WHITE) {
+			if(ls.getXY(x - leftUp - 1,y - leftUp -1) == ls.WHITE || ls.getXY(x + rightDown + 1,y + rightDown + 1) == ls.WHITE) {
 				return 0;
 			}else {
 				return 1;
@@ -259,7 +261,7 @@ public class ForbiddenStone {
 		
 		
 	}
-	// ¡è ¡é Å½»ö
+	// ï¿½ï¿½ ï¿½ï¿½ Å½ï¿½ï¿½
 	public int find3(omok_logicSet LS, int x, int y) {
 		ls = LS;
 		chx = x;
@@ -270,7 +272,7 @@ public class ForbiddenStone {
 		int allStone = 0;
 		int blink1 = 1;
 		
-		// ¡è 
+		// ï¿½ï¿½ 
 		int chy = y-1; 
 		boolean check = false;
 		up :
@@ -278,16 +280,16 @@ public class ForbiddenStone {
 			if(chy == -1)
 				break up;
 
-			if(ls.getXY(chy,x) == ls.BLACK)
+			if(ls.getXY(x,chy) == ls.BLACK)
 			{
 				check = false;
 				stone1++;
 			}
 
-			if(ls.getXY(chy,x) == ls.WHITE)
+			if(ls.getXY(x,chy) == ls.WHITE)
 				break up;
 			
-			if(ls.getXY(chy,x) == 0) {
+			if(ls.getXY(x,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -304,7 +306,7 @@ public class ForbiddenStone {
 			chy--;
 		}
 		
-		// ¡é
+		// ï¿½ï¿½
 		int blink2 = blink1; 
 		if(blink1 == 1) 
 			blink1 = 0;
@@ -315,16 +317,16 @@ public class ForbiddenStone {
 			if(chy == 18)
 				break down;
 			
-			if(ls.getXY(chy,x) == ls.BLACK)
+			if(ls.getXY(x,chy) == ls.BLACK)
 			{
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY(chy,x) == ls.WHITE)
+			if(ls.getXY(x,chy) == ls.WHITE)
 				break down;
 			
-			if(ls.getXY(chy,x) == 0) {
+			if(ls.getXY(x,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -353,14 +355,14 @@ public class ForbiddenStone {
 		if(y - up == 0 || y + down == 17) {
 			return 0;
 		}else 
-			if(ls.getXY(y - up - 1,x) == ls.WHITE || ls.getXY(y + down + 1,x) == ls.WHITE) {
+			if(ls.getXY(x,y - up - 1) == ls.WHITE || ls.getXY(x,y + down + 1) == ls.WHITE) {
 				return 0;
 			}else {
 				return 1;
 			}
 	}
-	// £¯ Å½»ö
-	// ¢× ¢Ö Å½»ö
+	// ï¿½ï¿½ Å½ï¿½ï¿½
+	// ï¿½ï¿½ ï¿½ï¿½ Å½ï¿½ï¿½
 	public int find4(omok_logicSet LS, int x, int y) {
 		ls = LS;
 		chx = x;
@@ -371,7 +373,7 @@ public class ForbiddenStone {
 		int allStone = 0;
 		int blink1 = 1;
 		
-		// ¢×
+		// ï¿½ï¿½
 		int chx = x-1; 
 		int chy = y+1;
 		boolean check = false;
@@ -380,16 +382,16 @@ public class ForbiddenStone {
 			if(chx == -1 || chy == 18)
 				break leftDown;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK)
+			if(ls.getXY(chx,chy) == ls.BLACK)
 			{
 				check = false;
 				stone1++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break leftDown;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -407,7 +409,7 @@ public class ForbiddenStone {
 			chy++;
 		}
 	
-		// ¢Ö
+		// ï¿½ï¿½
 		int blink2 = blink1; 
 		if(blink1 == 1) 
 			blink1 = 0;
@@ -419,16 +421,16 @@ public class ForbiddenStone {
 			if(chx == 18 || chy == -1)
 				break rightUp;
 
-			if(ls.getXY(chy,chx) == ls.BLACK)
+			if(ls.getXY(chx,chy) == ls.BLACK)
 			{
 				check = false;
 				stone2++;
 			}
 
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break rightUp;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -459,7 +461,7 @@ public class ForbiddenStone {
 		if(x - leftDown == 0 || y - rightUp == 0|| y + leftDown == 17 || x + rightUp == 17) {
 			return 0;
 		}else 
-			if(ls.getXY(y + leftDown + 1,x - leftDown - 1) == ls.WHITE || ls.getXY(y-rightUp-1,x + rightUp +1) == ls.WHITE) {
+			if(ls.getXY(x - leftDown - 1,y + leftDown + 1) == ls.WHITE || ls.getXY(x + rightUp +1,y-rightUp-1) == ls.WHITE) {
 				return 0;
 			}else {
 				return 1;
@@ -470,38 +472,40 @@ public class ForbiddenStone {
 	
 	
 	//44
-	//¿­¸®´Â°Ç ¹®Á¦ x ±×³É 4ÀÇ °¹¼ö¸¦ ´ã´Âº¯¼ö°¡ 2°³ÀÌ»óÀÌ¸é 44
-	//¶È°°ÀÌ ºó°ø°£Àº ÇÏ³ª¸¸ Çã¿ë
-	// 4°¡Áö ºÎºÐÀ¸·Î ·Î³ª´©¾î Ç®¼öÀÖÀ½
-	public boolean sasa() {
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ x ï¿½×³ï¿½ 4ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Âºï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½Ì»ï¿½ï¿½Ì¸ï¿½ 44
+	//ï¿½È°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	// 4ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î³ï¿½ï¿½ï¿½ï¿½ï¿½ Ç®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public int sasa(omok_logicSet LS, int x, int y) {
+		ls = LS;
+		
 		int fourStone = 0;
 		
-		fourStone += fourORjang1(1);
-		fourStone += fourORjang2(1);
-		fourStone += fourORjang3(1);
-		fourStone += fourORjang4(1);
+		fourStone += fourORjang1(1, ls, x, y);
+		fourStone += fourORjang2(1, ls, x, y);
+		fourStone += fourORjang3(1, ls, x, y);
+		fourStone += fourORjang4(1, ls, x, y);
 		
 		
 		if(fourStone >= 2)
-			return true;
+			return 0;
 		else
-			return false;
+			return 1;
 	}
 	
 	
-	// ¡ç ¡æ Å½»ö
-	public int fourORjang1(int trigger) {
-		int b = BLACK;
-		int w = WHITE;
+	// ï¿½ï¿½ ï¿½ï¿½ Å½ï¿½ï¿½
+	public int fourORjang1(int trigger, omok_logicSet LS, int x, int y) {
+		int b = ls.BLACK;
+		int w = ls.WHITE;
 		int stone1 = 0;
 		int stone2 = 0;
 		int allStone = 0;
-		//¿­¸°4ÀÎÁö´Â »ó°üÀº¾øÀ½. ´Ù¸¸ ÄÚµå»ó ºó°ø°£¸¸À» ÀÇ¹Ì.
+		//ï¿½ï¿½ï¿½ï¿½4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½Ù¸ï¿½ ï¿½Úµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½.
 		int blink1 = 1;
-		if(trigger == 3) // 5¸ñ´Þ¼ºÁ¶°ÇÀº ºó°ø°£¾øÀÌ 5°³°¡ ÀÌ¾îÁ®¾ßÇÔ.
+		if(trigger == 3) // 5ï¿½ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 			blink1 = 0;
 		
-		// ¡ç  Å½»ö
+		// ï¿½ï¿½  Å½ï¿½ï¿½
 		int chy = y;
 		int chx = x - 1;
 		boolean check = false;
@@ -510,16 +514,16 @@ public class ForbiddenStone {
 			if(chx == -1)
 				break left;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK) {
+			if(ls.getXY(chx,chy) == ls.BLACK) {
 				check = false;
 				stone1++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break left;
 			
-			if(ls.getXY(chy,chx) == 0) {
-				//µÎ¹ø¿¬¼ÓÀ¸·Î ºó°ø°£¸¸³¯½Ã blinkÄ«¿îÆ®¸¦ µÇµ¹¸².
+			if(ls.getXY(chx,chy) == 0) {
+				//ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ blinkÄ«ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½.
 				if(check == false) {
 					check = true;
 				}else {
@@ -530,7 +534,7 @@ public class ForbiddenStone {
 				if(blink1 == 1) {
 					blink1--;
 				}else {
-					break left; //ºó°ø°£À»¸¸³µÀ¸³ª ºó°ø°£À» µÎ¹ø¸¸³ª¸é ³¡ÀÓ
+					break left; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				}
 				
 				
@@ -539,7 +543,7 @@ public class ForbiddenStone {
 			chx--;
 		}
 		
-		// ¡æ Å½»ö
+		// ï¿½ï¿½ Å½ï¿½ï¿½
 		chx = x + 1;
 		chy = y;
 		int blink2 = blink1;
@@ -549,15 +553,15 @@ public class ForbiddenStone {
 			if(chx == 18)
 				break right;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK) {
+			if(ls.getXY(chx,chy) == ls.BLACK) {
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break right;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -580,17 +584,17 @@ public class ForbiddenStone {
 		
 		allStone = stone1 + stone2;
 		
-		//»ç»çÃ£´Â Æ®¸®°Å
+		//ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½
 		if (trigger == 1) {
 			if (allStone != 3)
-				return 0; //³õÀºµ¹Á¦¿Ü 3°³¾Æ´Ï¸é 4°¡¾Æ´Ï´Ï±î.
+				return 0; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½Æ´Ï¸ï¿½ 4ï¿½ï¿½ï¿½Æ´Ï´Ï±ï¿½.
 			else
-				return 1; //³õÀºµ¹Á¦¿Ü 3°³¸é 4ÀÓ. ´ÝÈ÷°í ¿­¸°Áö´Â »ó°ü¾øÀ½.
+				return 1; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		}
 
-		//Àå¸ñÃ£´Â Æ®¸®°Å
+		//ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½
 		if (trigger == 2) {
-			//ÇöÀç³õÀºµ¹ +1 +5 => 6¸ñÀÌ»óÀº Àå¸ñ. ¿©±â¼­ ³õÀºµ¹±âÁØ µÎ¹æÇâ¸ðµÎ µ¹ÀÌÀÖ¾î¾ß Àå¸ñ
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ +1 +5 => 6ï¿½ï¿½ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ ï¿½ï¿½ï¿½
 			if(allStone >= 5 && stone1 != 0 && stone2 != 0)
 				return 1;
 			else
@@ -598,20 +602,20 @@ public class ForbiddenStone {
 		}
 		
 		if(trigger == 3) {
-			//³õÀºµ¹Æ÷ÇÔ 5°³ÀÇµ¹ÀÌ¿Ï¼ºµÇ¸é.
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½Çµï¿½ï¿½Ì¿Ï¼ï¿½ï¿½Ç¸ï¿½.
 			if(allStone == 4)
 				return 1;
 			else
 				return 0;
 		}
 		
-		//±×·²ÀÏÀ»¾øÁö¸¸ 1 µµ 2µµ¾Æ´Ï¸é 0¸®ÅÏ
+		//ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1 ï¿½ï¿½ 2ï¿½ï¿½ï¿½Æ´Ï¸ï¿½ 0ï¿½ï¿½ï¿½ï¿½
 		return 0;
 	}
-	// ¢Ø ¢Ù Å½»ö
-	public  int fourORjang2(int trigger) {
-		int b = BLACK;
-		int w = WHITE;
+	// ï¿½ï¿½ ï¿½ï¿½ Å½ï¿½ï¿½
+	public  int fourORjang2(int trigger, omok_logicSet LS, int x, int y) {
+		int b = LS.BLACK;
+		int w = LS.WHITE;
 		int stone1 = 0;
 		int stone2 = 0;
 		int allStone = 0;
@@ -619,7 +623,7 @@ public class ForbiddenStone {
 		if(trigger == 3)
 			blink1 = 0;
 		
-		// ¢Ø  Å½»ö
+		// ï¿½ï¿½  Å½ï¿½ï¿½
 		int chy = y - 1;
 		int chx = x - 1;
 		boolean check = false;
@@ -628,15 +632,15 @@ public class ForbiddenStone {
 			if(chx == -1 || chy == -1)
 				break leftUp;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK) {
+			if(ls.getXY(chx,chy) == ls.BLACK) {
 				check = false;
 				stone1++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break leftUp;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -657,7 +661,7 @@ public class ForbiddenStone {
 			chy--;
 		}
 		
-		// ¢Ù  Å½»ö
+		// ï¿½ï¿½  Å½ï¿½ï¿½
 		chy = y + 1;
 		chx = x + 1;
 		check = false;
@@ -667,15 +671,15 @@ public class ForbiddenStone {
 			if(chx == 18 || chy == 18)
 				break leftDown;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK) {
+			if(ls.getXY(chx,chy) == ls.BLACK) {
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break leftDown;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -722,10 +726,10 @@ public class ForbiddenStone {
 
 		return 0;
 	}
-	// ¡è ¡é Å½»ö
-	public  int fourORjang3(int trigger) {
-		int b = BLACK;
-		int w = WHITE;
+	// ï¿½ï¿½ ï¿½ï¿½ Å½ï¿½ï¿½
+	public  int fourORjang3(int trigger, omok_logicSet LS, int x, int y) {
+		int b =LS.BLACK;
+		int w = LS.WHITE;
 		int stone1 = 0;
 		int stone2 = 0;
 		int allStone = 0;
@@ -733,7 +737,7 @@ public class ForbiddenStone {
 		if(trigger == 3)
 			blink1 = 0;
 		
-		// ¡è  Å½»ö
+		// ï¿½ï¿½  Å½ï¿½ï¿½
 		int chy = y - 1;
 		int chx = x;
 		boolean check = false;
@@ -742,15 +746,15 @@ public class ForbiddenStone {
 			if(chy == -1)
 				break up;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK) {
+			if(ls.getXY(chx,chy) == ls.BLACK) {
 				check = false;
 				stone1++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break up;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -770,7 +774,7 @@ public class ForbiddenStone {
 			chy--;
 		}
 		
-		// ¡é  Å½»ö
+		// ï¿½ï¿½  Å½ï¿½ï¿½
 		chy = y + 1;
 		chx = x;
 		check = false;
@@ -780,15 +784,15 @@ public class ForbiddenStone {
 			if(chy == 18)
 				break down;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK) {
+			if(ls.getXY(chx,chy) == ls.BLACK) {
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break down;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -835,10 +839,10 @@ public class ForbiddenStone {
 		
 		return 0;
 	}
-	// ¢Ö ¢× Å½»ö
-	public  int fourORjang4(int trigger) {
-		int b = BLACK;
-		int w = WHITE;
+	// ï¿½ï¿½ ï¿½ï¿½ Å½ï¿½ï¿½
+	public  int fourORjang4(int trigger, omok_logicSet LS, int x, int y) {
+		int b = LS.BLACK;
+		int w = LS.WHITE;
 		int stone1 = 0;
 		int stone2 = 0;
 		int allStone = 0;
@@ -846,7 +850,7 @@ public class ForbiddenStone {
 		if(trigger == 3)
 			blink1 = 0;
 		
-		// ¢Ö Å½»ö
+		// ï¿½ï¿½ Å½ï¿½ï¿½
 		int chy = y - 1;
 		int chx = x + 1;
 		boolean check = false;
@@ -855,15 +859,15 @@ public class ForbiddenStone {
 			if(chx == 18 || chy == -1)
 				break rightup;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK) {
+			if(ls.getXY(chx,chy) == ls.BLACK) {
 				check = false;
 				stone1++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break rightup;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -884,7 +888,7 @@ public class ForbiddenStone {
 			chy--;
 		}
 		
-		// ¢× Å½»ö
+		// ï¿½ï¿½ Å½ï¿½ï¿½
 		chy = y + 1;
 		chx = x - 1;
 		check = false;
@@ -894,15 +898,15 @@ public class ForbiddenStone {
 			if(chx == -1 || chy == 18)
 				break leftdown;
 			
-			if(ls.getXY(chy,chx) == ls.BLACK) {
+			if(ls.getXY(chx,chy) == ls.BLACK) {
 				check = false;
 				stone2++;
 			}
 			
-			if(ls.getXY(chy,chx) == ls.WHITE)
+			if(ls.getXY(chx,chy) == ls.WHITE)
 				break leftdown;
 			
-			if(ls.getXY(chy,chx) == 0) {
+			if(ls.getXY(chx,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
@@ -952,33 +956,39 @@ public class ForbiddenStone {
 	}
 	
 	
-	//Àå¸ñ
-	public  boolean jangmok() {
+	//ï¿½ï¿½ï¿½
+	public  int jangmok(omok_logicSet LS, int x, int y) {
+		ls = LS;
+		chx = x;
+		chy = y;
+		
 		int result = 0;
 		
-		result += fourORjang1(2);
-		result += fourORjang2(2);
-		result += fourORjang3(2);
-		result += fourORjang4(2);
+		result += fourORjang1(2, ls, chx, chy);
+		result += fourORjang2(2, ls, chx, chy);
+		result += fourORjang3(2, ls, chx, chy);
+		result += fourORjang4(2, ls, chx, chy);
 		
-		if(result >= 1)  //ÇÏ³ª¶óµµ Àå¸ñ¼ö°¡ÀÖÀ¸¸é
-			return true;
+		if(result >= 1)  //ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			return 0;
 		
-		return false;
+		return 1;
 	}
 	
-	public  boolean fiveStone() {
+	public  int fiveStone(omok_logicSet LS, int x, int y) {
+		ls = LS;
+		chx = x;
+		chy = y;
 		int result = 0;
 		
-		result += fourORjang1(3);
-		result += fourORjang2(3);
-		result += fourORjang3(3);
-		result += fourORjang4(3);
+		result += fourORjang1(3, ls, chx, chy);
+		result += fourORjang2(3, ls, chx, chy);
+		result += fourORjang3(3, ls, chx, chy);
+		result += fourORjang4(3, ls, chx, chy);
 		
-		if(result >= 1) //ÇÏ³ª¶óµµ ¿À¸ñÀÌ ´Þ¼ºµÇ¸é.
-			return true;
+		if(result >= 1) //ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½Ç¸ï¿½.
+			return 0;
 		
-		
-		return false;
+		return 1;
 	}
 }

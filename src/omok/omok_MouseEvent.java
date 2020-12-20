@@ -22,16 +22,18 @@ public class omok_MouseEvent extends MouseAdapter {
 		if(x<0 || x>19 || y<0 || y>19) {
 			return;
 		}
-		//
-		//
-		if(ls.omokCheck(x,y)==1)
+		
+		int check = ls.omokCheck(x,y);
+		
+		if(check==1) {
 			b.repaint();
-		else if(ls.omokCheck(x,y)==2) {
+		}
+		else if(check==2) {
 			b.repaint();
+			System.out.println("GUI에서 승리 확인");
 			//승리표시 메소드
 		}
 			
-		//필요: x,y좌표 넘겨주는 방법, 그리고 이미 놓여져 있는 곳이면 안놓이게 하는 거
 	}
 	
 }

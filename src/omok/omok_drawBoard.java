@@ -34,11 +34,11 @@ public class omok_drawBoard extends JPanel {
 	}
 	
 	public void drawStone(Graphics arg0) {
-		for(int y=0; y<18; y++) {
-			for(int x=0; x<18; x++) {
-				if(ls.getXY(y, x)==1)
+		for(int y=0; y<19; y++) {
+			for(int x=0; x<19; x++) {
+				if(ls.getXY(x,y)==1)
 					drawBlack(arg0,x,y);
-				if(ls.getXY(y, x)==2){
+				if(ls.getXY(x,y)==2){
 					drawWhite(arg0,x,y);
 				}
 			}
