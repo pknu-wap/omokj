@@ -1,8 +1,11 @@
 package omok;
 
 import java.awt.event.*;
+
+import omokJServer.omok_logicSet;
+
 import java.awt.*;
-import omok_logic.*;
+
 
 public class omok_MouseEvent extends MouseAdapter {
 	
@@ -30,8 +33,8 @@ public class omok_MouseEvent extends MouseAdapter {
 		}
 		else if(check==2) {
 			b.repaint();
-			System.out.println("GUI에서 승리 확인");
-			//승리표시 메소드
+			System.out.println("GUI�뿉�꽌 �듅由� �솗�씤");
+			//�듅由ы몴�떆 硫붿냼�뱶
 		}
 			
 	}

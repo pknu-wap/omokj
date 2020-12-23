@@ -45,6 +45,7 @@ public class OmokRoomManager {
 	// Omok Room
 	public class OmokRoom {
 		int roomNumber; // 1 ~ 5
+		int curPlayers = 0; // Next Player + 1 % 2
 		ServerCommProcessor[] player = {null, null};
 		
 		omok_logicSet board; // board.omokCheck(x, y)

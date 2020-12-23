@@ -3,6 +3,7 @@ package omok;
 import java.awt.*;
 import javax.swing.*;
 
+import omokJServer.omok_logicSet;
 import omok_logic.*;
 
 @SuppressWarnings("serial")
@@ -21,15 +22,15 @@ public class omok_drawBoard extends JPanel {
 	public void paintComponent(Graphics arg0) {
 		// TODO Auto-generated method stub
 		super.paintComponent(arg0);
-		arg0.setColor(Color.BLACK); //그려질 색을 지정
-		board(arg0); //board 함수 이용해서 그림 보드판 그림 
-		drawStone(arg0); //오목알 그림
+		arg0.setColor(Color.BLACK); //洹몃젮吏� �깋�쓣 吏��젙
+		board(arg0); //board �븿�닔 �씠�슜�빐�꽌 洹몃┝ 蹂대뱶�뙋 洹몃┝ 
+		drawStone(arg0); //�삤紐⑹븣 洹몃┝
 	}
 	
 	public void board(Graphics arg0) {
 		for(int i=1;i<=19;i++){
-			arg0.drawLine(25, i*25, 25*19, i*25); //가로 줄 그리기
-			arg0.drawLine(i*25, 25, i*25 , 25*19); //세로줄 그리기
+			arg0.drawLine(25, i*25, 25*19, i*25); //媛�濡� 以� 洹몃━湲�
+			arg0.drawLine(i*25, 25, i*25 , 25*19); //�꽭濡쒖쨪 洹몃━湲�
 			}
 	}
 	
@@ -46,13 +47,13 @@ public class omok_drawBoard extends JPanel {
 	}
 	
 	public void drawBlack(Graphics arg0,int x,int y){
-		//그려질 색을 블랙으로 바꿈
+		//洹몃젮吏� �깋�쓣 釉붾옓�쑝濡� 諛붽퓞
 		arg0.setColor(Color.BLACK);
 		arg0.fillOval(x*25+18, y*25+18, 15, 15);
 	}
 
 	public void drawWhite(Graphics arg0,int x,int y){
-		//그려질 색을 화이트로 바꿈
+		//洹몃젮吏� �깋�쓣 �솕�씠�듃濡� 諛붽퓞
 		arg0.setColor(Color.WHITE);
 		arg0.fillOval(x*25+18, y*25+18, 15, 15);
 	}

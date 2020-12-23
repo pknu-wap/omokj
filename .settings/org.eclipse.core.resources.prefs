@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/omok/GUI_main.java=UTF-8
+encoding//src/omok/GUI_play.java=UTF-8
+encoding//src/omok/omok_MouseEvent.java=UTF-8
+encoding//src/omok/omok_drawBoard.java=UTF-8
 encoding//src/omokJServer/ForbiddenStone.java=UTF-8
 encoding//src/omokJServer/ServerCommProcessor.java=UTF-8
