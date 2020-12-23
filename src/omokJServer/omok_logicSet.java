@@ -1,5 +1,4 @@
-package omok_logic;
-
+package omokJServer;
 import java.util.Scanner;
 
 public class omok_logicSet {

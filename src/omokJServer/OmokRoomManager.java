@@ -1,10 +1,10 @@
 package omokJServer;
 
-import omokJServer.OmokRoomManager.OmokRoom;
 
 public class OmokRoomManager {
 	private final static int MAX_ROOMS = 5+1;
 	public OmokRoom[] room = new OmokRoom[MAX_ROOMS]; // roomNumber : 1 ~
+	
 	public OmokRoomManager() {
 		for(int i = 0; i < room.length; i++) {
 			this.room[i] = new OmokRoom(i);
@@ -45,13 +45,14 @@ public class OmokRoomManager {
 	// Omok Room
 	public class OmokRoom {
 		int roomNumber; // 1 ~ 5
+		ServerCommProcessor[] player = {null, null};
+		
+		omok_logicSet board; // board.omokCheck(x, y)
+		
 		boolean gameStarted = false;
 		boolean p1Ready = false; // both are true, then startOmok
 		boolean p2Ready = false;
-		int curPlayers = 0;
-		ServerCommProcessor[] player = {null, null};
 		int nextPlayerIndex = 0; // Next Player + 1 % 2
- 
 		boolean gameOver = false;
 		ServerCommProcessor winner = null;
 		
@@ -59,6 +60,7 @@ public class OmokRoomManager {
 			this.roomNumber = rN;
 			this.player[0] = null;
 			this.player[1] = null;
+			this.board = new omok_logicSet();
 		}
 	}
 }

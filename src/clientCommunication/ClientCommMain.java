@@ -8,6 +8,7 @@ public class ClientCommMain {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		String nick = sc.nextLine();
+		
 		ClientCommProcessor ccp = new ClientCommProcessor(nick);
 		ccp.start();
 		

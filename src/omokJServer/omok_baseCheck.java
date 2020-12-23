@@ -1,4 +1,4 @@
-package omok_logic;
+package omokJServer;
 
 public class omok_baseCheck {
 	

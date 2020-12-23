@@ -131,13 +131,6 @@ public class ServerCommProcessor extends Thread {
 			e.printStackTrace();
 		}
 	}
-	// ===== Methods about this Class =====
-	public void setRoomNumber(int rN) {
-		this.roomNumber = rN;
-	}
-	public int getRoomNumber( ) {
-		return this.roomNumber;
-	}
 	//
 	private void consoleLog(String log) {
 		System.out.println("[SERVER " + Thread.currentThread().getId() + " ] " + log);
