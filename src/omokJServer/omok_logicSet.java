@@ -59,8 +59,6 @@ public class omok_logicSet {
 		else
 			omok[chy][chx] = WHITE;
 		
-		System.out.println(state);
-		
 		turn = !turn;
 		return state;
 	}
