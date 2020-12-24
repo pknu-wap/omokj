@@ -80,6 +80,19 @@ public class ClientCommProcessor extends Thread {
 						String player1 = (String)is.readObject();
 						String player2 = (String)is.readObject();
 						System.out.println(" >" + roomNumber + "< P1:" + player1 + " | P2:" + player2);
+						int rC = 0;
+						while(rC != 1 &&  rC != 2) {
+							System.out.println(" 1. Ready 2. Quit ");
+							rC = sc.nextInt();
+							if(rC==1) {
+								//get ready
+								getReady();
+							}
+							else if(rC==2) {
+								// quit room
+								quitRoom();
+							}
+						}
 					}
 					else {
 						System.out.println("해당 방에 접속하는데 실패하였습니다.");
@@ -129,6 +142,24 @@ public class ClientCommProcessor extends Thread {
 		try {
 			os.writeObject(opcode);
 			os.writeObject(this.roomNumber);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void getReady() {
+		Opcode opcode = Opcode.getReady;
+		try {
+			os.writeObject(opcode);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void quitRoom() {
+		Opcode opcode = Opcode.quitRoom;
+		try {
+			os.writeObject(opcode);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
