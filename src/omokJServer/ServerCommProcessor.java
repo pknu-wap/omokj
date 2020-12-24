@@ -39,11 +39,13 @@ public class ServerCommProcessor extends Thread {
 				switch(opcode) {
 				case joinServer: // showRoomList
 					if(clientList.size()>10) {
-						// n of cl num > 10 -> deny
+						denyEntr();
 					}
+					else {
 					this.nickname = (String)is.readObject();
 					clientList.add(this);
 					showRoomList();
+					}
 					break;
 				case joinRoom: 
 					int roomNum = (int)is.readObject();
@@ -90,7 +92,7 @@ public class ServerCommProcessor extends Thread {
 	// ===== Comm Operations =====
 	
 	// ===== Server to Client =====
-	private void showRoomList() {
+	private void showRoomList( ) {
 		Opcode opcode = Opcode.showRoomList;
 		consoleLog(this.nickname + " Connected. [Connected : " + clientList.size() + " ]");
 		// rn => int[], players => String[]
@@ -119,13 +121,29 @@ public class ServerCommProcessor extends Thread {
 	
 	private void showRoom(int rN) { //
 		Opcode opcode = Opcode.showRoom;
+		consoleLog(this.nickname + " joined Room [" + rN + "]");
 		try {
 			os.writeObject(opcode);
 			os.writeObject(rN);
-			if(roomManager.room[rN].player[0] == null) os.writeObject(" ");
-			else os.writeObject(roomManager.room[rN].player[0].nickname);
-			if(roomManager.room[rN].player[1] == null) os.writeObject(" ");
-			else os.writeObject(roomManager.room[rN].player[1].nickname);
+			if(rN != 0) {
+				if(roomManager.room[rN].player[0] == null) os.writeObject(" ");
+				else os.writeObject(roomManager.room[rN].player[0].nickname);
+				if(roomManager.room[rN].player[1] == null) os.writeObject(" ");
+				else os.writeObject(roomManager.room[rN].player[1].nickname);
+			}
+			else {
+				this.showRoomList();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void denyEntr() {
+		Opcode opcode = Opcode.denyEntry;
+		try {
+			os.writeObject(opcode);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -6,13 +6,9 @@ import java.util.Scanner;
 
 public class ClientCommMain {
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		String nick = sc.nextLine();
 		
-		ClientCommProcessor ccp = new ClientCommProcessor(nick);
+		ClientCommProcessor ccp = new ClientCommProcessor();
 		ccp.start();
 		
-		// 임시 블락
-		sc.next();
 	}
 }
