@@ -24,13 +24,14 @@ public class ClientCommProcessor extends Thread {
 	private String nickname = null;
 	private int roomNumber = 0; // 아무 방에도 안들어가 있으면 0
 	
-	Scanner sc;
+	public static enum State { 
+		first, channel, room, game
+	}
 	
-	public ClientCommProcessor () {
-		System.out.print("닉네임을 입력하세요 : ");
-		sc = new Scanner(System.in);
-		this.nickname = sc.nextLine();
+	State state = State.first;
 	
+	public ClientCommProcessor (String nickname) {
+		this.nickname = nickname;
 	}
 	
 	@Override
@@ -61,6 +62,7 @@ public class ClientCommProcessor extends Thread {
 				case denyEntry:
 					return;
 				case showRoomList:  // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
+					state = State.channel;
 					int[] roomNumbers = (int[])is.readObject(); // 0번방은 사용 안하고 현재 1~5번방 까지 있음
 					String[] player1s = (String[])is.readObject();
 					String[] player2s = (String[])is.readObject();
@@ -68,31 +70,15 @@ public class ClientCommProcessor extends Thread {
 						System.out.println("[" + roomNumbers[i] + "] P1:" + player1s[i] + " | P2:" + player2s[i]);
 					}
 					System.out.print("몇 번방에 들어가시겠습니까? (1~5번, 다른 입력시 종료) : ");
-					int roomN = sc.nextInt();
-					if(roomN>=1 && roomN <=5) 
-					joinRoom(roomN);
-					else 
-						return;
 					break;
 				case showRoom: // 들어가는데 실패 했으면 0 이 날아오고 아니면 들어간 방번호, 들어있는 사람 닉네임이 날아옴
 					this.roomNumber = (int)is.readObject();
 					if(this.roomNumber != 0) {
+						state = State.room;
 						String player1 = (String)is.readObject();
 						String player2 = (String)is.readObject();
 						System.out.println(" >" + roomNumber + "< P1:" + player1 + " | P2:" + player2);
-						int rC = 0;
-						while(rC != 1 &&  rC != 2) {
-							System.out.println(" 1. Ready 2. Quit ");
-							rC = sc.nextInt();
-							if(rC==1) {
-								//get ready
-								getReady();
-							}
-							else if(rC==2) {
-								// quit room
-								quitRoom();
-							}
-						}
+						System.out.println("1. Ready 2. Quit");
 					}
 					else {
 						System.out.println("해당 방에 접속하는데 실패하였습니다.");
@@ -162,6 +148,31 @@ public class ClientCommProcessor extends Thread {
 			os.writeObject(opcode);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		state = State.channel;
+	}
+	
+	public void consoleChoice(int choice) { // main 에서 클라이언트 상태에 따른 선택 처리
+		switch(state) {
+		case first:
+			break;
+		case channel:
+			int roomN = choice;
+			if(roomN>=1 && roomN <=5) 
+			joinRoom(roomN);
+			else 
+				return;
+			break;
+		case room:
+			if(choice==1);
+			else if(choice==2) 
+				quitRoom();
+			else ;
+			break;
+		case game:
+			break;
+		default:
+			break;	
 		}
 	}
 }

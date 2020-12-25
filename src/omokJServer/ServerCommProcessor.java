@@ -59,6 +59,24 @@ public class ServerCommProcessor extends Thread {
 						roomManager.room[roomNum].player[1].showRoom(roomNum);
 					this.roomNumber = roomNum;
 					break;
+				case quitRoom:
+					if(this.roomNumber == 0) {
+						showRoomList();
+					}
+					else if(this.roomNumber >= 1 && this.roomNumber <=5) {
+						consoleLog(this.nickname + " quit Room [" + this.roomNumber+ "]");
+						if(roomManager.room[this.roomNumber].player[0] == this)
+							roomManager.room[this.roomNumber].player[0] = null;
+						else if(roomManager.room[this.roomNumber].player[1] == this)
+							roomManager.room[this.roomNumber].player[1] = null;
+						
+						roomManager.room[this.roomNumber].curPlayers--;
+						showRoomList();
+					}
+					else {
+						showRoomList();
+					}
+					break;
 				case turnOver:
 					break;
 				case gameOver:

@@ -1,2 +1,4 @@
 /ClientCommMain.class
 /ClientCommProcessor.class
+/ClientState.class
+/ClientCommProcessor$State.class
