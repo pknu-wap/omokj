@@ -164,7 +164,8 @@ public class ClientCommProcessor extends Thread {
 				return;
 			break;
 		case room:
-			if(choice==1);
+			if(choice==1)
+				getReady();
 			else if(choice==2) 
 				quitRoom();
 			else ;

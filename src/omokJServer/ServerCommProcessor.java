@@ -19,6 +19,7 @@ public class ServerCommProcessor extends Thread {
 	protected ObjectOutputStream os;
 	private String nickname = null;
 	private int roomNumber = 0; // 0 if never entered any room
+	public int playerIdx = 0;
 	
 	// Constructor for each connection
 	public ServerCommProcessor(Socket socket, ArrayList<ServerCommProcessor> clientList, OmokRoomManager roomManager) {
@@ -40,6 +41,7 @@ public class ServerCommProcessor extends Thread {
 				case joinServer: // showRoomList
 					if(clientList.size()>10) {
 						denyEntr();
+						return;
 					}
 					else {
 					this.nickname = (String)is.readObject();
@@ -48,16 +50,25 @@ public class ServerCommProcessor extends Thread {
 					}
 					break;
 				case joinRoom: 
-					int roomNum = (int)is.readObject();
+					int roomNum = 0;
+					this.roomNumber = (int)is.readObject();
 					roomNum = roomManager.joinRoom(this, roomNum);
-					if (roomNum == 0) {
+					if (roomNum == 0) 
 						this.showRoom(roomNum);
-					}
+					else {
 					if(roomManager.room[roomNum].player[0] != null) //  p1 exists, then showRoom
 						roomManager.room[roomNum].player[0].showRoom(roomNum);
 					if(roomManager.room[roomNum].player[1] != null) // p2 exists, then showRoom
 						roomManager.room[roomNum].player[1].showRoom(roomNum);
+					}
 					this.roomNumber = roomNum;
+					break;
+				case getReady:
+					roomManager.room[this.roomNumber].playerReady[this.playerIdx] = !roomManager.room[this.roomNumber].playerReady[this.playerIdx];
+					if(roomManager.room[this.roomNumber].player[0] != null) //  p1 exists, then showRoom
+						roomManager.room[this.roomNumber].player[0].showRoom(this.roomNumber);
+					if(roomManager.room[this.roomNumber].player[1] != null) // p2 exists, then showRoom
+						roomManager.room[this.roomNumber].player[1].showRoom(this.roomNumber);
 					break;
 				case quitRoom:
 					if(this.roomNumber == 0) {
@@ -65,17 +76,19 @@ public class ServerCommProcessor extends Thread {
 					}
 					else if(this.roomNumber >= 1 && this.roomNumber <=5) {
 						consoleLog(this.nickname + " quit Room [" + this.roomNumber+ "]");
+						roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
+						
 						if(roomManager.room[this.roomNumber].player[0] == this)
 							roomManager.room[this.roomNumber].player[0] = null;
 						else if(roomManager.room[this.roomNumber].player[1] == this)
 							roomManager.room[this.roomNumber].player[1] = null;
 						
-						roomManager.room[this.roomNumber].curPlayers--;
 						showRoomList();
 					}
 					else {
 						showRoomList();
 					}
+					this.roomNumber = 0;
 					break;
 				case turnOver:
 					break;
