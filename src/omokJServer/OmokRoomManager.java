@@ -70,19 +70,24 @@ public class OmokRoomManager {
 			board = new omok_logicSet();
 			player[0].startOmok();
 			player[1].startOmok();
+			player[this.nextPlayerIndex].turnOver();
 		}
 		
 		public int placeStone(int pIdx, int x, int y) { // 0 fail 1 ok 2 win
 			if(pIdx == nextPlayerIndex) {
 			int r = this.board.omokCheck(x, y);
-			if(r != 0)
+			if(r == 1)
 				nextPlayerIndex = (nextPlayerIndex + 1)%2;
-			if(r == 2)
+			if(r == 2) {
 				this.board = null; 
+				this.winner = this.player[pIdx];
+			}
+			if(r != 2) 
+				player[this.nextPlayerIndex].turnOver();
 			return r;
 			}
 			else // wrong turn
-				return -1;
+				return -1; 
 		}
 		
 		public int[][] getBoard() {

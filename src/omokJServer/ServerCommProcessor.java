@@ -39,7 +39,7 @@ public class ServerCommProcessor extends Thread {
 				// operation process
 				switch(opcode) {
 				case joinServer: // showRoomList
-					if(clientList.size()>10) {
+					if(clientList.size()>MAX_USERS) {
 						denyEntr();
 						return;
 					}
@@ -68,8 +68,9 @@ public class ServerCommProcessor extends Thread {
 					roomManager.room[this.roomNumber].playerReady[this.playerIdx] = !roomManager.room[this.roomNumber].playerReady[this.playerIdx];
 					
 					if(roomManager.room[this.roomNumber].playerReady[0]==true && roomManager.room[this.roomNumber].playerReady[1] ==true)
-						if(roomManager.room[this.roomNumber].getPlayersNum()>=2)
+						if(roomManager.room[this.roomNumber].getPlayersNum()>=2) { // START omok
 								roomManager.room[this.roomNumber].startOmok();
+						}
 					
 					if(roomManager.room[this.roomNumber].player[0] != null) //  p1 exists, then showRoom
 						roomManager.room[this.roomNumber].player[0].showRoom(this.roomNumber);
@@ -96,8 +97,6 @@ public class ServerCommProcessor extends Thread {
 					break;
 				case turnOver:
 					break;
-				case gameOver:
-						break;
 				case showRoomList:
 					break;
 				default:
@@ -127,6 +126,16 @@ public class ServerCommProcessor extends Thread {
 	// ===== Comm Operations =====
 	
 	// ===== Server to Client =====
+	private void denyEntr() {
+		Opcode opcode = Opcode.denyEntry;
+		try {
+			os.writeObject(opcode);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	private void showRoomList( ) {
 		Opcode opcode = Opcode.showRoomList;
 		// rn => int[], players => String[]
@@ -163,7 +172,7 @@ public class ServerCommProcessor extends Thread {
 				else os.writeObject(roomManager.room[rN].player[0].nickname);
 				if(roomManager.room[rN].player[1] == null) os.writeObject(" ");
 				else os.writeObject(roomManager.room[rN].player[1].nickname);
-				boolean[] rdy = {roomManager.room[rN].playerReady[0], roomManager.room[rN].playerReady[1]};
+				boolean[] rdy = roomManager.room[rN].playerReady.clone();
 				os.writeObject(rdy);
 			}
 			else {
@@ -175,6 +184,45 @@ public class ServerCommProcessor extends Thread {
 		}
 	}
 	
+	public void turnOver() {
+		int oppo;
+		if(this.playerIdx == 0) oppo = 1;
+		else oppo = 0;
+		
+		roomManager.room[this.roomNumber].player[oppo].notifyBoard();
+		
+		Opcode opcode = Opcode.turnOver;
+		try {
+			os.writeObject(opcode);
+			this.notifyBoard();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void notifyBoard() {
+		Opcode opcode = Opcode.notifyBoard;
+		
+		int[][] board = roomManager.room[this.roomNumber].getBoard().clone();
+		try {
+			os.writeObject(opcode);
+			os.writeObject(board);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//
+	private void placeStone(int x, int y) {
+		int r = roomManager.room[this.roomNumber].placeStone(this.playerIdx, x, y);
+		if( r == 0 ) {
+			this.turnOver();
+		}
+		else if ( r == 1) ;
+	}
+	
 	public void startOmok() {
 		Opcode opcode = Opcode.startOmok;
 		try {
@@ -184,16 +232,6 @@ public class ServerCommProcessor extends Thread {
 		}
 	}
 	
-	private void denyEntr() {
-		Opcode opcode = Opcode.denyEntry;
-		try {
-			os.writeObject(opcode);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	//
 	private void consoleLog(String log) {
 		System.out.println("[SERVER " + Thread.currentThread().getId() + " ] " + log);
 	}
