@@ -8,6 +8,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
+import omok.GUI;
 import omokJServer.TransferObj.*;
 import java.io.*;
 
@@ -81,15 +82,15 @@ public class ClientCommProcessor extends Thread {
 						
 						System.out.println(" >" + roomNumber + "<");
 						if(playerReady[0] == true) 
-							System.out.print("[Ready!]");
+							System.out.print("[Ready!] ");
 						else
-							System.out.print("[Waiting..]");
+							System.out.print("[Waiting..] ");
 						System.out.println("P1:" + player1);
 						
 						if(playerReady[1] == true) 
-							System.out.println("[Ready!]");
+							System.out.print("[Ready!] ");
 						else
-							System.out.println("[Waiting..]");
+							System.out.print("[Waiting..] ");
 						System.out.println("P2:" + player2);
 						
 						System.out.println("1. Ready 2. Quit");
@@ -97,6 +98,9 @@ public class ClientCommProcessor extends Thread {
 					else {
 						System.out.println("해당 방에 접속하는데 실패하였습니다.");
 					}
+					break;
+				case startOmok:
+					GUI gui = new GUI();
 					break;
 				default:
 					break;
