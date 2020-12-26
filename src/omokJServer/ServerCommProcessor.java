@@ -46,12 +46,12 @@ public class ServerCommProcessor extends Thread {
 					else {
 					this.nickname = (String)is.readObject();
 					clientList.add(this);
+					consoleLog(this.nickname + " Connected. [Connected : " + clientList.size() + " ]");
 					showRoomList();
 					}
 					break;
 				case joinRoom: 
-					int roomNum = 0;
-					this.roomNumber = (int)is.readObject();
+					int roomNum = (int)is.readObject();
 					roomNum = roomManager.joinRoom(this, roomNum);
 					if (roomNum == 0) 
 						this.showRoom(roomNum);
@@ -61,6 +61,7 @@ public class ServerCommProcessor extends Thread {
 					if(roomManager.room[roomNum].player[1] != null) // p2 exists, then showRoom
 						roomManager.room[roomNum].player[1].showRoom(roomNum);
 					}
+					if(this.roomNumber != 0) consoleLog(this.nickname + " joined Room [" + this.roomNumber + "]");
 					this.roomNumber = roomNum;
 					break;
 				case getReady:
@@ -77,12 +78,9 @@ public class ServerCommProcessor extends Thread {
 					else if(this.roomNumber >= 1 && this.roomNumber <=5) {
 						consoleLog(this.nickname + " quit Room [" + this.roomNumber+ "]");
 						roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
-						
-						if(roomManager.room[this.roomNumber].player[0] == this)
-							roomManager.room[this.roomNumber].player[0] = null;
-						else if(roomManager.room[this.roomNumber].player[1] == this)
-							roomManager.room[this.roomNumber].player[1] = null;
-						
+						roomManager.room[this.roomNumber].gameStarted = false;
+						roomManager.room[this.roomNumber].player[this.playerIdx] = null;
+						this.playerIdx = -1;
 						showRoomList();
 					}
 					else {
@@ -125,7 +123,6 @@ public class ServerCommProcessor extends Thread {
 	// ===== Server to Client =====
 	private void showRoomList( ) {
 		Opcode opcode = Opcode.showRoomList;
-		consoleLog(this.nickname + " Connected. [Connected : " + clientList.size() + " ]");
 		// rn => int[], players => String[]
 		int rm_len = roomManager.room.length;
 		int[] rNs = new int[rm_len];
@@ -152,7 +149,6 @@ public class ServerCommProcessor extends Thread {
 	
 	private void showRoom(int rN) { //
 		Opcode opcode = Opcode.showRoom;
-		consoleLog(this.nickname + " joined Room [" + rN + "]");
 		try {
 			os.writeObject(opcode);
 			os.writeObject(rN);
@@ -161,6 +157,8 @@ public class ServerCommProcessor extends Thread {
 				else os.writeObject(roomManager.room[rN].player[0].nickname);
 				if(roomManager.room[rN].player[1] == null) os.writeObject(" ");
 				else os.writeObject(roomManager.room[rN].player[1].nickname);
+				boolean[] rdy = {roomManager.room[rN].playerReady[0], roomManager.room[rN].playerReady[1]};
+				os.writeObject(rdy);
 			}
 			else {
 				this.showRoomList();

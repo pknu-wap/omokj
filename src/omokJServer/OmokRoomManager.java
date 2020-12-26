@@ -51,7 +51,7 @@ public class OmokRoomManager {
 		omok_logicSet board; // board.omokCheck(x, y)
 		
 		boolean gameStarted = false;
-		boolean playerReady[] = {false, false};
+		boolean[] playerReady = {false, false};
 		int nextPlayerIndex = 0; // Next Player + 1 % 2
 		
 		boolean gameOver = false;
@@ -65,12 +65,15 @@ public class OmokRoomManager {
 			this.board = new omok_logicSet();
 		}
 		public int getPlayersNum () {
-			if (player[0] == null && player[1] == null) 
+			if (player[0] == null && player[1] == null) {
 				return 0;
-			else if((player[0] == null && player[1] != null)||(player[0] != null && player[1] == null))
+			}
+			else if((player[0] == null && player[1] != null)||(player[0] != null && player[1] == null)) {
 				return 1;
-			else
+			}
+			else {
 				return 2;
+			}
 		}
 	}
 }

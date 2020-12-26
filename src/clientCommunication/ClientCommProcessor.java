@@ -77,7 +77,21 @@ public class ClientCommProcessor extends Thread {
 						state = State.room;
 						String player1 = (String)is.readObject();
 						String player2 = (String)is.readObject();
-						System.out.println(" >" + roomNumber + "< P1:" + player1 + " | P2:" + player2);
+						boolean[] playerReady = (boolean[])is.readObject();
+						
+						System.out.println(" >" + roomNumber + "<");
+						if(playerReady[0] == true) 
+							System.out.print("[Ready!]");
+						else
+							System.out.print("[Waiting..]");
+						System.out.println("P1:" + player1);
+						
+						if(playerReady[1] == true) 
+							System.out.println("[Ready!]");
+						else
+							System.out.println("[Waiting..]");
+						System.out.println("P2:" + player2);
+						
 						System.out.println("1. Ready 2. Quit");
 					}
 					else {
