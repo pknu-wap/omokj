@@ -54,7 +54,6 @@ public class OmokRoomManager {
 		boolean[] playerReady = {false, false};
 		int nextPlayerIndex = 0; // Next Player + 1 % 2
 		
-		boolean gameOver = false;
 		ServerCommProcessor winner = null;
 		
 		public OmokRoom (int rN) {
@@ -64,6 +63,32 @@ public class OmokRoomManager {
 			
 			this.board = new omok_logicSet();
 		}
+		
+		public void startOmok() {
+			this.gameStarted = true;
+			playerReady[0] = playerReady[1] = false;
+			board = new omok_logicSet();
+			player[0].startOmok();
+			player[1].startOmok();
+		}
+		
+		public int placeStone(int pIdx, int x, int y) { // 0 fail 1 ok 2 win
+			if(pIdx == nextPlayerIndex) {
+			int r = this.board.omokCheck(x, y);
+			if(r != 0)
+				nextPlayerIndex = (nextPlayerIndex + 1)%2;
+			if(r == 2)
+				this.board = null; 
+			return r;
+			}
+			else // wrong turn
+				return -1;
+		}
+		
+		public int[][] getBoard() {
+			return this.board.omok;
+		}
+		
 		public int getPlayersNum () {
 			if (player[0] == null && player[1] == null) {
 				return 0;

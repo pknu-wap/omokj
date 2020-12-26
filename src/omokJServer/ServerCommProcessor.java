@@ -66,10 +66,16 @@ public class ServerCommProcessor extends Thread {
 					break;
 				case getReady:
 					roomManager.room[this.roomNumber].playerReady[this.playerIdx] = !roomManager.room[this.roomNumber].playerReady[this.playerIdx];
+					
+					if(roomManager.room[this.roomNumber].playerReady[0]==true && roomManager.room[this.roomNumber].playerReady[1] ==true)
+						if(roomManager.room[this.roomNumber].getPlayersNum()>=2)
+								roomManager.room[this.roomNumber].startOmok();
+					
 					if(roomManager.room[this.roomNumber].player[0] != null) //  p1 exists, then showRoom
 						roomManager.room[this.roomNumber].player[0].showRoom(this.roomNumber);
 					if(roomManager.room[this.roomNumber].player[1] != null) // p2 exists, then showRoom
 						roomManager.room[this.roomNumber].player[1].showRoom(this.roomNumber);
+					
 					break;
 				case quitRoom:
 					if(this.roomNumber == 0) {
@@ -165,6 +171,15 @@ public class ServerCommProcessor extends Thread {
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void startOmok() {
+		Opcode opcode = Opcode.startOmok;
+		try {
+			os.writeObject(opcode);
+		} catch(IOException e) {
 			e.printStackTrace();
 		}
 	}

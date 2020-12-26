@@ -2,7 +2,7 @@ package omokJServer;
 import java.util.Scanner;
 
 public class omok_logicSet {
-	private int[][] omok;
+	public int[][] omok;
 	
 	static int BLACK=1; 
 	static int WHITE=2; 
