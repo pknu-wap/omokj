@@ -104,7 +104,7 @@ public class ClientCommProcessor extends Thread {
 					}
 					break;
 				case startOmok:
-					GUI gui = new GUI();
+					ClientCommMain ccm = new ClientCommMain();
 					break;
 				default:
 					break;
