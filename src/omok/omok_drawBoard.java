@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 
 import omokJServer.omok_logicSet;
-import omok_logic.*;
 
 @SuppressWarnings("serial")
 public class omok_drawBoard extends JPanel {
@@ -24,7 +23,7 @@ public class omok_drawBoard extends JPanel {
 		super.paintComponent(arg0);
 		arg0.setColor(Color.BLACK); 
 		board(arg0); 
-		drawStone(arg0); //�삤紐⑹븣 洹몃┝
+		drawStone(arg0);
 	}
 	
 	public void board(Graphics arg0) {

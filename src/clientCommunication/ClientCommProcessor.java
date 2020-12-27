@@ -25,6 +25,8 @@ public class ClientCommProcessor extends Thread {
 	private String nickname = null;
 	private int roomNumber = 0; // 아무 방에도 안들어가 있으면 0
 	
+	public boolean placeAuth = false; // 서버로 부터 turnOver 받으면 이걸 참으로 하고 이게 참일 때만 보드 클릭을 처리함.
+	
 	public static enum State { 
 		first, channel, room, game
 	}
