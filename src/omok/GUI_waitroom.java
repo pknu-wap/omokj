@@ -37,6 +37,8 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		    });
 		button1.setLocation(200,70);
 		button1.setSize(300,70);
+		button1.setBackground(new Color(0,0,0));
+		button1.setForeground(new Color(255,255,255));
 		
 		
 		JButton button2 = new JButton("2번방"); 
@@ -48,6 +50,8 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		    });
 		button2.setLocation(200,160);
 		button2.setSize(300,70);
+		button2.setBackground(new Color(255,255,255));
+		button2.setForeground(new Color(0,0,0));
 		
 
 		JButton button3 = new JButton("3번방"); 
@@ -59,7 +63,9 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		    });
 		button3.setLocation(200,250);
 		button3.setSize(300,70);
-
+		button3.setBackground(new Color(0,0,0));
+		button3.setForeground(new Color(255,255,255));
+		
 		JButton button4 = new JButton("4번방"); 
 		button4.addActionListener(e->{
 	
@@ -69,6 +75,8 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		    });
 		button4.setLocation(200,340);
 		button4.setSize(300,70);
+		button4.setBackground(new Color(255,255,255));
+		button4.setForeground(new Color(0,0,0));
 		
 		JButton button5 = new JButton("5번방"); 
 		button5.addActionListener(e->{
@@ -79,6 +87,8 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		    });
 		button5.setLocation(200,430);
 		button5.setSize(300,70);
+		button5.setBackground(new Color(0,0,0));
+		button5.setForeground(new Color(255,255,255));
 		
 		JButton exit = new JButton("종료"); 
 		exit.addActionListener(e->{System.exit(0);});
