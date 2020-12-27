@@ -39,7 +39,7 @@ public class GUI_main extends JPanel implements ActionListener {
 			nickname = name.getText();
 			removeAll(); //프레임에 있는 패널 및 각종 항목 모두 제거
 			repaint(); //다시 그림
-			add(new GUI_play());
+			add(new GUI_waitroom());
 			});//서버입장 버튼 ->서버창으로 이동
 		entrance.setLocation(200, 600);
 		entrance.setSize(100,30);

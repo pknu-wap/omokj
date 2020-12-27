@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3b5cf48-de40-4977-a1e1-dac48a1d3006" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientCommunication/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientCommunication/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientCommunication/ClientCommProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientCommunication/ClientCommProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omok/GUI_main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/GUI_main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omok/GUI_play.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/GUI_play.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omok/omok_MouseEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/omok_MouseEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omok/omok_drawBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/omok_drawBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omokJServer/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omokJServer/ForbiddenStone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/ForbiddenStone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omokJServer/OmokRoomManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/OmokRoomManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omokJServer/ServerCommProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/ServerCommProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omokJServer/TransferObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/TransferObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omok_logic/ForbiddenStone.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omok_logic/omok_baseCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/omok_baseCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/omok_logic/omok_logicSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omokJServer/omok_logicSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omok/GUI_waitroom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omok/GUI_waitroom.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/modules/" />
@@ -35,10 +18,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java">
+        <entry file="file://$PROJECT_DIR$/src/omok/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="304">
+              <caret line="21" column="55" lean-forward="true" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/omok/GUI_main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,31 +42,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/omok/GUI.java">
+        <entry file="file://$PROJECT_DIR$/src/omok/GUI_waitroom.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/omokJServer/ForbiddenStone.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1938">
-              <caret line="102" column="23" selection-start-line="102" selection-start-column="23" selection-end-line="102" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/omokJServer/ServerMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+            <state relative-caret-position="228">
+              <caret line="19" column="56" lean-forward="true" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -97,6 +71,7 @@
         <option value="$PROJECT_DIR$/src/omok_logic/ForbiddenStone.java" />
         <option value="$PROJECT_DIR$/src/omok/omok_MouseEvent.java" />
         <option value="$PROJECT_DIR$/src/omokJServer/ForbiddenStone.java" />
+        <option value="$PROJECT_DIR$/src/omok/GUI_waitroom.java" />
       </list>
     </option>
   </component>
@@ -113,9 +88,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="940" />
-    <option name="width" value="990" />
-    <option name="height" value="1040" />
+    <option name="x" value="952" />
+    <option name="width" value="977" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -285,7 +260,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19915000" />
+    <option name="totallyTimeSpent" value="20164000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -300,7 +275,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.30921987" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.30780143" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -363,26 +338,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/omok/getShowRoomList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/omok/omok.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clientCommunication/ClientCommMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="533">
           <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -410,30 +372,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/omok/GUI_main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="20" column="79" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/omok_logic/omok_logicSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/omok_logic/ForbiddenStone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3446">
-          <caret line="468" column="28" selection-start-line="468" selection-start-column="28" selection-end-line="468" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/omok_logic/omok_logicSet.java" />
+    <entry file="file://$PROJECT_DIR$/src/omok_logic/ForbiddenStone.java" />
     <entry file="file://$PROJECT_DIR$/src/omok/omok_MouseEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="617">
@@ -443,18 +383,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/omokJServer/ForbiddenStone.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
+        <state relative-caret-position="1843">
           <caret line="102" column="23" selection-start-line="102" selection-start-column="23" selection-end-line="102" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/omok/getShowRoomList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/omok/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+        <state relative-caret-position="304">
+          <caret line="21" column="55" lean-forward="true" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/omok/GUI_main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/omok/GUI_waitroom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="19" column="56" lean-forward="true" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
         </state>
       </provider>
     </entry>
