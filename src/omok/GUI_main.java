@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+import omokJServer.omok_logicSet;
 import omokJServer.TransferObj.*;
 import clientCommunication.*;
 

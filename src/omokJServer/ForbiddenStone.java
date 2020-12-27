@@ -1,4 +1,4 @@
-package omok_logic;
+package omokJServer;
 
 public class ForbiddenStone {
 	
@@ -32,8 +32,8 @@ public class ForbiddenStone {
 	}
 	
 
-	// �� �� Ž��
-	// �� Ž�� : ����3�� �Ǹ� 1�� ���� �ƴϸ� 0 ����
+	// 占쏙옙 占쏙옙 탐占쏙옙
+	// 占쏙옙 탐占쏙옙 : 占쏙옙占쏙옙3占쏙옙 占실몌옙 1占쏙옙 占쏙옙占쏙옙 占싣니몌옙 0 占쏙옙占쏙옙
 	public int find1(omok_logicSet LS, int x, int y) {
 		ls = LS;
 		chx = x;
@@ -42,38 +42,38 @@ public class ForbiddenStone {
 		int stone1 = 0;
 		int stone2 = 0;
 		int allStone = 0;
-		//���� 3���� üũ�ϱ����Ѱ�..
+		//占쏙옙占쏙옙 3占쏙옙占쏙옙 체크占싹깍옙占쏙옙占싼곤옙..
 		int blink1 = 1;
 		
-		//blink2 �� blink1 �� ���� �߰������־��ٰ���.
+		//blink2 占쏙옙 blink1 占쏙옙 占쏙옙占쏙옙 占쌩곤옙占쏙옙占쏙옙占쌍억옙占쌕곤옙占쏙옙.
 		//int blink2 = blink1;
 		
 		
-		// ��
-		chx = x-1; //�޶����� ��ǥ
+		// 占쏙옙
+		chx = x-1; //占쌨띰옙占쏙옙占쏙옙 占쏙옙표
 		boolean check = false;
 		left :
 		while(true) {
 			
-			//��ǥ������
+			//占쏙옙표占쏙옙占쏙옙占쏙옙
 			if(chx == -1)
 				break left;
 			
-			//check�� false�� �ٲ����� �ι��������� �������� Ȯ���Ҽ��ְ�.
+			//check占쏙옙 false占쏙옙 占쌕뀐옙占쏙옙占쏙옙 占싸뱄옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 확占쏙옙占쌀쇽옙占쌍곤옙.
 			if(ls.getXY(chx,chy) == ls.BLACK) 
 			{
 				check = false;
 				stone1++;
 			}
 			
-			//��뵹�� ������ Ž������
+			//占쏙옙逾뱄옙占� 占쏙옙占쏙옙占쏙옙 탐占쏙옙占쏙옙占쏙옙
 			if(ls.getXY(chx,chy) == ls.WHITE) 
 				break left;
 			
 			if(ls.getXY(chx,chy) == 0) {
-				//ó�� ����������� check�� true�� ��µ�
-				//���޾� ������������� Ž������
-				//�ι��������� ����������� blinkī��Ʈ�� �ǵ���.
+				//처占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� check占쏙옙 true占쏙옙 占쏙옙쨉占�
+				//占쏙옙占쌨억옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� 탐占쏙옙占쏙옙占쏙옙
+				//占싸뱄옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� blink카占쏙옙트占쏙옙 占실듸옙占쏙옙.
 				if(check == false) {
 					check = true;
 				}else {
@@ -84,18 +84,18 @@ public class ForbiddenStone {
 				if(blink1 == 1) {
 					blink1--;
 				}else {
-					break left; //��������������� ������� �ι������� ����
+					break left; //占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占� 占싸뱄옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 				}
 			}
-			//���Ž��
+			//占쏙옙占신쏙옙占�
 			chx--;
 		}
 		
 		
-		// ��
-		chx = x+1; //�޶����� ��ǥ
-		int blink2 = blink1; //blink1�����Ÿ�ŭ blink2,
-		if(blink1 == 1) //������� ������������� �����������
+		// 占쏙옙
+		chx = x+1; //占쌨띰옙占쏙옙占쏙옙 占쏙옙표
+		int blink2 = blink1; //blink1占쏙옙占쏙옙占신몌옙큼 blink2,
+		if(blink1 == 1) //占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占�
 			blink1 = 0;
 		check = false;
 		right :
@@ -110,12 +110,12 @@ public class ForbiddenStone {
 				stone2++;
 			}
 			
-			//��뵹�� ������ Ž������
+			//占쏙옙逾뱄옙占� 占쏙옙占쏙옙占쏙옙 탐占쏙옙占쏙옙占쏙옙
 			if(ls.getXY(chx,chy) == ls.WHITE) 
 				break right;
 			
 			if(ls.getXY(chx,chy) == 0) {
-				//�ι��������� ����������� blinkī��Ʈ�� �ǵ���.
+				//占싸뱄옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� blink카占쏙옙트占쏙옙 占실듸옙占쏙옙.
 				if(check == false) {
 					check = true;
 				}else {
@@ -126,35 +126,35 @@ public class ForbiddenStone {
 				if(blink2 == 1) {
 					blink2--;
 				}else {
-					break right; //��������������� ������� �ι������� ����
+					break right; //占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占� 占싸뱄옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 				}
 			}
 			chx++;
 		}
 		
 		allStone = stone1 + stone2;
-		//����̹Ƿ� �������� 2 + 1(���絹)�̾ƴϸ� 0����
-		//�̺κ��� 43�� ����ϰ�����. 33�� ã�Ե�
+		//占쏙옙占쏙옙譴퓐占� 占쏙옙占쏙옙占쏙옙占쏙옙 2 + 1(占쏙옙占썹돌)占싱아니몌옙 0占쏙옙占쏙옙
+		//占싱부븝옙占쏙옙 43占쏙옙 占쏙옙占쏙옙構占쏙옙占쏙옙占�. 33占쏙옙 찾占쌉듸옙
 		if(allStone != 2) {
 			return 0;
 			}
-		//�������� 3�̸� ���� 3���� �ľ�.
+		//占쏙옙占쏙옙占쏙옙占쏙옙 3占싱몌옙 占쏙옙占쏙옙 3占쏙옙占쏙옙 占식억옙.
 		
 		int left = (stone1 + blink1);
 		int right = (stone2 + blink2);
 		
-		//������ ������� - ����3�� �ƴ�
+		//占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� - 占쏙옙占쏙옙3占쏙옙 占싣댐옙
 		if(x - left == 0 || x + right == 17) {
 			return 0;
-		}else //��뵹�� ������� - ����3�� �ƴ�
+		}else //占쏙옙逾뱄옙占� 占쏙옙占쏙옙占쏙옙占� - 占쏙옙占쏙옙3占쏙옙 占싣댐옙
 			if(ls.getXY(x-left-1,y) == ls.WHITE || ls.getXY(x+right+1,y) == ls.WHITE) {
 				return 0;
 			}else {
-				return 1; //����3 �϶� 1 ����
+				return 1; //占쏙옙占쏙옙3 占싹띰옙 1 占쏙옙占쏙옙
 			}
 
 	}
-	// �� �� Ž��
+	// 占쏙옙 占쏙옙 탐占쏙옙
 	public int find2(omok_logicSet LS, int x, int y) {
 		ls = LS;
 		chx = x;
@@ -166,7 +166,7 @@ public class ForbiddenStone {
 		int blink1 = 1;
 		
 		
-		// ��
+		// 占쏙옙
 		chx = x-1; 
 		chy = y-1;
 		boolean check = false;
@@ -203,7 +203,7 @@ public class ForbiddenStone {
 		}
 		
 		
-		// ��
+		// 占쏙옙
 		int blink2 = blink1;
 		if(blink1 == 1) 
 			blink1 = 0;
@@ -264,7 +264,7 @@ public class ForbiddenStone {
 		
 		
 	}
-	// �� �� Ž��
+	// 占쏙옙 占쏙옙 탐占쏙옙
 	public int find3(omok_logicSet LS, int x, int y) {
 		ls = LS;
 		chx = x;
@@ -275,7 +275,7 @@ public class ForbiddenStone {
 		int allStone = 0;
 		int blink1 = 1;
 		
-		// �� 
+		// 占쏙옙 
 		int chy = y-1; 
 		boolean check = false;
 		up :
@@ -309,7 +309,7 @@ public class ForbiddenStone {
 			chy--;
 		}
 		
-		// ��
+		// 占쏙옙
 		int blink2 = blink1; 
 		if(blink1 == 1) 
 			blink1 = 0;
@@ -364,8 +364,8 @@ public class ForbiddenStone {
 				return 1;
 			}
 	}
-	// �� Ž��
-	// �� �� Ž��
+	// 占쏙옙 탐占쏙옙
+	// 占쏙옙 占쏙옙 탐占쏙옙
 	public int find4(omok_logicSet LS, int x, int y) {
 		ls = LS;
 		chx = x;
@@ -376,7 +376,7 @@ public class ForbiddenStone {
 		int allStone = 0;
 		int blink1 = 1;
 		
-		// ��
+		// 占쏙옙
 		int chx = x-1; 
 		int chy = y+1;
 		boolean check = false;
@@ -412,7 +412,7 @@ public class ForbiddenStone {
 			chy++;
 		}
 	
-		// ��
+		// 占쏙옙
 		int blink2 = blink1; 
 		if(blink1 == 1) 
 			blink1 = 0;
@@ -477,9 +477,9 @@ public class ForbiddenStone {
 	
 	
 	//44
-	//�����°� ���� x �׳� 4�� ������ ��º����� 2���̻��̸� 44
-	//�Ȱ��� ������� �ϳ��� ���
-	// 4���� �κ����� �γ����� Ǯ������
+	//占쏙옙占쏙옙占승곤옙 占쏙옙占쏙옙 x 占쌓놂옙 4占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙쨘占쏙옙占쏙옙占� 2占쏙옙占싱삼옙占싱몌옙 44
+	//占싫곤옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占싹놂옙占쏙옙 占쏙옙占�
+	// 4占쏙옙占쏙옙 占싸븝옙占쏙옙占쏙옙 占싸놂옙占쏙옙占쏙옙 풀占쏙옙占쏙옙占쏙옙
 	public int sasa(omok_logicSet LS, int x, int y) {
 		ls = LS;
 		
@@ -498,19 +498,19 @@ public class ForbiddenStone {
 	}
 	
 	
-	// �� �� Ž��
+	// 占쏙옙 占쏙옙 탐占쏙옙
 	public int fourORjang1(int trigger, omok_logicSet LS, int x, int y) {
 		int b = ls.BLACK;
 		int w = ls.WHITE;
 		int stone1 = 0;
 		int stone2 = 0;
 		int allStone = 0;
-		//����4������ ���������. �ٸ� �ڵ�� ��������� �ǹ�.
+		//占쏙옙占쏙옙4占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占�. 占쌕몌옙 占쌘듸옙占� 占쏙옙占쏙옙占쏙옙占쏙옙占� 占실뱄옙.
 		int blink1 = 1;
-		if(trigger == 3) // 5��޼������� ��������� 5���� �̾�������.
+		if(trigger == 3) // 5占쏙옙氷占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙占� 5占쏙옙占쏙옙 占싱억옙占쏙옙占쏙옙占쏙옙.
 			blink1 = 0;
 		
-		// ��  Ž��
+		// 占쏙옙  탐占쏙옙
 		int chy = y;
 		int chx = x - 1;
 		boolean check = false;
@@ -528,7 +528,7 @@ public class ForbiddenStone {
 				break left;
 			
 			if(ls.getXY(chx,chy) == 0) {
-				//�ι��������� ����������� blinkī��Ʈ�� �ǵ���.
+				//占싸뱄옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� blink카占쏙옙트占쏙옙 占실듸옙占쏙옙.
 				if(check == false) {
 					check = true;
 				}else {
@@ -539,7 +539,7 @@ public class ForbiddenStone {
 				if(blink1 == 1) {
 					blink1--;
 				}else {
-					break left; //��������������� ������� �ι������� ����
+					break left; //占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占� 占싸뱄옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 				}
 				
 				
@@ -548,7 +548,7 @@ public class ForbiddenStone {
 			chx--;
 		}
 		
-		// �� Ž��
+		// 占쏙옙 탐占쏙옙
 		chx = x + 1;
 		chy = y;
 		int blink2 = blink1;
@@ -589,17 +589,17 @@ public class ForbiddenStone {
 		
 		allStone = stone1 + stone2;
 		
-		//���ã�� Ʈ����
+		//占쏙옙占시ｏ옙占� 트占쏙옙占쏙옙
 		if (trigger == 1) {
 			if (allStone != 3)
-				return 0; //���������� 3���ƴϸ� 4���ƴϴϱ�.
+				return 0; //占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 3占쏙옙占싣니몌옙 4占쏙옙占싣니니깍옙.
 			else
-				return 1; //���������� 3���� 4��. ������ �������� �������.
+				return 1; //占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 3占쏙옙占쏙옙 4占쏙옙. 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占�.
 		}
 
-		//���ã�� Ʈ����
+		//占쏙옙占시ｏ옙占� 트占쏙옙占쏙옙
 		if (trigger == 2) {
-			//��������� +1 +5 => 6���̻��� ���. ���⼭ ���������� �ι����� �����־�� ���
+			//占쏙옙占쏙옙占쏙옙占쏙옙占� +1 +5 => 6占쏙옙占싱삼옙占쏙옙 占쏙옙占�. 占쏙옙占썩서 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占싸뱄옙占쏙옙占쏙옙 占쏙옙占쏙옙占쌍억옙占� 占쏙옙占�
 			if(allStone >= 5 && stone1 != 0 && stone2 != 0)
 				return 1;
 			else
@@ -607,17 +607,17 @@ public class ForbiddenStone {
 		}
 		
 		if(trigger == 3) {
-			//���������� 5���ǵ��̿ϼ��Ǹ�.
+			//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 5占쏙옙占실듸옙占싱완쇽옙占실몌옙.
 			if(allStone == 4)
 				return 1;
 			else
 				return 0;
 		}
 		
-		//�׷����������� 1 �� 2���ƴϸ� 0����
+		//占쌓뤄옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 1 占쏙옙 2占쏙옙占싣니몌옙 0占쏙옙占쏙옙
 		return 0;
 	}
-	// �� �� Ž��
+	// 占쏙옙 占쏙옙 탐占쏙옙
 	public  int fourORjang2(int trigger, omok_logicSet LS, int x, int y) {
 		int b = LS.BLACK;
 		int w = LS.WHITE;
@@ -628,7 +628,7 @@ public class ForbiddenStone {
 		if(trigger == 3)
 			blink1 = 0;
 		
-		// ��  Ž��
+		// 占쏙옙  탐占쏙옙
 		int chy = y - 1;
 		int chx = x - 1;
 		boolean check = false;
@@ -666,7 +666,7 @@ public class ForbiddenStone {
 			chy--;
 		}
 		
-		// ��  Ž��
+		// 占쏙옙  탐占쏙옙
 		chy = y + 1;
 		chx = x + 1;
 		check = false;
@@ -731,7 +731,7 @@ public class ForbiddenStone {
 
 		return 0;
 	}
-	// �� �� Ž��
+	// 占쏙옙 占쏙옙 탐占쏙옙
 	public  int fourORjang3(int trigger, omok_logicSet LS, int x, int y) {
 		int b =LS.BLACK;
 		int w = LS.WHITE;
@@ -742,7 +742,7 @@ public class ForbiddenStone {
 		if(trigger == 3)
 			blink1 = 0;
 		
-		// ��  Ž��
+		// 占쏙옙  탐占쏙옙
 		int chy = y - 1;
 		int chx = x;
 		boolean check = false;
@@ -779,7 +779,7 @@ public class ForbiddenStone {
 			chy--;
 		}
 		
-		// ��  Ž��
+		// 占쏙옙  탐占쏙옙
 		chy = y + 1;
 		chx = x;
 		check = false;
@@ -844,7 +844,7 @@ public class ForbiddenStone {
 		
 		return 0;
 	}
-	// �� �� Ž��
+	// 占쏙옙 占쏙옙 탐占쏙옙
 	public  int fourORjang4(int trigger, omok_logicSet LS, int x, int y) {
 		int b = LS.BLACK;
 		int w = LS.WHITE;
@@ -855,7 +855,7 @@ public class ForbiddenStone {
 		if(trigger == 3)
 			blink1 = 0;
 		
-		// �� Ž��
+		// 占쏙옙 탐占쏙옙
 		int chy = y - 1;
 		int chx = x + 1;
 		boolean check = false;
@@ -893,7 +893,7 @@ public class ForbiddenStone {
 			chy--;
 		}
 		
-		// �� Ž��
+		// 占쏙옙 탐占쏙옙
 		chy = y + 1;
 		chx = x - 1;
 		check = false;
@@ -961,7 +961,7 @@ public class ForbiddenStone {
 	}
 	
 	
-	//���
+	//占쏙옙占�
 	public  int jangmok(omok_logicSet LS, int x, int y) {
 		ls = LS;
 		chx = x;
@@ -974,7 +974,7 @@ public class ForbiddenStone {
 		result += fourORjang3(2, ls, chx, chy);
 		result += fourORjang4(2, ls, chx, chy);
 		
-		if(result >= 1)  //�ϳ��� ������������
+		if(result >= 1)  //占싹놂옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
 			return 0;
 		
 		return 1;
@@ -991,7 +991,7 @@ public class ForbiddenStone {
 		result += fourORjang3(3, ls, chx, chy);
 		result += fourORjang4(3, ls, chx, chy);
 		
-		if(result >= 1) //�ϳ��� ������ �޼��Ǹ�.
+		if(result >= 1) //占싹놂옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌨쇽옙占실몌옙.
 			return 0;
 		
 		return 1;

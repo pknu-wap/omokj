@@ -1,9 +1,8 @@
-package omok_logic;
-
+package omokJServer;
 import java.util.Scanner;
 
 public class omok_logicSet {
-	private int[][] omok;
+	public int[][] omok;
 	
 	static int BLACK=1; 
 	static int WHITE=2; 
@@ -60,8 +59,6 @@ public class omok_logicSet {
 			omok[chy][chx] = BLACK;
 		else
 			omok[chy][chx] = WHITE;
-		
-		System.out.println(state);
 		
 		turn = !turn;
 		return state;

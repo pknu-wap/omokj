@@ -6,13 +6,15 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Scanner;
 
+import omok.GUI;
 import omokJServer.TransferObj.*;
-import omokJServer.TransferObj;
+import java.io.*;
 
 public class ClientCommProcessor extends Thread {
 	//첫 메인 메뉴에서 서버 입장 버튼 누르면 이 클래스에 닉네임을 전달하면서 쓰레드를 실행함
-	private static final String SERVER_IP = "52.78.178.184"; // 172.31.42.164       52.78.178.184
+	private static final String SERVER_IP = "52.78.178.184"; 
 	private static final int SERVER_PORT = 50505;
 	
 	private Socket socket = null;
@@ -22,6 +24,12 @@ public class ClientCommProcessor extends Thread {
 	
 	private String nickname = null;
 	private int roomNumber = 0; // 아무 방에도 안들어가 있으면 0
+	
+	public static enum State { 
+		first, channel, room, game
+	}
+	
+	State state = State.first;
 	
 	public ClientCommProcessor (String nickname) {
 		this.nickname = nickname;
@@ -51,21 +59,52 @@ public class ClientCommProcessor extends Thread {
 				// operation process
 				switch(opcode) {
 				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
+					opcode = (Opcode)is.readObject();
+					int[][] abc = (int[][])is.readObject();
 					break;
+				case notifyBoard:
+					break;
+				case denyEntry:
+					return;
 				case showRoomList:  // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
+					state = State.channel;
 					int[] roomNumbers = (int[])is.readObject(); // 0번방은 사용 안하고 현재 1~5번방 까지 있음
 					String[] player1s = (String[])is.readObject();
 					String[] player2s = (String[])is.readObject();
 					for(int i = 1; i < roomNumbers.length;i++) {
 						System.out.println("[" + roomNumbers[i] + "] P1:" + player1s[i] + " | P2:" + player2s[i]);
 					}
-					joinRoom(3);
+					System.out.print("몇 번방에 들어가시겠습니까? (1~5번, 다른 입력시 종료) : ");
 					break;
 				case showRoom: // 들어가는데 실패 했으면 0 이 날아오고 아니면 들어간 방번호, 들어있는 사람 닉네임이 날아옴
 					this.roomNumber = (int)is.readObject();
-					String player1 = (String)is.readObject();
-					String player2 = (String)is.readObject();
-					System.out.println(" >" + roomNumber + "< P1:" + player1 + " | P2:" + player2);
+					if(this.roomNumber != 0) {
+						state = State.room;
+						String player1 = (String)is.readObject();
+						String player2 = (String)is.readObject();
+						boolean[] playerReady = (boolean[])is.readObject();
+						
+						System.out.println(" >" + roomNumber + "<");
+						if(playerReady[0] == true) 
+							System.out.print("[Ready!] ");
+						else
+							System.out.print("[Waiting..] ");
+						System.out.println("P1:" + player1);
+						
+						if(playerReady[1] == true) 
+							System.out.print("[Ready!] ");
+						else
+							System.out.print("[Waiting..] ");
+						System.out.println("P2:" + player2);
+						
+						System.out.println("1. Ready 2. Quit");
+					}
+					else {
+						System.out.println("해당 방에 접속하는데 실패하였습니다.");
+					}
+					break;
+				case startOmok:
+					ClientCommMain ccm = new ClientCommMain();
 					break;
 				default:
 					break;
@@ -78,6 +117,7 @@ public class ClientCommProcessor extends Thread {
 			e.printStackTrace();
 		}
 		finally {
+			System.out.println("오목 종료");
 			try {
 				if( socket != null && !socket.isClosed()) {
 					is.close();
@@ -112,6 +152,50 @@ public class ClientCommProcessor extends Thread {
 			os.writeObject(this.roomNumber);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void getReady() {
+		Opcode opcode = Opcode.getReady;
+		try {
+			os.writeObject(opcode);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void quitRoom() {
+		Opcode opcode = Opcode.quitRoom;
+		try {
+			os.writeObject(opcode);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		state = State.channel;
+	}
+	
+	public void consoleChoice(int choice) { // main 에서 클라이언트 상태에 따른 선택 처리
+		switch(state) {
+		case first:
+			break;
+		case channel:
+			int roomN = choice;
+			if(roomN>=1 && roomN <=5) 
+			joinRoom(roomN);
+			else 
+				return;
+			break;
+		case room:
+			if(choice==1)
+				getReady();
+			else if(choice==2) 
+				quitRoom();
+			else ;
+			break;
+		case game:
+			break;
+		default:
+			break;	
 		}
 	}
 }
