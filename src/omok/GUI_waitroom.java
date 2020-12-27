@@ -15,6 +15,9 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 	public GUI_waitroom() {
 		setSize(700,700); 
 		setLayout(null);
+
+		GUI_main gui_main = new GUI_main();
+		System.out.println("닉네임: " + gui_main.nickname);
 		
 		JPanel picture = new JPanel() {
 			ImageIcon icon = new ImageIcon(getClass().getResource("omok.png"));
