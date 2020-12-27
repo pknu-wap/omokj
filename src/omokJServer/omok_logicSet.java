@@ -20,6 +20,7 @@ public class omok_logicSet {
 	}
 	
 	public int getXY(int y, int x) {
+
 		return omok[x][y];
 	}
 	

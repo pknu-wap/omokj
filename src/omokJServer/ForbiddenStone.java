@@ -17,9 +17,10 @@ public class ForbiddenStone {
 		ls = LS;
 		chx = x;
 		chy = y;
-		
+		System.out.println("현재 좌표: " + chx + ", " + chy);
+
 		int open_sam_count = 0;
-		open_sam_count += find1(ls, chx, chy); 
+		open_sam_count += find1(ls, chx, chy);
 		open_sam_count += find2(ls, chx, chy);
 		open_sam_count += find3(ls, chx, chy);
 		open_sam_count += find4(ls, chx, chy);
@@ -98,8 +99,8 @@ public class ForbiddenStone {
 			blink1 = 0;
 		check = false;
 		right :
-		while(true) {
-			//占쏙옙표占쏙옙占쏙옙占쏙옙
+		while(chx < 19 && chy < 19) {
+			//��ǥ������
 			if(chx == 18)
 				break right;
 			
@@ -210,7 +211,7 @@ public class ForbiddenStone {
 		chy = y+1;
 		check = false;
 		rightDown:
-		while(true) {
+		while(chx < 19 && chy < 19) {
 			if(chx == 18 || chy == 18)
 				break rightDown;
 			
@@ -253,7 +254,9 @@ public class ForbiddenStone {
 		if(y - leftUp == 0 || x - leftUp == 0 || y + rightDown == 17 || x + rightDown == 17) {
 			return 0;
 		}else 
-			if(ls.getXY(x - leftUp - 1,y - leftUp -1) == ls.WHITE || ls.getXY(x + rightDown + 1,y + rightDown + 1) == ls.WHITE) {
+			if(ls.getXY(x - leftUp - 1,y - leftUp -1) == ls.WHITE ||
+					x + rightDown + 1 < 19 && y + rightDown + 1 < 19 &&
+							ls.getXY(x + rightDown + 1,y + rightDown + 1) == ls.WHITE) {
 				return 0;
 			}else {
 				return 1;
@@ -276,7 +279,7 @@ public class ForbiddenStone {
 		int chy = y-1; 
 		boolean check = false;
 		up :
-		while(true) {
+		while(chx < 19 && chy < 19) {
 			if(chy == -1)
 				break up;
 
@@ -312,10 +315,10 @@ public class ForbiddenStone {
 			blink1 = 0;
 		chy = y + 1;
 		check = false;
-		down :
-		while(true) {
+
+		while(chx < 19 && chy < 19) {
 			if(chy == 18)
-				break down;
+				break;
 			
 			if(ls.getXY(x,chy) == ls.BLACK)
 			{
@@ -324,20 +327,20 @@ public class ForbiddenStone {
 			}
 			
 			if(ls.getXY(x,chy) == ls.WHITE)
-				break down;
+				break;
 			
 			if(ls.getXY(x,chy) == 0) {
 				if(check == false) {
 					check = true;
 				}else {
 					blink2++;
-					break down;
+					break;
 				}
 				
 				if(blink2 == 1) {
 					blink2--;
 				}else {
-					break down; 
+					break;
 				}
 			}
 			
@@ -377,8 +380,8 @@ public class ForbiddenStone {
 		int chx = x-1; 
 		int chy = y+1;
 		boolean check = false;
-		leftDown : 
-		while(true) {
+		leftDown :
+		while(chx < 19 && chy < 19) {
 			if(chx == -1 || chy == 18)
 				break leftDown;
 			
@@ -417,7 +420,7 @@ public class ForbiddenStone {
 		chy = y - 1;
 		check = false;
 		rightUp : 
-		while(true) {
+		while(chx < 19 && chy < 19) {
 			if(chx == 18 || chy == -1)
 				break rightUp;
 
@@ -460,13 +463,15 @@ public class ForbiddenStone {
 
 		if(x - leftDown == 0 || y - rightUp == 0|| y + leftDown == 17 || x + rightUp == 17) {
 			return 0;
-		}else 
-			if(ls.getXY(x - leftDown - 1,y + leftDown + 1) == ls.WHITE || ls.getXY(x + rightUp +1,y-rightUp-1) == ls.WHITE) {
+		}else {
+			if (x - leftDown - 1 >= 0 && ls.getXY(x - leftDown - 1, y + leftDown + 1) == ls.WHITE ||
+					y - rightUp - 1 >= 0 && x + rightUp + 1 <= 18 &&
+							ls.getXY(x + rightUp + 1, y - rightUp - 1) == ls.WHITE) {
 				return 0;
-			}else {
+			} else {
 				return 1;
 			}
-
+		}
 	}
 	
 	
@@ -549,7 +554,7 @@ public class ForbiddenStone {
 		int blink2 = blink1;
 		check = false;
 		right :
-		while(true) {
+		while(chx < 19 && chy < 19) {
 			if(chx == 18)
 				break right;
 			
@@ -667,7 +672,7 @@ public class ForbiddenStone {
 		check = false;
 		int blink2 = blink1;
 		leftDown :
-		while(true) {
+		while(chx < 19 && chy < 19) {
 			if(chx == 18 || chy == 18)
 				break leftDown;
 			
@@ -780,7 +785,7 @@ public class ForbiddenStone {
 		check = false;
 		int blink2 = blink1;
 		down :
-		while(true) {
+		while(chx < 19 && chy < 19) {
 			if(chy == 18)
 				break down;
 			
@@ -855,7 +860,7 @@ public class ForbiddenStone {
 		int chx = x + 1;
 		boolean check = false;
 		rightup :
-		while(true) {
+		while(chx < 19 && chy < 19) {
 			if(chx == 18 || chy == -1)
 				break rightup;
 			
@@ -894,7 +899,7 @@ public class ForbiddenStone {
 		check = false;
 		int blink2 = blink1;
 		leftdown :
-		while(true) {
+		while(chx < 19 && chy < 19) {
 			if(chx == -1 || chy == 18)
 				break leftdown;
 			

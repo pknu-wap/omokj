@@ -59,6 +59,10 @@ public class ClientCommProcessor extends Thread {
 				// operation process
 				switch(opcode) {
 				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
+					opcode = (Opcode)is.readObject();
+					int[][] abc = (int[][])is.readObject();
+					break;
+				case notifyBoard:
 					break;
 				case denyEntry:
 					return;
@@ -100,7 +104,7 @@ public class ClientCommProcessor extends Thread {
 					}
 					break;
 				case startOmok:
-					GUI gui = new GUI();
+					ClientCommMain ccm = new ClientCommMain();
 					break;
 				default:
 					break;

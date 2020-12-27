@@ -22,7 +22,7 @@ public class omok_MouseEvent extends MouseAdapter {
 		super.mousePressed(arg0);
 		int x = (int)Math.round(arg0.getX()/(double)25)-1;
 		int y = (int)Math.round(arg0.getY()/(double)25)-1;
-		if(x<0 || x>19 || y<0 || y>19) {
+		if(x<0 || x>18 || y<0 || y>18) {
 			return;
 		}
 		
