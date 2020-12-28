@@ -205,7 +205,10 @@ public class ServerCommProcessor extends Thread {
 	public void notifyBoard() {
 		Opcode opcode = Opcode.notifyBoard;
 		
-		int[][] board = roomManager.room[this.roomNumber].getBoard().clone();
+		int[][] board = new int[19][19];
+		for(int i = 0; i < 19; i++) {
+			board[i] = (roomManager.room[this.roomNumber].getBoard())[i].clone();
+		}
 		try {
 			os.writeObject(opcode);
 			os.writeObject(board);

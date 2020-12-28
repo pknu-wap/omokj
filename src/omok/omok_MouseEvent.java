@@ -29,7 +29,7 @@ public class omok_MouseEvent extends MouseAdapter {
 		
 		//int check = ls.omokCheck(x,y);
 		if(ccp.placeAuth == true) { // x,y 값을 서버로 전달
-			ccp.sendStone(x,y);
+			ccp.sendStone(y,x);
 			ccp.placeAuth = false;
 		}
 		
