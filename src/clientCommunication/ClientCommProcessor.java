@@ -108,7 +108,6 @@ public class ClientCommProcessor extends Thread {
 					ClientCommMain ccm = new ClientCommMain(this, omokBoard);
 					break;
 				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
-					opcode = (Opcode)is.readObject();
 					placeAuth = true; // true로 바뀌었으니 보드를 클릭하면 배치 정보가 서버로 전송됨.
 					break;
 				case notifyBoard: // turnOver 받은 직후엔 바로 이 명령도 날아옴.
