@@ -100,6 +100,7 @@ public class ClientCommProcessor extends Thread {
 						guim.removeAll();
 						guim.repaint();
 						guim.add(new GUI_room(this, player1, player2, playerReady));
+						guim.repaint();
 						System.out.println(" >" + roomNumber + "<");
 						if(playerReady[0] == true) 
 							System.out.print("[Ready!] ");
@@ -116,7 +117,10 @@ public class ClientCommProcessor extends Thread {
 						System.out.println("1. Ready 2. Quit");
 					}
 					else {
+						guim.removeAll();
+						guim.repaint();
 						guim.add(new GUI_waitroom(this));
+						guim.repaint();
 						System.out.println("해당 방에 접속하는데 실패하였습니다.");
 					}
 					break;

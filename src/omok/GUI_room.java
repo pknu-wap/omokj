@@ -24,16 +24,18 @@ public class GUI_room extends JPanel implements ActionListener{
 		System.out.println("´Ð³×ÀÓ: " + gui_main.nickname);
 		
 		JLabel label = new JLabel();
-		label.setBounds(330,2,300,100);
+		label.setBounds(250,30,200,100);
 		label.setText(player1);
 		label.setFont(new Font("", Font.BOLD, 25));
 		label.setForeground(Color.black);
+		label.setHorizontalAlignment(JLabel.CENTER);
 		
 		JLabel label2 = new JLabel();
-		label.setBounds(330,2,300,100);
-		label.setText(player2);
-		label.setFont(new Font("", Font.BOLD, 25));
-		label.setForeground(Color.white);
+		label2.setBounds(250,10,200,100);
+		label2.setText(player2);
+		label2.setFont(new Font("", Font.BOLD, 25));
+		label2.setForeground(Color.white);
+		label2.setHorizontalAlignment(JLabel.CENTER);
 		
 		JPanel picture = new JPanel() {
 			ImageIcon icon = new ImageIcon(getClass().getResource("omok.png"));
@@ -53,9 +55,8 @@ public class GUI_room extends JPanel implements ActionListener{
 			
 			removeAll();
 			repaint(); 
-			add(new GUI_play(ccp));
 		    });
-		button1.setLocation(200,70);
+		button1.setLocation(200,200);
 		button1.setSize(300,70);
 		button1.setBackground(new Color(0,0,0));
 		button1.setForeground(new Color(255,255,255));
@@ -68,9 +69,8 @@ public class GUI_room extends JPanel implements ActionListener{
 			
 			removeAll();
 			repaint(); 
-			add(new GUI_play(ccp));
 		    });
-		button2.setLocation(200,160);
+		button2.setLocation(200,300);
 		button2.setSize(300,70);
 		button2.setBackground(new Color(255,255,255));
 		button2.setForeground(new Color(0,0,0));

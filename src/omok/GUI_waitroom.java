@@ -20,10 +20,11 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		System.out.println("닉네임: " + gui_main.nickname);
 		
 		JLabel label = new JLabel();
-		label.setBounds(330,2,300,100);
+		label.setBounds(250,-10,200,100);
 		label.setText(gui_main.nickname);
 		label.setFont(new Font("", Font.BOLD, 25));
-		label.setForeground(Color.yellow);
+		label.setForeground(Color.white);
+		label.setHorizontalAlignment(JLabel.CENTER);
 		
 		JPanel picture = new JPanel() {
 			ImageIcon icon = new ImageIcon(getClass().getResource("omok.png"));
