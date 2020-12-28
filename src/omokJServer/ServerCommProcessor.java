@@ -188,8 +188,6 @@ public class ServerCommProcessor extends Thread {
 	}
 	
 	public void turnOver() {
-		consoleLog(this.nickname + " has turn");
-		
 		roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].notifyBoard();
 		
 		Opcode opcode = Opcode.turnOver;

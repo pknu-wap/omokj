@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,18 +25,26 @@ public class GUI_room extends JPanel implements ActionListener{
 		System.out.println("닉네임: " + gui_main.nickname);
 		
 		JLabel label = new JLabel();
-		label.setBounds(250,30,200,100);
+		label.setBounds(250,30,200,35);
 		label.setText(player1);
 		label.setFont(new Font("", Font.BOLD, 25));
 		label.setForeground(Color.black);
 		label.setHorizontalAlignment(JLabel.CENTER);
+		label.setVerticalAlignment(JLabel.CENTER);
+		
+		if(playerReady[0] == true)
+			label.setBorder(BorderFactory.createLineBorder(Color.WHITE,5, true));
 		
 		JLabel label2 = new JLabel();
-		label2.setBounds(250,10,200,100);
+		label2.setBounds(250,90,200,35);
 		label2.setText(player2);
 		label2.setFont(new Font("", Font.BOLD, 25));
 		label2.setForeground(Color.white);
 		label2.setHorizontalAlignment(JLabel.CENTER);
+		label2.setVerticalAlignment(JLabel.CENTER);
+		
+		if(playerReady[1] == true)
+			label2.setBorder(BorderFactory.createLineBorder(Color.BLACK,5, true));
 		
 		JPanel picture = new JPanel() {
 			ImageIcon icon = new ImageIcon(getClass().getResource("omok.png"));
@@ -48,13 +57,13 @@ public class GUI_room extends JPanel implements ActionListener{
 		picture.setLocation(100,15);
 		
 		
-		JButton button1 = new JButton("1번방"); 
+		JButton button1 = new JButton("READY"); 
 		button1.addActionListener(e->{
 	    	
-			ccp.joinRoom(1);
-			
 			removeAll();
-			repaint(); 
+			repaint();
+			
+			ccp.getReady();
 		    });
 		button1.setLocation(200,200);
 		button1.setSize(300,70);
@@ -62,13 +71,14 @@ public class GUI_room extends JPanel implements ActionListener{
 		button1.setForeground(new Color(255,255,255));
 		
 		
-		JButton button2 = new JButton("2번방"); 
+		
+		JButton button2 = new JButton("QUIT"); 
 		button2.addActionListener(e->{
 	
-			ccp.joinRoom(2);
-			
 			removeAll();
 			repaint(); 
+			
+			ccp.quitRoom();
 		    });
 		button2.setLocation(200,300);
 		button2.setSize(300,70);
