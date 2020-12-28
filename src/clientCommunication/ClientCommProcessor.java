@@ -33,7 +33,7 @@ public class ClientCommProcessor extends Thread {
 	public boolean placeAuth = false; // 서버로 부터 turnOver 받으면 이걸 참으로 하고 이게 참일 때만 보드 클릭을 처리함.
 	public int[][] omokBoard;
 	
-	private String[] player;
+	public String[] player;
 	
 	omok_drawBoard dBo;
 	
@@ -136,6 +136,10 @@ public class ClientCommProcessor extends Thread {
 				case startOmok:
 					state = State.game;
 					omokBoard = new int[19][19];
+					guim.removeAll();
+					guim.repaint();
+					guim.add(new GUI_play(this));
+					guim.repaint();
 					break;
 				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
 					placeAuth = true; // true로 바뀌었으니 보드를 클릭하면 배치 정보가 서버로 전송됨.
@@ -143,10 +147,6 @@ public class ClientCommProcessor extends Thread {
 				case notifyBoard: // turnOver 받은 직후엔 바로 이 명령도 날아옴.
 					omokBoard = (int[][])is.readObject(); 
 					dBo.board = omokBoard;
-					guim.removeAll();
-					guim.repaint();
-					guim.add(new GUI_play(this,player[0],player[1]));
-					guim.repaint();
 					this.dBo.repaint();
 					break;
 				default:

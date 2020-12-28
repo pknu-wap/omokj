@@ -67,16 +67,17 @@ public class ServerCommProcessor extends Thread {
 				case getReady:
 					roomManager.room[this.roomNumber].playerReady[this.playerIdx] = !roomManager.room[this.roomNumber].playerReady[this.playerIdx];
 					
-					if(roomManager.room[this.roomNumber].playerReady[0]==true && roomManager.room[this.roomNumber].playerReady[1] ==true)
+					if(roomManager.room[this.roomNumber].playerReady[0]==true && roomManager.room[this.roomNumber].playerReady[1] ==true) {
 						if(roomManager.room[this.roomNumber].getPlayersNum()>=2) { // START omok
 								roomManager.room[this.roomNumber].startOmok();
 						}
-					
+					}
+					else {
 					if(roomManager.room[this.roomNumber].player[0] != null) //  p1 exists, then showRoom
 						roomManager.room[this.roomNumber].player[0].showRoom(this.roomNumber);
 					if(roomManager.room[this.roomNumber].player[1] != null) // p2 exists, then showRoom
 						roomManager.room[this.roomNumber].player[1].showRoom(this.roomNumber);
-					
+					}
 					break;
 				case quitRoom:
 					if(this.roomNumber == 0) {

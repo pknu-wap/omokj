@@ -11,11 +11,11 @@ public class GUI_play extends JPanel {
 	
 	//private omok_logicSet ls = new omok_logicSet();
 	
-	public GUI_play(ClientCommProcessor ccomp, String p1, String p2) {
+	public GUI_play(ClientCommProcessor ccomp) {
 		setSize(700,700);
 		setLayout(null);
 		
-		JLabel info = new JLabel("寃뚯엫 �젙蹂� 諛� �꽩, �듅�뙣 �몴�떆"); 
+		JLabel info = new JLabel("INFO"); 
 		info.setLocation(300,15);
 		info.setSize(100,20);
 		
@@ -26,16 +26,16 @@ public class GUI_play extends JPanel {
 		board.setLocation(100,50);
 		board.setSize(500,500);
 		
-		JLabel player1 = new JLabel(p1);
+		JLabel player1 = new JLabel(ccomp.player[0]);
 		player1.setLocation(130,560);
 		player1.setSize(100,30);
 		
-		JLabel player2 = new JLabel(p2); 
+		JLabel player2 = new JLabel(ccomp.player[1]); 
 		player2.setLocation(550,560);
 		player2.setSize(100,30);
 		
 		
-		JButton exit = new JButton("醫낅즺");
+		JButton exit = new JButton("종료");
 		exit.addActionListener(e->{System.exit(0);}); 
 		exit.setLocation(300,600);
 		exit.setSize(100,30);
