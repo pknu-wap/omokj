@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import omok.GUI;
+import omok.omok_drawBoard;
 import omokJServer.TransferObj.*;
 import java.io.*;
 
@@ -27,6 +28,8 @@ public class ClientCommProcessor extends Thread {
 	
 	public boolean placeAuth = false; // 서버로 부터 turnOver 받으면 이걸 참으로 하고 이게 참일 때만 보드 클릭을 처리함.
 	public int[][] omokBoard;
+	
+	omok_drawBoard dBo;
 	
 	public static enum State { 
 		first, channel, room, game
@@ -110,6 +113,7 @@ public class ClientCommProcessor extends Thread {
 					break;
 				case notifyBoard: // turnOver 받은 직후엔 바로 이 명령도 날아옴.
 					omokBoard = (int[][])is.readObject(); 
+					this.dBo.repaint();
 					break;
 				default:
 					break;
@@ -189,6 +193,10 @@ public class ClientCommProcessor extends Thread {
 			e.printStackTrace();
 		}
 		state = State.channel;
+	}
+	
+	public void setDrawBoard(omok_drawBoard dbd) {
+		this.dBo = dbd;
 	}
 	
 	public void consoleChoice(int choice) { // main 에서 클라이언트 상태에 따른 선택 처리

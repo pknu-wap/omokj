@@ -97,9 +97,10 @@ public class ServerCommProcessor extends Thread {
 						roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].showRoom(this.roomNumber);
 					this.roomNumber = 0;
 					break;
-				case turnOver:
-					break;
-				case showRoomList:
+				case sendStone:
+					int x = (int)is.readObject();
+					int y = (int)is.readObject();
+					this.placeStone(x, y);
 					break;
 				default:
 					break;
@@ -222,7 +223,13 @@ public class ServerCommProcessor extends Thread {
 		if( r == 0 ) {
 			this.turnOver();
 		}
-		else if ( r == 1) ;
+		else if ( r == 1) {
+			int t = roomManager.room[this.roomNumber].nextPlayerIndex;
+			roomManager.room[this.roomNumber].player[t].turnOver();
+		} // Game Set
+		else {
+			
+		}
 	}
 	
 	public void startOmok() {
