@@ -101,6 +101,9 @@ public class ServerCommProcessor extends Thread {
 				case sendStone:
 					if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]==null) {
 						roomManager.room[this.roomNumber].gameStarted = false;
+						roomManager.room[this.roomNumber].board = null;
+						roomManager.room[this.roomNumber].winner = this;
+						this.playerIdx = -1;
 						this.winner();
 						break;
 					}
@@ -121,6 +124,8 @@ public class ServerCommProcessor extends Thread {
 				roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
 				roomManager.room[this.roomNumber].gameStarted = false;
 				roomManager.room[this.roomNumber].player[this.playerIdx] = null;
+				roomManager.room[this.roomNumber].board = null;
+				roomManager.room[this.roomNumber].winner = this;
 				this.playerIdx = -1;
 				showRoomList();
 			}
@@ -132,6 +137,8 @@ public class ServerCommProcessor extends Thread {
 				roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
 				roomManager.room[this.roomNumber].gameStarted = false;
 				roomManager.room[this.roomNumber].player[this.playerIdx] = null;
+				roomManager.room[this.roomNumber].board = null;
+				roomManager.room[this.roomNumber].winner = this;
 				this.playerIdx = -1;
 				showRoomList();
 			}
@@ -239,6 +246,11 @@ public class ServerCommProcessor extends Thread {
 	}
 	
 	public void winner() {
+		roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
+		roomManager.room[this.roomNumber].gameStarted = false;
+		roomManager.room[this.roomNumber].player[this.playerIdx] = null;
+		roomManager.room[this.roomNumber].board = null;
+		roomManager.room[this.roomNumber].winner = null;
 		Opcode opcode = Opcode.winner;
 		try {
 			os.writeObject(opcode);
@@ -249,6 +261,11 @@ public class ServerCommProcessor extends Thread {
 	}
 	
 	public void loser() {
+		roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
+		roomManager.room[this.roomNumber].gameStarted = false;
+		roomManager.room[this.roomNumber].player[this.playerIdx] = null;
+		roomManager.room[this.roomNumber].board = null;
+		roomManager.room[this.roomNumber].winner = null;
 		Opcode opcode = Opcode.loser;
 		try {
 			os.writeObject(opcode);
@@ -261,6 +278,9 @@ public class ServerCommProcessor extends Thread {
 	private void placeStone(int x, int y) {
 		int r = roomManager.room[this.roomNumber].placeStone(this.playerIdx, x, y);
 		if( r == 2) { //Game Over
+			roomManager.room[this.roomNumber].winner.winner();
+			roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].loser();
+			
 		} 
 		else if (r == -1) { //Wrong Player
 			

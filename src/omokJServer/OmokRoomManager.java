@@ -65,6 +65,7 @@ public class OmokRoomManager {
 		}
 		
 		public void startOmok() {
+			nextPlayerIndex = 0;
 			this.gameStarted = true;
 			playerReady[0] = playerReady[1] = false;
 			board = new omok_logicSet();

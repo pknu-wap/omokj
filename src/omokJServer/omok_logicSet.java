@@ -11,7 +11,7 @@ public class omok_logicSet {
 	private int state; 
 	
 	private omok_baseCheck bch = new omok_baseCheck();
-	private ForbiddenStone fbs = new ForbiddenStone();
+	//private ForbiddenStone fbs = new ForbiddenStone();
 	
 	public omok_logicSet() {
 		omok = new int[19][19];
@@ -40,6 +40,7 @@ public class omok_logicSet {
 			state = 0;
 			return state;
 		}
+		/*
 		state = fbs.samsam(this, chx, chy);
 		if(state == 0) {
 			return state;
@@ -52,7 +53,7 @@ public class omok_logicSet {
 		if(state == 0) {
 			return state;
 		}	
-		
+		*/
 		state = bch.omok_bCheck(this, chx, chy);
 		
 		if(turn == true) 

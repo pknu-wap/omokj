@@ -8,6 +8,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
+import javax.swing.JLabel;
+
 import omok.GUI;
 import omok.GUI_main;
 import omok.GUI_play;
@@ -15,6 +17,9 @@ import omok.GUI_room;
 import omok.GUI_waitroom;
 import omok.omok_drawBoard;
 import omokJServer.TransferObj.*;
+
+import java.awt.Color;
+import java.awt.Font;
 import java.io.*;
 
 public class ClientCommProcessor extends Thread {
@@ -149,6 +154,34 @@ public class ClientCommProcessor extends Thread {
 					dBo.board = omokBoard;
 					this.dBo.repaint();
 					break;
+				case winner:
+					JLabel wlabel = new JLabel("승");
+					wlabel.setBounds(0,0,700,700);
+					wlabel.setFont(new Font("", Font.BOLD, 50));
+					wlabel.setForeground(Color.black);
+					wlabel.setHorizontalAlignment(JLabel.CENTER);
+					wlabel.setVerticalAlignment(JLabel.CENTER);
+					guim.removeAll();
+					guim.repaint();
+					guim.add(wlabel);
+					guim.repaint();
+					Thread.sleep(3000);
+					this.joinRoom(this.roomNumber);
+					break;
+				case loser:
+					JLabel llabel = new JLabel("패");
+					llabel.setBounds(0,0,700,700);
+					llabel.setFont(new Font("", Font.BOLD, 50));
+					llabel.setForeground(Color.black);
+					llabel.setHorizontalAlignment(JLabel.CENTER);
+					llabel.setVerticalAlignment(JLabel.CENTER);
+					guim.removeAll();
+					guim.repaint();
+					guim.add(llabel);
+					guim.repaint();
+					Thread.sleep(3000);
+					this.joinRoom(this.roomNumber);
+					break;
 				default:
 					break;
 				}
@@ -158,9 +191,11 @@ public class ClientCommProcessor extends Thread {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		finally {
-			System.out.println("오목 종료");
 			try {
 				if( socket != null && !socket.isClosed()) {
 					is.close();
