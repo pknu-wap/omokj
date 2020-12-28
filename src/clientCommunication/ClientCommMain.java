@@ -11,12 +11,12 @@ import omok.GUI_play;
 
 public class ClientCommMain extends JFrame {
 	
-	public ClientCommMain() {
+	public ClientCommMain(int[][] board) {
 		setSize(700,700); 
 		setLayout(null);
 		setTitle("오목 J");
 		
-		add(new GUI_play());
+		add(new GUI_play(board));
 		setVisible(true); 
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

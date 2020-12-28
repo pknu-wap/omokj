@@ -26,6 +26,7 @@ public class ClientCommProcessor extends Thread {
 	private int roomNumber = 0; // 아무 방에도 안들어가 있으면 0
 	
 	public boolean placeAuth = false; // 서버로 부터 turnOver 받으면 이걸 참으로 하고 이게 참일 때만 보드 클릭을 처리함.
+	public int[][] omokBoard;
 	
 	public static enum State { 
 		first, channel, room, game
@@ -60,12 +61,6 @@ public class ClientCommProcessor extends Thread {
 				// 모든 전송을 객체 하나에 묶어서 직렬화 해서 주고받음. 객체에 operation code를 enum 클래스로 가짐. 각 operation 마다 필요 정보도 내부 클래스로 가짐.
 				// operation process
 				switch(opcode) {
-				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
-					opcode = (Opcode)is.readObject();
-					int[][] abc = (int[][])is.readObject();
-					break;
-				case notifyBoard:
-					break;
 				case denyEntry:
 					return;
 				case showRoomList:  // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
@@ -106,7 +101,15 @@ public class ClientCommProcessor extends Thread {
 					}
 					break;
 				case startOmok:
-					ClientCommMain ccm = new ClientCommMain();
+					omokBoard = new int[19][19];
+					ClientCommMain ccm = new ClientCommMain(omokBoard);
+					break;
+				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
+					opcode = (Opcode)is.readObject();
+					placeAuth = true; // true로 바뀌었으니 보드를 클릭하면 배치 정보가 서버로 전송됨.
+					break;
+				case notifyBoard: // turnOver 받은 직후엔 바로 이 명령도 날아옴.
+					omokBoard = (int[][])is.readObject(); 
 					break;
 				default:
 					break;

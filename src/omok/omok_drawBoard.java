@@ -8,14 +8,15 @@ import omokJServer.omok_logicSet;
 @SuppressWarnings("serial")
 public class omok_drawBoard extends JPanel {
 	
-	private omok_logicSet ls;
+	//private omok_logicSet ls;
+	int[][] board;
 	
-	public omok_drawBoard(omok_logicSet ls) {
+	public omok_drawBoard(int[][] board) {
 		setBackground(new Color(206,167,61));
 		setSize(500,500);
 		setLayout(null);
-		this.ls = ls;
-		addMouseListener(new omok_MouseEvent(this, this.ls));
+		this.board = board;
+		addMouseListener(new omok_MouseEvent(this));
 	}
 	
 	public void paintComponent(Graphics arg0) {
@@ -36,9 +37,9 @@ public class omok_drawBoard extends JPanel {
 	public void drawStone(Graphics arg0) { // 여기서 ls (logicSet에서 배열 각 요소를 가져와서 돌들을 그림)
 		for(int y=0; y<19; y++) {
 			for(int x=0; x<19; x++) {
-				if(ls.getXY(x,y)==1)
+				if(board[x][y]==1)
 					drawBlack(arg0,x,y);
-				if(ls.getXY(x,y)==2){
+				if(board[x][y]==2){
 					drawWhite(arg0,x,y);
 				}
 			}
