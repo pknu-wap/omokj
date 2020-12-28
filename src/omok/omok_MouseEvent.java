@@ -27,7 +27,6 @@ public class omok_MouseEvent extends MouseAdapter {
 			return;
 		} // 클릭 되는 경우 해당 위치 x,y 값
 		
-		b.board[x][y] = 1;
 		//int check = ls.omokCheck(x,y);
 		if(ccp.placeAuth == true) { // x,y 값을 서버로 전달
 			ccp.sendStone(x,y);

@@ -10,13 +10,13 @@ import omokJServer.omok_logicSet;
 public class omok_drawBoard extends JPanel {
 	
 	//private omok_logicSet ls;
-	int[][] board;
+	public int[][] board;
 	
-	public omok_drawBoard(ClientCommProcessor ccomp, int[][] board) {
+	public omok_drawBoard(ClientCommProcessor ccomp) {
 		setBackground(new Color(206,167,61));
 		setSize(500,500);
 		setLayout(null);
-		this.board = board;
+		this.board = ccomp.omokBoard;
 		addMouseListener(new omok_MouseEvent(ccomp, this));
 	}
 	
