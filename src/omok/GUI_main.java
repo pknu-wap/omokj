@@ -37,9 +37,20 @@ public class GUI_main extends JPanel implements ActionListener {
 		JButton entrance = new JButton("서버 입장"); //서버 입장 버튼
 		entrance.addActionListener(e->{
 			nickname = name.getText();
+			
+			ClientCommProcessor ccp = new ClientCommProcessor(nickname, this); // 입장 버튼 누르면 닉네임 가져가서 서버 연결
+			ccp.start();
+			
+			while(ccp.enterState == 1) System.out.print("");
+			if(ccp.enterState == 3) {
+				ccp.enterState = 0;
+				return;
+			}
+			ccp.enterState = 0;
+			
 			removeAll(); //프레임에 있는 패널 및 각종 항목 모두 제거
 			repaint(); //다시 그림
-			add(new GUI_waitroom());
+			add(new GUI_waitroom(ccp));
 			});//서버입장 버튼 ->서버창으로 이동
 		entrance.setLocation(200, 600);
 		entrance.setSize(100,30);

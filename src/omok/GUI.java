@@ -2,6 +2,8 @@ package omok;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Scanner;
+
 import javax.swing.*;
 
 import omokJServer.TransferObj.*;
@@ -10,9 +12,9 @@ import clientCommunication.*;
 
 public class GUI extends JFrame  {
 	public GUI() {
-		setSize(700,700); //크기 지정. 수정 가능
+		setSize(700,700); //�겕湲� 吏��젙. �닔�젙 媛��뒫
 		setLayout(null);
-		setTitle("오목 7조"); //윈도우 창 이름 지정, 의논
+		setTitle("�삤紐� 7議�"); //�쐢�룄�슦 李� �씠由� 吏��젙, �쓽�끉
 		
 		GUI_main gui_main = new GUI_main();
 		

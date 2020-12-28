@@ -12,7 +12,7 @@ import clientCommunication.*;
 @SuppressWarnings("serial")
 public class GUI_waitroom extends JPanel implements ActionListener{
 	
-	public GUI_waitroom() {
+	public GUI_waitroom(ClientCommProcessor ccp) {
 		setSize(700,700); 
 		setLayout(null);
 
@@ -22,10 +22,8 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		JLabel label = new JLabel();
 		label.setBounds(330,2,300,100);
 		label.setText(gui_main.nickname);
-	
-		
-		 
-           
+		label.setFont(new Font("", Font.BOLD, 25));
+		label.setForeground(Color.yellow);
 		
 		JPanel picture = new JPanel() {
 			ImageIcon icon = new ImageIcon(getClass().getResource("omok.png"));
@@ -40,11 +38,13 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		
 		JButton button1 = new JButton("1번방"); 
 		button1.addActionListener(e->{
-	    		
-			
+	    	
 			removeAll();
 			repaint(); 
-			add(new GUI_play());
+			
+			ccp.joinRoom(1);
+			
+			//add(new GUI_play(ccp));
 		    });
 		button1.setLocation(200,70);
 		button1.setSize(300,70);
@@ -54,10 +54,11 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		
 		JButton button2 = new JButton("2번방"); 
 		button2.addActionListener(e->{
-	
+
 			removeAll();
 			repaint(); 
-			add(new GUI_play());
+			
+			ccp.joinRoom(2);
 		    });
 		button2.setLocation(200,160);
 		button2.setSize(300,70);
@@ -67,10 +68,11 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 
 		JButton button3 = new JButton("3번방"); 
 		button3.addActionListener(e->{
-	
+
 			removeAll();
 			repaint(); 
-			add(new GUI_play());
+			
+			ccp.joinRoom(3);
 		    });
 		button3.setLocation(200,250);
 		button3.setSize(300,70);
@@ -79,10 +81,11 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		
 		JButton button4 = new JButton("4번방"); 
 		button4.addActionListener(e->{
-	
+
 			removeAll();
 			repaint(); 
-			add(new GUI_play());
+			
+			ccp.joinRoom(4);
 		    });
 		button4.setLocation(200,340);
 		button4.setSize(300,70);
@@ -91,10 +94,11 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		
 		JButton button5 = new JButton("5번방"); 
 		button5.addActionListener(e->{
-	
+
 			removeAll();
 			repaint(); 
-			add(new GUI_play());
+			
+			ccp.joinRoom(5);
 		    });
 		button5.setLocation(200,430);
 		button5.setSize(300,70);

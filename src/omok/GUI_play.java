@@ -20,7 +20,9 @@ public class GUI_play extends JPanel {
 		info.setSize(100,20);
 		
 		omok_drawBoard board = new omok_drawBoard(ccomp); //
+		
 		ccomp.setDrawBoard(board);
+		
 		board.setLocation(100,50);
 		board.setSize(500,500);
 		

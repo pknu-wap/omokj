@@ -9,6 +9,10 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import omok.GUI;
+import omok.GUI_main;
+import omok.GUI_play;
+import omok.GUI_room;
+import omok.GUI_waitroom;
 import omok.omok_drawBoard;
 import omokJServer.TransferObj.*;
 import java.io.*;
@@ -31,14 +35,20 @@ public class ClientCommProcessor extends Thread {
 	
 	omok_drawBoard dBo;
 	
+	public int enterState = 0; // 0 none 1 waiting 2 succeeded 3 failed
+	
+	GUI_main guim;
+	
 	public static enum State { 
 		first, channel, room, game
 	}
 	
 	State state = State.first;
 	
-	public ClientCommProcessor (String nickname) {
+	public ClientCommProcessor (String nickname, GUI_main guim) {
 		this.nickname = nickname;
+		enterState = 1;
+		this.guim = guim;
 	}
 	
 	@Override
@@ -51,8 +61,12 @@ public class ClientCommProcessor extends Thread {
 			socket.connect(new InetSocketAddress(SERVER_IP, SERVER_PORT));
 		}
 		catch(IOException e) {
+			enterState = 3;
 			e.printStackTrace();
 		}
+		if(enterState != 3)
+			enterState = 2;
+		
 		// input, output 스트림 세팅 밑 데이타 객체 수신 대기 시작
 		try {
 			os = new ObjectOutputStream(socket.getOutputStream());
@@ -83,7 +97,9 @@ public class ClientCommProcessor extends Thread {
 						String player1 = (String)is.readObject();
 						String player2 = (String)is.readObject();
 						boolean[] playerReady = (boolean[])is.readObject();
-						
+						guim.removeAll();
+						guim.repaint();
+						guim.add(new GUI_room(this, player1, player2, playerReady));
 						System.out.println(" >" + roomNumber + "<");
 						if(playerReady[0] == true) 
 							System.out.print("[Ready!] ");
@@ -100,6 +116,7 @@ public class ClientCommProcessor extends Thread {
 						System.out.println("1. Ready 2. Quit");
 					}
 					else {
+						guim.add(new GUI_waitroom(this));
 						System.out.println("해당 방에 접속하는데 실패하였습니다.");
 					}
 					break;

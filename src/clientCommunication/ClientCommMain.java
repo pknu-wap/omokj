@@ -27,7 +27,7 @@ public class ClientCommMain extends JFrame {
 		System.out.print("닉네임을 입력하세요: ");
 		String nick = sc.nextLine();
 		int choice = 0;
-		ClientCommProcessor ccp = new ClientCommProcessor(nick);
+		ClientCommProcessor ccp = new ClientCommProcessor(nick, null);
 		ccp.start();
 		while(ccp.isAlive()) {
 			choice = sc.nextInt();
