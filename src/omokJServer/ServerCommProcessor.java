@@ -93,6 +93,8 @@ public class ServerCommProcessor extends Thread {
 					else {
 						showRoomList();
 					}
+					if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]!=null)
+						roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].showRoom(this.roomNumber);
 					this.roomNumber = 0;
 					break;
 				case turnOver:
