@@ -93,11 +93,14 @@ public class ServerCommProcessor extends Thread {
 					else {
 						showRoomList();
 					}
+					if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]!=null)
+						roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].showRoom(this.roomNumber);
 					this.roomNumber = 0;
 					break;
-				case turnOver:
-					break;
-				case showRoomList:
+				case sendStone:
+					int x = (int)is.readObject();
+					int y = (int)is.readObject();
+					this.placeStone(x, y);
 					break;
 				default:
 					break;
@@ -185,11 +188,9 @@ public class ServerCommProcessor extends Thread {
 	}
 	
 	public void turnOver() {
-		int oppo;
-		if(this.playerIdx == 0) oppo = 1;
-		else oppo = 0;
+		consoleLog(this.nickname + " has turn");
 		
-		roomManager.room[this.roomNumber].player[oppo].notifyBoard();
+		roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].notifyBoard();
 		
 		Opcode opcode = Opcode.turnOver;
 		try {
@@ -204,7 +205,10 @@ public class ServerCommProcessor extends Thread {
 	public void notifyBoard() {
 		Opcode opcode = Opcode.notifyBoard;
 		
-		int[][] board = roomManager.room[this.roomNumber].getBoard().clone();
+		int[][] board = new int[19][19];
+		for(int i = 0; i < 19; i++) {
+			board[i] = (roomManager.room[this.roomNumber].getBoard())[i].clone();
+		}
 		try {
 			os.writeObject(opcode);
 			os.writeObject(board);
@@ -217,13 +221,17 @@ public class ServerCommProcessor extends Thread {
 	//
 	private void placeStone(int x, int y) {
 		int r = roomManager.room[this.roomNumber].placeStone(this.playerIdx, x, y);
-		if( r == 0 ) {
-			this.turnOver();
+		if( r == 2) { //Game Over
+		} 
+		else if (r == -1) { //Wrong Player
+			
 		}
-		else if ( r == 1) ;
+		else { 
+		}
 	}
 	
 	public void startOmok() {
+		consoleLog(this.roomNumber + " Started omok");
 		Opcode opcode = Opcode.startOmok;
 		try {
 			os.writeObject(opcode);

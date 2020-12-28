@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import omok.GUI;
+import omok.omok_drawBoard;
 import omokJServer.TransferObj.*;
 import java.io.*;
 
@@ -24,6 +25,11 @@ public class ClientCommProcessor extends Thread {
 	
 	private String nickname = null;
 	private int roomNumber = 0; // 아무 방에도 안들어가 있으면 0
+	
+	public boolean placeAuth = false; // 서버로 부터 turnOver 받으면 이걸 참으로 하고 이게 참일 때만 보드 클릭을 처리함.
+	public int[][] omokBoard;
+	
+	omok_drawBoard dBo;
 	
 	public static enum State { 
 		first, channel, room, game
@@ -58,12 +64,6 @@ public class ClientCommProcessor extends Thread {
 				// 모든 전송을 객체 하나에 묶어서 직렬화 해서 주고받음. 객체에 operation code를 enum 클래스로 가짐. 각 operation 마다 필요 정보도 내부 클래스로 가짐.
 				// operation process
 				switch(opcode) {
-				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
-					opcode = (Opcode)is.readObject();
-					int[][] abc = (int[][])is.readObject();
-					break;
-				case notifyBoard:
-					break;
 				case denyEntry:
 					return;
 				case showRoomList:  // 각 방의 방번호, 들어있는 사람 닉네임 (빈 칸은 null로 전달)
@@ -104,7 +104,16 @@ public class ClientCommProcessor extends Thread {
 					}
 					break;
 				case startOmok:
-					ClientCommMain ccm = new ClientCommMain();
+					state = State.game;
+					ClientCommMain ccm = new ClientCommMain(this);
+					break;
+				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
+					placeAuth = true; // true로 바뀌었으니 보드를 클릭하면 배치 정보가 서버로 전송됨.
+					break;
+				case notifyBoard: // turnOver 받은 직후엔 바로 이 명령도 날아옴.
+					omokBoard = (int[][])is.readObject(); 
+					dBo.board = omokBoard;
+					this.dBo.repaint();
 					break;
 				default:
 					break;
@@ -130,6 +139,18 @@ public class ClientCommProcessor extends Thread {
 			}
 		}
 }
+	
+	public void sendStone(int x, int y) {
+		this.placeAuth = false;
+		Opcode opcode = Opcode.sendStone;
+		try {
+			os.writeObject(opcode);
+			os.writeObject(x);
+			os.writeObject(y);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	//JoinServer 소켓, 스트림 연결된 직후에 바로 실행
 	private void joinServer(String nickname) {
 		Opcode opcode = Opcode.joinServer;
@@ -172,6 +193,10 @@ public class ClientCommProcessor extends Thread {
 			e.printStackTrace();
 		}
 		state = State.channel;
+	}
+	
+	public void setDrawBoard(omok_drawBoard dbd) {
+		this.dBo = dbd;
 	}
 	
 	public void consoleChoice(int choice) { // main 에서 클라이언트 상태에 따른 선택 처리
