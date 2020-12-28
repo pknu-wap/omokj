@@ -88,7 +88,6 @@ public class ServerCommProcessor extends Thread {
 						roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
 						roomManager.room[this.roomNumber].gameStarted = false;
 						roomManager.room[this.roomNumber].player[this.playerIdx] = null;
-						this.playerIdx = -1;
 						showRoomList();
 					}
 					else {
@@ -96,9 +95,15 @@ public class ServerCommProcessor extends Thread {
 					}
 					if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]!=null)
 						roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].showRoom(this.roomNumber);
+					this.playerIdx = -1;
 					this.roomNumber = 0;
 					break;
 				case sendStone:
+					if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]==null) {
+						roomManager.room[this.roomNumber].gameStarted = false;
+						this.winner();
+						break;
+					}
 					int x = (int)is.readObject();
 					int y = (int)is.readObject();
 					this.placeStone(x, y);
@@ -111,9 +116,25 @@ public class ServerCommProcessor extends Thread {
 		catch(IOException e) {
 			clientList.remove(this);
 			consoleLog(this.nickname + " lost connect. [Connected : " + clientList.size() + " ]");
+			if(this.roomNumber >= 1 && this.roomNumber <=5) {
+				consoleLog(this.nickname + " quit Room [" + this.roomNumber+ "]");
+				roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
+				roomManager.room[this.roomNumber].gameStarted = false;
+				roomManager.room[this.roomNumber].player[this.playerIdx] = null;
+				this.playerIdx = -1;
+				showRoomList();
+			}
 		} catch (ClassNotFoundException e) {
 			clientList.remove(this);
 			consoleLog(this.nickname + " lost connect. [Connected : " + clientList.size() + " ]");
+			if(this.roomNumber >= 1 && this.roomNumber <=5) {
+				consoleLog(this.nickname + " quit Room [" + this.roomNumber+ "]");
+				roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
+				roomManager.room[this.roomNumber].gameStarted = false;
+				roomManager.room[this.roomNumber].player[this.playerIdx] = null;
+				this.playerIdx = -1;
+				showRoomList();
+			}
 		}
 		finally {
 			try {
@@ -217,6 +238,25 @@ public class ServerCommProcessor extends Thread {
 		}
 	}
 	
+	public void winner() {
+		Opcode opcode = Opcode.winner;
+		try {
+			os.writeObject(opcode);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void loser() {
+		Opcode opcode = Opcode.loser;
+		try {
+			os.writeObject(opcode);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
 	//
 	private void placeStone(int x, int y) {
 		int r = roomManager.room[this.roomNumber].placeStone(this.playerIdx, x, y);

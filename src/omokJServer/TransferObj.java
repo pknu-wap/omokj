@@ -8,6 +8,6 @@ import java.util.ArrayList;
 public class TransferObj implements Serializable {
 	public static enum Opcode implements Serializable { 
 		joinServer, joinRoom, getReady, quitRoom, sendStone, // for Client
-		denyEntry, showRoomList, showRoom, startOmok, turnOver, notifyBoard // for Server
+		denyEntry, showRoomList, showRoom, startOmok, turnOver, notifyBoard, winner, loser // for Server
 	}
 }
