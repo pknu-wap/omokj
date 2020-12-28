@@ -2,6 +2,7 @@ package omok;
 
 import java.awt.event.*;
 
+import clientCommunication.ClientCommProcessor;
 import omokJServer.omok_logicSet;
 
 import java.awt.*;
@@ -10,9 +11,11 @@ import java.awt.*;
 public class omok_MouseEvent extends MouseAdapter {
 	
 	private omok_drawBoard b;
+	ClientCommProcessor ccp;
 	
-	public omok_MouseEvent(omok_drawBoard b) {
+	public omok_MouseEvent(ClientCommProcessor ccomp, omok_drawBoard b) {
 		this.b = b;
+		this.ccp = ccomp;
 	}
 	
 
@@ -26,6 +29,10 @@ public class omok_MouseEvent extends MouseAdapter {
 		
 		b.board[x][y] = 1;
 		//int check = ls.omokCheck(x,y);
+		if(ccp.placeAuth == true) { // x,y 값을 서버로 전달
+			ccp.sendStone(x,y);
+			ccp.placeAuth = false;
+		}
 		
 		b.repaint();
 		/*

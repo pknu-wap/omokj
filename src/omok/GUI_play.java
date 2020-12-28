@@ -3,6 +3,7 @@ package omok;
 import java.awt.*;
 import javax.swing.*;
 
+import clientCommunication.ClientCommProcessor;
 import omokJServer.omok_logicSet;
 
 @SuppressWarnings("serial")
@@ -10,7 +11,7 @@ public class GUI_play extends JPanel {
 	
 	//private omok_logicSet ls = new omok_logicSet();
 	
-	public GUI_play(int [][] omokBoard) {
+	public GUI_play(ClientCommProcessor ccomp, int [][] omokBoard) {
 		setSize(700,700);
 		setLayout(null);
 		
@@ -18,7 +19,7 @@ public class GUI_play extends JPanel {
 		info.setLocation(300,15);
 		info.setSize(100,20);
 		
-		omok_drawBoard board = new omok_drawBoard(omokBoard); //
+		omok_drawBoard board = new omok_drawBoard(ccomp, omokBoard); //
 		board.setLocation(100,50);
 		board.setSize(500,500);
 		

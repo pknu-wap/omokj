@@ -3,6 +3,7 @@ package omok;
 import java.awt.*;
 import javax.swing.*;
 
+import clientCommunication.ClientCommProcessor;
 import omokJServer.omok_logicSet;
 
 @SuppressWarnings("serial")
@@ -11,12 +12,12 @@ public class omok_drawBoard extends JPanel {
 	//private omok_logicSet ls;
 	int[][] board;
 	
-	public omok_drawBoard(int[][] board) {
+	public omok_drawBoard(ClientCommProcessor ccomp, int[][] board) {
 		setBackground(new Color(206,167,61));
 		setSize(500,500);
 		setLayout(null);
 		this.board = board;
-		addMouseListener(new omok_MouseEvent(this));
+		addMouseListener(new omok_MouseEvent(ccomp, this));
 	}
 	
 	public void paintComponent(Graphics arg0) {

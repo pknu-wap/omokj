@@ -102,7 +102,7 @@ public class ClientCommProcessor extends Thread {
 					break;
 				case startOmok:
 					omokBoard = new int[19][19];
-					ClientCommMain ccm = new ClientCommMain(omokBoard);
+					ClientCommMain ccm = new ClientCommMain(this, omokBoard);
 					break;
 				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
 					opcode = (Opcode)is.readObject();
@@ -135,6 +135,18 @@ public class ClientCommProcessor extends Thread {
 			}
 		}
 }
+	
+	public void sendStone(int x, int y) {
+		this.placeAuth = false;
+		Opcode opcode = Opcode.sendStone;
+		try {
+			os.writeObject(opcode);
+			os.writeObject(x);
+			os.writeObject(y);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	//JoinServer 소켓, 스트림 연결된 직후에 바로 실행
 	private void joinServer(String nickname) {
 		Opcode opcode = Opcode.joinServer;
