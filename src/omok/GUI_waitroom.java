@@ -19,6 +19,14 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		GUI_main gui_main = new GUI_main();
 		System.out.println("닉네임: " + gui_main.nickname);
 		
+		JLabel label = new JLabel();
+		label.setBounds(330,2,300,100);
+		label.setText(gui_main.nickname);
+	
+		
+		 
+           
+		
 		JPanel picture = new JPanel() {
 			ImageIcon icon = new ImageIcon(getClass().getResource("omok.png"));
 			Image img = icon.getImage();
@@ -98,7 +106,7 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		exit.setLocation(300,550);
 		exit.setSize(100,30);
 		
-		
+	    add(label);
 		add(button1); 
 		add(button2);
 		add(button3);
