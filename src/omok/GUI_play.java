@@ -11,7 +11,7 @@ public class GUI_play extends JPanel {
 	
 	//private omok_logicSet ls = new omok_logicSet();
 	
-	public GUI_play(ClientCommProcessor ccomp) {
+	public GUI_play(ClientCommProcessor ccomp, String p1, String p2) {
 		setSize(700,700);
 		setLayout(null);
 		
@@ -26,11 +26,11 @@ public class GUI_play extends JPanel {
 		board.setLocation(100,50);
 		board.setSize(500,500);
 		
-		JLabel player1 = new JLabel("Player1");
+		JLabel player1 = new JLabel(p1);
 		player1.setLocation(130,560);
 		player1.setSize(100,30);
 		
-		JLabel player2 = new JLabel("Player2"); 
+		JLabel player2 = new JLabel(p2); 
 		player2.setLocation(550,560);
 		player2.setSize(100,30);
 		

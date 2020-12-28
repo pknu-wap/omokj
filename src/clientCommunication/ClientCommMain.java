@@ -16,7 +16,7 @@ public class ClientCommMain extends JFrame {
 		setLayout(null);
 		setTitle("오목 J");
 		
-		add(new GUI_play(ccomp));
+		//add(new GUI_play(ccomp));
 		setVisible(true); 
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

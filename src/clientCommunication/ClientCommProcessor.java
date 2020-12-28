@@ -33,6 +33,8 @@ public class ClientCommProcessor extends Thread {
 	public boolean placeAuth = false; // 서버로 부터 turnOver 받으면 이걸 참으로 하고 이게 참일 때만 보드 클릭을 처리함.
 	public int[][] omokBoard;
 	
+	private String[] player;
+	
 	omok_drawBoard dBo;
 	
 	public int enterState = 0; // 0 none 1 waiting 2 succeeded 3 failed
@@ -49,6 +51,7 @@ public class ClientCommProcessor extends Thread {
 		this.nickname = nickname;
 		enterState = 1;
 		this.guim = guim;
+		this.player = new String[2];
 	}
 	
 	@Override
@@ -89,6 +92,10 @@ public class ClientCommProcessor extends Thread {
 						System.out.println("[" + roomNumbers[i] + "] P1:" + player1s[i] + " | P2:" + player2s[i]);
 					}
 					System.out.print("몇 번방에 들어가시겠습니까? (1~5번, 다른 입력시 종료) : ");
+					guim.removeAll();
+					guim.repaint();
+					guim.add(new GUI_waitroom(this));
+					guim.repaint();
 					break;
 				case showRoom: // 들어가는데 실패 했으면 0 이 날아오고 아니면 들어간 방번호, 들어있는 사람 닉네임이 날아옴
 					this.roomNumber = (int)is.readObject();
@@ -96,6 +103,8 @@ public class ClientCommProcessor extends Thread {
 						state = State.room;
 						String player1 = (String)is.readObject();
 						String player2 = (String)is.readObject();
+						this.player[0] = player1;
+						this.player[1] = player2;
 						boolean[] playerReady = (boolean[])is.readObject();
 						guim.removeAll();
 						guim.repaint();
@@ -126,7 +135,7 @@ public class ClientCommProcessor extends Thread {
 					break;
 				case startOmok:
 					state = State.game;
-					ClientCommMain ccm = new ClientCommMain(this);
+					omokBoard = new int[19][19];
 					break;
 				case turnOver: // 상대방 turnOver를 받거나 첫 턴을 서버에게 받음
 					placeAuth = true; // true로 바뀌었으니 보드를 클릭하면 배치 정보가 서버로 전송됨.
@@ -134,6 +143,10 @@ public class ClientCommProcessor extends Thread {
 				case notifyBoard: // turnOver 받은 직후엔 바로 이 명령도 날아옴.
 					omokBoard = (int[][])is.readObject(); 
 					dBo.board = omokBoard;
+					guim.removeAll();
+					guim.repaint();
+					guim.add(new GUI_play(this,player[0],player[1]));
+					guim.repaint();
 					this.dBo.repaint();
 					break;
 				default:
