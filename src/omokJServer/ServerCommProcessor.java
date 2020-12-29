@@ -118,7 +118,6 @@ public class ServerCommProcessor extends Thread {
 			}
 		}
 		catch(IOException e) {
-			clientList.remove(this);
 			consoleLog(this.nickname + " lost connect. [Connected : " + clientList.size() + " ]");
 			if(this.roomNumber >= 1 && this.roomNumber <=5) {
 				if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]!=null)
@@ -132,7 +131,6 @@ public class ServerCommProcessor extends Thread {
 				showRoomList();
 			}
 		} catch (ClassNotFoundException e) {
-			clientList.remove(this);
 			consoleLog(this.nickname + " lost connect. [Connected : " + clientList.size() + " ]");
 			if(this.roomNumber >= 1 && this.roomNumber <=5) {
 				if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]!=null)
@@ -147,6 +145,9 @@ public class ServerCommProcessor extends Thread {
 			}
 		} 
 		finally {
+			if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]!=null)
+				roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].showRoom(this.roomNumber);
+			clientList.remove(this);
 			try {
 				is.close();
 				os.close();
