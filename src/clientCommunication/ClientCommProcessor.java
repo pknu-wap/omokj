@@ -93,10 +93,6 @@ public class ClientCommProcessor extends Thread {
 					int[] roomNumbers = (int[])is.readObject(); // 0번방은 사용 안하고 현재 1~5번방 까지 있음
 					String[] player1s = (String[])is.readObject();
 					String[] player2s = (String[])is.readObject();
-					for(int i = 1; i < roomNumbers.length;i++) {
-						System.out.println("[" + roomNumbers[i] + "] P1:" + player1s[i] + " | P2:" + player2s[i]);
-					}
-					System.out.print("몇 번방에 들어가시겠습니까? (1~5번, 다른 입력시 종료) : ");
 					guim.removeAll();
 					guim.repaint();
 					guim.add(new GUI_waitroom(this));
@@ -115,30 +111,39 @@ public class ClientCommProcessor extends Thread {
 						guim.repaint();
 						guim.add(new GUI_room(this, player1, player2, playerReady));
 						guim.repaint();
-						System.out.println(" >" + roomNumber + "<");
-						if(playerReady[0] == true) 
-							System.out.print("[Ready!] ");
-						else
-							System.out.print("[Waiting..] ");
-						System.out.println("P1:" + player1);
-						
-						if(playerReady[1] == true) 
-							System.out.print("[Ready!] ");
-						else
-							System.out.print("[Waiting..] ");
-						System.out.println("P2:" + player2);
-						
-						System.out.println("1. Ready 2. Quit");
 					}
 					else {
 						guim.removeAll();
 						guim.repaint();
 						guim.add(new GUI_waitroom(this));
 						guim.repaint();
-						System.out.println("해당 방에 접속하는데 실패하였습니다.");
 					}
 					break;
 				case startOmok:
+					JLabel slabel = new JLabel("3");
+					slabel.setBounds(0,0,700,700);
+					slabel.setFont(new Font("", Font.BOLD, 50));
+					slabel.setForeground(Color.white);
+					slabel.setHorizontalAlignment(JLabel.CENTER);
+					slabel.setVerticalAlignment(JLabel.CENTER);
+					guim.removeAll();
+					guim.repaint();
+					guim.add(slabel);
+					guim.repaint();
+					Thread.sleep(1000);
+					slabel.setText("2");
+					guim.removeAll();
+					guim.repaint();
+					guim.add(slabel);
+					guim.repaint();
+					Thread.sleep(1000);
+					slabel.setText("1");
+					guim.removeAll();
+					guim.repaint();
+					guim.add(slabel);
+					guim.repaint();
+					Thread.sleep(1000);
+					
 					state = State.game;
 					omokBoard = new int[19][19];
 					guim.removeAll();

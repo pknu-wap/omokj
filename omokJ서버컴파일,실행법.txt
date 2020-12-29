@@ -1,0 +1,20 @@
+	컴파일 : ubuntu 폴더에서
+javac -d . omokJServer/ServerMain.java
+	실행 : ubuntu 폴더에서
+java omokJServer/ServerMain
+
+
+
+
+
+
+콘솔 실행
+cd C:\Users\leade\AppData\Roaming\SPB_Data\omokj\src
+javac -encoding utf-8 clientCommunication/ClientCommMain.java
+java -Dfile.encoding=UTF-8 clientCommunication/ClientCommMain.java
+
+javac -encoding utf-8 omok/GUI.java
+java -Dfile.encoding=UTF-8 omok/GUI.java
+
+ps -efc 였나?
+kill ~

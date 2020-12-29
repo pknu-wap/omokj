@@ -15,9 +15,9 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 	public GUI_waitroom(ClientCommProcessor ccp) {
 		setSize(700,700); 
 		setLayout(null);
+		setBackground(new Color(148, 242, 197));
 
 		GUI_main gui_main = new GUI_main();
-		System.out.println("닉네임: " + gui_main.nickname);
 		
 		JLabel label = new JLabel();
 		label.setBounds(250,-10,200,100);
@@ -110,6 +110,7 @@ public class GUI_waitroom extends JPanel implements ActionListener{
 		exit.addActionListener(e->{System.exit(0);});
 		exit.setLocation(300,550);
 		exit.setSize(100,30);
+		exit.setFont(new Font("", Font.BOLD, 15));
 		
 	    add(label);
 		add(button1); 

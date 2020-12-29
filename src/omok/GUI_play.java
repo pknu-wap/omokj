@@ -14,6 +14,7 @@ public class GUI_play extends JPanel {
 	public GUI_play(ClientCommProcessor ccomp) {
 		setSize(700,700);
 		setLayout(null);
+		setBackground(new Color(148, 242, 197));
 		
 		JLabel info = new JLabel("INFO"); 
 		info.setLocation(300,15);

@@ -20,9 +20,9 @@ public class GUI_room extends JPanel implements ActionListener{
 	public GUI_room(ClientCommProcessor ccp, String player1, String player2, boolean[] playerReady) {
 		setSize(700,700); 
 		setLayout(null);
+		setBackground(new Color(148, 242, 197));
 
 		GUI_main gui_main = new GUI_main();
-		System.out.println("´Ð³×ÀÓ: " + gui_main.nickname);
 		
 		JLabel label = new JLabel();
 		label.setBounds(250,30,200,35);

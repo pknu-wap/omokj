@@ -69,6 +69,7 @@ public class ServerCommProcessor extends Thread {
 					
 					if(roomManager.room[this.roomNumber].playerReady[0]==true && roomManager.room[this.roomNumber].playerReady[1] ==true) {
 						if(roomManager.room[this.roomNumber].getPlayersNum()>=2) { // START omok
+							if((roomManager.room[this.roomNumber].playerReady[0]==true && roomManager.room[this.roomNumber].playerReady[1] ==true)&&roomManager.room[this.roomNumber].getPlayersNum()>=2)
 								roomManager.room[this.roomNumber].startOmok();
 						}
 					}
@@ -121,6 +122,8 @@ public class ServerCommProcessor extends Thread {
 			consoleLog(this.nickname + " lost connect. [Connected : " + clientList.size() + " ]");
 			if(this.roomNumber >= 1 && this.roomNumber <=5) {
 				consoleLog(this.nickname + " quit Room [" + this.roomNumber+ "]");
+				if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]!=null)
+					roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].showRoom(this.roomNumber);
 				roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
 				roomManager.room[this.roomNumber].gameStarted = false;
 				roomManager.room[this.roomNumber].player[this.playerIdx] = null;
@@ -134,6 +137,8 @@ public class ServerCommProcessor extends Thread {
 			consoleLog(this.nickname + " lost connect. [Connected : " + clientList.size() + " ]");
 			if(this.roomNumber >= 1 && this.roomNumber <=5) {
 				consoleLog(this.nickname + " quit Room [" + this.roomNumber+ "]");
+				if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]!=null)
+					roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].showRoom(this.roomNumber);
 				roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
 				roomManager.room[this.roomNumber].gameStarted = false;
 				roomManager.room[this.roomNumber].player[this.playerIdx] = null;
@@ -142,7 +147,7 @@ public class ServerCommProcessor extends Thread {
 				this.playerIdx = -1;
 				showRoomList();
 			}
-		}
+		} 
 		finally {
 			try {
 				is.close();
