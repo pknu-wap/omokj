@@ -121,7 +121,6 @@ public class ServerCommProcessor extends Thread {
 			clientList.remove(this);
 			consoleLog(this.nickname + " lost connect. [Connected : " + clientList.size() + " ]");
 			if(this.roomNumber >= 1 && this.roomNumber <=5) {
-				consoleLog(this.nickname + " quit Room [" + this.roomNumber+ "]");
 				if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]!=null)
 					roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].showRoom(this.roomNumber);
 				roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
@@ -136,7 +135,6 @@ public class ServerCommProcessor extends Thread {
 			clientList.remove(this);
 			consoleLog(this.nickname + " lost connect. [Connected : " + clientList.size() + " ]");
 			if(this.roomNumber >= 1 && this.roomNumber <=5) {
-				consoleLog(this.nickname + " quit Room [" + this.roomNumber+ "]");
 				if(roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2]!=null)
 					roomManager.room[this.roomNumber].player[(this.playerIdx+1)%2].showRoom(this.roomNumber);
 				roomManager.room[this.roomNumber].playerReady[this.playerIdx] = false;
